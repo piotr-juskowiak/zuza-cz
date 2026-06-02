@@ -3,6 +3,8 @@
   const ALERT_TIMEOUT_MS = 6000;
   const FIRESTORE_TIMEOUT_MS = 1200;
 
+  window.__FORM_MAILER_HANDLES_FORMS__ = true;
+
   function injectFormMailerStyles() {
     if (document.getElementById("formMailerStyles")) {
       return;

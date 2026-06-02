@@ -7142,7 +7142,7 @@
         })();
     </script>
     <!-- Firebase SDK -->
-    <script src="form-mailer.js?v=resend-6"></script>
+    <script src="form-mailer.js?v=resend-7"></script>
     <script type="module">
         import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
         import { getFirestore, collection, addDoc, getDocs, query, orderBy, where } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
@@ -7423,6 +7423,7 @@
         const contactForm = document.getElementById('contactForm');
         if (contactForm) {
             contactForm.addEventListener('submit', async (e) => {
+            if (window.__FORM_MAILER_HANDLES_FORMS__) return;
             e.preventDefault();
             const submitBtn = e.target.querySelector('button[type="submit"]');
             const originalText = submitBtn.textContent;
@@ -7493,6 +7494,7 @@
         const newsletterForm = document.getElementById('newsletterForm');
         if (newsletterForm) {
             newsletterForm.addEventListener('submit', async (e) => {
+            if (window.__FORM_MAILER_HANDLES_FORMS__) return;
             e.preventDefault();
             const submitBtn = e.target.querySelector('button[type="submit"]');
             const originalText = submitBtn.textContent;
