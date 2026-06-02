@@ -7334,16 +7334,26 @@
         }
 
         .team-call-brief {
+            position: relative;
+            overflow: hidden;
             display: grid;
-            grid-template-columns: minmax(180px, 0.24fr) minmax(0, 1fr);
-            gap: clamp(1rem, 2vw, 2rem);
+            grid-template-columns: minmax(230px, 0.34fr) minmax(0, 1fr);
+            gap: 0;
             align-items: stretch;
-            margin-top: clamp(1rem, 2vw, 1.6rem);
+            margin-top: clamp(0.95rem, 1.7vw, 1.25rem);
+            background:
+                linear-gradient(135deg, rgba(26, 46, 40, 0.98), rgba(16, 32, 27, 0.95)),
+                radial-gradient(circle at top right, rgba(197, 160, 101, 0.16), transparent 42%);
+            border: 1px solid rgba(197, 160, 101, 0.28);
+            box-shadow: 0 20px 44px rgba(26, 46, 40, 0.1);
         }
 
         .team-call-brief-heading {
-            border-top: 1px solid rgba(197, 160, 101, 0.42);
-            padding-top: 0.75rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 0.55rem;
+            padding: clamp(1.1rem, 2vw, 1.45rem);
         }
 
         .team-call-brief-heading span {
@@ -7357,10 +7367,43 @@
             margin-bottom: 0;
         }
 
+        .team-call-brief-heading strong {
+            display: block;
+            max-width: 220px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1.65rem, 2.2vw, 2.25rem);
+            font-weight: 500;
+            line-height: 0.95;
+            color: #fff;
+        }
+
+        .team-call-brief-heading a {
+            display: inline-flex;
+            width: fit-content;
+            align-items: center;
+            gap: 0.55rem;
+            margin-top: 0.2rem;
+            border-bottom: 1px solid rgba(197, 160, 101, 0.78);
+            padding-bottom: 0.35rem;
+            font-family: 'Syne', sans-serif;
+            font-size: 0.62rem;
+            font-weight: 700;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.88);
+        }
+
+        .team-call-brief-heading a:hover {
+            color: var(--accent-gold);
+        }
+
         .team-call-roles {
             display: grid;
             grid-template-columns: repeat(3, minmax(0, 1fr));
-            gap: clamp(0.75rem, 1.4vw, 1rem);
+            gap: 0.75rem;
+            align-items: stretch;
+            padding: clamp(0.75rem, 1.4vw, 1rem);
+            background: rgba(255, 255, 255, 0.92);
         }
 
         .team-call-role {
@@ -7370,13 +7413,14 @@
                 linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(247, 244, 238, 0.86)),
                 radial-gradient(circle at top right, rgba(197, 160, 101, 0.12), transparent 42%);
             border: 1px solid rgba(197, 160, 101, 0.24);
-            border-radius: 8px;
-            box-shadow: 0 16px 36px rgba(26, 46, 40, 0.07), 0 6px 14px rgba(197, 160, 101, 0.05);
-            padding: clamp(0.95rem, 1.4vw, 1.15rem);
-            min-height: 92px;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
+            border-radius: 6px;
+            box-shadow: none;
+            padding: clamp(0.85rem, 1.3vw, 1rem);
+            min-height: 82px;
+            display: grid;
+            grid-template-columns: auto minmax(0, 1fr);
+            align-items: center;
+            gap: 0.8rem;
             transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
         }
 
@@ -7392,8 +7436,8 @@
 
         .team-call-role:hover {
             background: #fff;
-            transform: translateY(-5px);
-            box-shadow: 0 28px 62px rgba(26, 46, 40, 0.11), 0 10px 24px rgba(197, 160, 101, 0.09);
+            transform: translateY(-3px);
+            box-shadow: 0 16px 32px rgba(26, 46, 40, 0.1);
         }
 
         .team-call-role:hover::before {
@@ -7418,19 +7462,51 @@
             box-shadow: 0 10px 20px rgba(26, 46, 40, 0.12);
         }
 
+        .team-call-role--active {
+            background:
+                linear-gradient(135deg, rgba(26, 46, 40, 0.98), rgba(19, 38, 32, 0.94)),
+                radial-gradient(circle at top right, rgba(197, 160, 101, 0.18), transparent 42%);
+            border-color: rgba(197, 160, 101, 0.52);
+        }
+
+        .team-call-role--active:hover {
+            background: rgba(26, 46, 40, 0.98);
+        }
+
+        .team-call-role--active strong {
+            color: #fff;
+        }
+
+        .team-call-role--active small {
+            color: rgba(255, 255, 255, 0.72);
+        }
+
         .team-call-role div {
             position: relative;
             z-index: 1;
+            min-width: 0;
         }
 
         .team-call-role strong {
             display: block;
-            margin: 0.62rem 0 0;
+            margin: 0;
             font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(1.18rem, 1.45vw, 1.42rem);
+            font-size: clamp(1.08rem, 1.35vw, 1.28rem);
             font-weight: 500;
             line-height: 1.05;
             color: var(--text-primary);
+        }
+
+        .team-call-role small {
+            display: block;
+            margin-top: 0.3rem;
+            font-family: 'Syne', sans-serif;
+            font-size: 0.56rem;
+            font-weight: 700;
+            letter-spacing: 0.16em;
+            line-height: 1.25;
+            text-transform: uppercase;
+            color: rgba(26, 46, 40, 0.58);
         }
 
         @media (max-width: 1100px) {
@@ -7522,25 +7598,30 @@
             <div class="team-call-brief">
                 <div class="team-call-brief-heading reveal reveal-up">
                     <span>Kroki rekrutacji</span>
+                    <strong>3 proste ruchy i gotowe</strong>
+                    <a href="#formularz-rekrutacyjny">Wypełnij teraz <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
                 </div>
 
                 <div class="team-call-roles reveal reveal-up delay-100" aria-label="Kroki rekrutacji">
-                    <article class="team-call-role">
+                    <article class="team-call-role team-call-role--active">
                         <span>01</span>
                         <div>
                             <strong>Zgłoszenie</strong>
+                            <small>2-3 minuty</small>
                         </div>
                     </article>
                     <article class="team-call-role">
                         <span>02</span>
                         <div>
                             <strong>Rozmowa</strong>
+                            <small>Krótki kontakt</small>
                         </div>
                     </article>
                     <article class="team-call-role">
                         <span>03</span>
                         <div>
                             <strong>Start</strong>
+                            <small>Pierwsze zadanie</small>
                         </div>
                     </article>
                 </div>
