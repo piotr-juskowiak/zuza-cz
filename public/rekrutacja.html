@@ -8320,6 +8320,19 @@
             const bar = document.getElementById('recruitmentProgressBar');
             const value = document.getElementById('recruitmentProgressValue');
             const track = document.getElementById('recruitmentProgressTrack');
+            const faqItems = Array.from(document.querySelectorAll('.recruitment-faq details'));
+
+            faqItems.forEach((item) => {
+                item.addEventListener('toggle', () => {
+                    if (!item.open) return;
+
+                    faqItems.forEach((otherItem) => {
+                        if (otherItem !== item) {
+                            otherItem.open = false;
+                        }
+                    });
+                });
+            });
 
             if (!form || !bar || !value || !track) return;
 
