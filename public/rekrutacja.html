@@ -8491,8 +8491,11 @@
                     timer: window.setTimeout(finishAnimation, faqAnimationMs + 80)
                 });
 
+                item.getBoundingClientRect();
                 window.requestAnimationFrame(() => {
-                    item.style.height = endHeight;
+                    window.requestAnimationFrame(() => {
+                        item.style.height = endHeight;
+                    });
                 });
             };
 
