@@ -8124,6 +8124,7 @@
 
         .recruitment-faq details.is-faq-animating {
             will-change: height;
+            transition: height 320ms cubic-bezier(0.22, 1, 0.36, 1);
         }
 
         .recruitment-faq summary {
@@ -8417,25 +8418,29 @@
             const track = document.getElementById('recruitmentProgressTrack');
             const faqItems = Array.from(document.querySelectorAll('.recruitment-faq details'));
             const faqAnimations = new WeakMap();
-            const faqAnimationOptions = {
-                duration: 320,
-                easing: 'cubic-bezier(0.22, 1, 0.36, 1)'
-            };
+            const faqAnimationMs = 320;
             const shouldReduceFaqMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
             const clearFaqAnimation = (item) => {
+                const animation = faqAnimations.get(item);
+
+                if (animation) {
+                    window.clearTimeout(animation.timer);
+                    item.removeEventListener('transitionend', animation.onEnd);
+                    faqAnimations.delete(item);
+                }
+
                 item.style.height = '';
                 item.style.overflow = '';
                 item.classList.remove('is-faq-animating', 'is-faq-opening', 'is-faq-closing');
-                faqAnimations.delete(item);
             };
 
             const cancelFaqAnimation = (item) => {
                 const animation = faqAnimations.get(item);
 
                 if (animation) {
-                    animation.oncancel = null;
-                    animation.cancel();
+                    window.clearTimeout(animation.timer);
+                    item.removeEventListener('transitionend', animation.onEnd);
                     faqAnimations.delete(item);
                 }
             };
@@ -8445,45 +8450,50 @@
 
                 if (!summary || (item.open === open && !faqAnimations.has(item))) return;
 
+                const startHeight = `${item.getBoundingClientRect().height}px`;
                 cancelFaqAnimation(item);
 
-                if (shouldReduceFaqMotion.matches || typeof item.animate !== 'function') {
+                if (shouldReduceFaqMotion.matches) {
                     item.open = open;
                     clearFaqAnimation(item);
                     return;
                 }
 
-                const startHeight = `${item.offsetHeight}px`;
+                item.style.height = startHeight;
+                item.style.overflow = 'hidden';
+                item.classList.add('is-faq-animating');
 
                 if (open) {
                     item.open = true;
-
-                    const endHeight = `${item.scrollHeight}px`;
-                    item.style.height = startHeight;
-                    item.style.overflow = 'hidden';
-                    item.classList.add('is-faq-animating', 'is-faq-opening');
+                    item.classList.add('is-faq-opening');
                     item.classList.remove('is-faq-closing');
-
-                    const animation = item.animate({ height: [startHeight, endHeight] }, faqAnimationOptions);
-                    faqAnimations.set(item, animation);
-                    animation.onfinish = () => clearFaqAnimation(item);
-                    animation.oncancel = () => clearFaqAnimation(item);
-                    return;
+                } else {
+                    item.classList.add('is-faq-closing');
+                    item.classList.remove('is-faq-opening');
                 }
 
-                const endHeight = `${summary.offsetHeight}px`;
-                item.style.height = startHeight;
-                item.style.overflow = 'hidden';
-                item.classList.add('is-faq-animating', 'is-faq-closing');
-                item.classList.remove('is-faq-opening');
+                const endHeight = open ? `${item.scrollHeight}px` : `${summary.offsetHeight}px`;
+                const finishAnimation = () => {
+                    if (!open) {
+                        item.open = false;
+                    }
 
-                const animation = item.animate({ height: [startHeight, endHeight] }, faqAnimationOptions);
-                faqAnimations.set(item, animation);
-                animation.onfinish = () => {
-                    item.open = false;
                     clearFaqAnimation(item);
                 };
-                animation.oncancel = () => clearFaqAnimation(item);
+                const onEnd = (event) => {
+                    if (event.target !== item || event.propertyName !== 'height') return;
+                    finishAnimation();
+                };
+
+                item.addEventListener('transitionend', onEnd);
+                faqAnimations.set(item, {
+                    onEnd,
+                    timer: window.setTimeout(finishAnimation, faqAnimationMs + 80)
+                });
+
+                window.requestAnimationFrame(() => {
+                    item.style.height = endHeight;
+                });
             };
 
             faqItems.forEach((item) => {
