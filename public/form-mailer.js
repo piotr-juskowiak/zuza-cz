@@ -263,6 +263,7 @@
     const originalAriaLabel = button.getAttribute("aria-label");
     const isNewsletter = form.id === "newsletterForm";
 
+    form.dataset.formMailerState = "submitting";
     form.classList.add("form-mailer-is-submitting");
     button.classList.add("form-mailer-button--pending");
     button.setAttribute("aria-busy", "true");
@@ -276,6 +277,7 @@
     }
 
     return function restore() {
+      delete form.dataset.formMailerState;
       form.classList.remove("form-mailer-is-submitting");
       button.classList.remove("form-mailer-button--pending");
       button.removeAttribute("aria-busy");
@@ -288,6 +290,25 @@
         button.removeAttribute("aria-label");
       }
     };
+  }
+
+  function isManagedForm(form) {
+    return form instanceof HTMLFormElement && (
+      form.id === "contactForm" ||
+      form.id === "newsletterForm"
+    );
+  }
+
+  function handleManagedForm(form) {
+    if (!isManagedForm(form) || form.dataset.formMailerState === "submitting") {
+      return;
+    }
+
+    if (form.id === "contactForm") {
+      handleContactForm(form);
+    } else {
+      handleNewsletterForm(form);
+    }
   }
 
   async function handleContactForm(form) {
@@ -373,11 +394,7 @@
     function (event) {
       const form = event.target;
 
-      if (!(form instanceof HTMLFormElement)) {
-        return;
-      }
-
-      if (form.id !== "contactForm" && form.id !== "newsletterForm") {
+      if (!isManagedForm(form)) {
         return;
       }
 
@@ -385,11 +402,31 @@
       event.stopPropagation();
       event.stopImmediatePropagation();
 
-      if (form.id === "contactForm") {
-        handleContactForm(form);
-      } else {
-        handleNewsletterForm(form);
+      handleManagedForm(form);
+    },
+    true
+  );
+
+  document.addEventListener(
+    "click",
+    function (event) {
+      const target = event.target instanceof Element ? event.target : null;
+      const button = target ? target.closest('button[type="submit"]') : null;
+      const form = button ? button.closest("form") : null;
+
+      if (!isManagedForm(form)) {
+        return;
       }
+
+      event.preventDefault();
+      event.stopPropagation();
+      event.stopImmediatePropagation();
+
+      if (typeof form.reportValidity === "function" && !form.reportValidity()) {
+        return;
+      }
+
+      handleManagedForm(form);
     },
     true
   );
