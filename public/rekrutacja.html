@@ -7352,11 +7352,32 @@
 
         .team-call-roles {
             display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
-            gap: clamp(0.8rem, 1.4vw, 1.25rem);
+            grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1fr);
+            gap: clamp(0.55rem, 1.05vw, 0.95rem);
             align-items: stretch;
             padding: 0;
             background: transparent;
+        }
+
+        .team-call-step-arrow {
+            align-self: center;
+            justify-self: center;
+            width: 34px;
+            height: 34px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(197, 160, 101, 0.34);
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.82);
+            color: var(--accent-gold);
+            box-shadow: 0 12px 24px rgba(26, 46, 40, 0.08);
+            pointer-events: none;
+        }
+
+        .team-call-step-arrow i {
+            font-size: 0.72rem;
+            transform: translateX(1px);
         }
 
         .team-call-role {
@@ -7477,7 +7498,7 @@
             }
 
             .team-call-roles {
-                grid-template-columns: repeat(3, minmax(0, 1fr));
+                grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1fr);
             }
         }
 
@@ -7522,6 +7543,10 @@
                 grid-template-columns: 1fr;
             }
 
+            .team-call-step-arrow {
+                display: none;
+            }
+
             .team-call-role {
                 min-height: 0;
             }
@@ -7558,6 +7583,7 @@
                         <small>2-3 minuty</small>
                     </div>
                 </article>
+                <span class="team-call-step-arrow" aria-hidden="true"><i class="fas fa-arrow-right"></i></span>
                 <article class="team-call-role">
                     <span>02</span>
                     <div>
@@ -7565,6 +7591,7 @@
                         <small>Krótki kontakt</small>
                     </div>
                 </article>
+                <span class="team-call-step-arrow" aria-hidden="true"><i class="fas fa-arrow-right"></i></span>
                 <article class="team-call-role">
                     <span>03</span>
                     <div>
