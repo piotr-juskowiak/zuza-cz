@@ -1,5 +1,97 @@
 (function () {
   const ENDPOINT = "/api/send-form-email";
+  const ALERT_TIMEOUT_MS = 6000;
+
+  function injectFormMailerStyles() {
+    if (document.getElementById("formMailerStyles")) {
+      return;
+    }
+
+    const style = document.createElement("style");
+    style.id = "formMailerStyles";
+    style.textContent = `
+      .form-mailer-alert {
+        display: block !important;
+        margin: 0 0 1rem !important;
+        padding: 0.95rem 1rem !important;
+        border-radius: 6px !important;
+        border: 1px solid rgba(197, 160, 101, 0.38) !important;
+        border-left: 3px solid #c5a065 !important;
+        background: rgba(248, 246, 241, 0.98) !important;
+        color: #182d25 !important;
+        font-size: 0.92rem !important;
+        line-height: 1.55 !important;
+        text-align: left !important;
+        box-shadow: 0 18px 42px rgba(7, 24, 20, 0.14) !important;
+        opacity: 0;
+        transform: translateY(8px);
+        animation: formMailerAlertIn 360ms ease forwards;
+      }
+
+      .footer-premium-newsletter .form-mailer-alert {
+        font-size: 0.86rem !important;
+      }
+
+      .form-mailer-alert--success {
+        border-color: rgba(197, 160, 101, 0.42) !important;
+        border-left-color: #c5a065 !important;
+      }
+
+      .form-mailer-alert--warning {
+        border-color: rgba(197, 160, 101, 0.55) !important;
+        border-left-color: #c5a065 !important;
+      }
+
+      .form-mailer-alert--error {
+        border-color: rgba(143, 61, 50, 0.36) !important;
+        border-left-color: #8f3d32 !important;
+      }
+
+      .form-mailer-button--pending {
+        cursor: wait !important;
+        opacity: 0.86;
+      }
+
+      .contact-form.form-mailer-is-submitting .field-input,
+      .premium-subscribe-form.form-mailer-is-submitting input {
+        opacity: 0.72;
+      }
+
+      .form-mailer-button-content {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.65rem;
+      }
+
+      .form-mailer-spinner {
+        display: inline-block;
+        width: 1em;
+        height: 1em;
+        border: 2px solid currentColor;
+        border-top-color: transparent;
+        border-radius: 999px;
+        animation: formMailerSpin 760ms linear infinite;
+      }
+
+      .premium-subscribe-form button .form-mailer-spinner {
+        width: 18px;
+        height: 18px;
+      }
+
+      @keyframes formMailerSpin {
+        to { transform: rotate(360deg); }
+      }
+
+      @keyframes formMailerAlertIn {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    `;
+    document.head.appendChild(style);
+  }
 
   function getField(form, selector) {
     const field = form.querySelector(selector);
@@ -121,34 +213,23 @@
       return;
     }
 
-    const palette = {
-      success: {
-        background: "#e8f5e9",
-        color: "#2e7d32",
-        border: "1px solid #c8e6c9",
-      },
-      warning: {
-        background: "#fff3e0",
-        color: "#f57c00",
-        border: "1px solid #ffcc80",
-      },
-      error: {
-        background: "#ffebee",
-        color: "#d32f2f",
-        border: "1px solid #ffcdd2",
-      },
-    };
-
-    const colors = palette[type] || palette.success;
+    window.clearTimeout(alertDiv.formMailerTimeout);
+    alertDiv.hidden = false;
     alertDiv.style.display = "block";
-    alertDiv.style.background = colors.background;
-    alertDiv.style.color = colors.color;
-    alertDiv.style.border = colors.border;
+    alertDiv.classList.remove(
+      "form-mailer-alert--success",
+      "form-mailer-alert--warning",
+      "form-mailer-alert--error"
+    );
+    alertDiv.classList.add("form-mailer-alert", `form-mailer-alert--${type || "success"}`);
+    alertDiv.setAttribute("role", type === "error" ? "alert" : "status");
+    alertDiv.setAttribute("aria-live", type === "error" ? "assertive" : "polite");
     alertDiv.textContent = message;
 
-    window.setTimeout(() => {
+    alertDiv.formMailerTimeout = window.setTimeout(() => {
       alertDiv.style.display = "none";
-    }, 5000);
+      alertDiv.hidden = true;
+    }, ALERT_TIMEOUT_MS);
   }
 
   function setPending(form, message) {
@@ -159,12 +240,33 @@
     }
 
     const originalHtml = button.innerHTML;
-    button.textContent = message;
+    const originalAriaLabel = button.getAttribute("aria-label");
+    const isNewsletter = form.id === "newsletterForm";
+
+    form.classList.add("form-mailer-is-submitting");
+    button.classList.add("form-mailer-button--pending");
+    button.setAttribute("aria-busy", "true");
     button.disabled = true;
+    button.innerHTML = isNewsletter
+      ? '<span class="form-mailer-spinner" aria-hidden="true"></span>'
+      : `<span class="form-mailer-button-content"><span>${message}</span><span class="form-mailer-spinner" aria-hidden="true"></span></span>`;
+
+    if (isNewsletter) {
+      button.setAttribute("aria-label", message);
+    }
 
     return function restore() {
+      form.classList.remove("form-mailer-is-submitting");
+      button.classList.remove("form-mailer-button--pending");
+      button.removeAttribute("aria-busy");
       button.innerHTML = originalHtml;
       button.disabled = false;
+
+      if (originalAriaLabel) {
+        button.setAttribute("aria-label", originalAriaLabel);
+      } else {
+        button.removeAttribute("aria-label");
+      }
     };
   }
 
@@ -266,6 +368,7 @@
     true
   );
 
+  injectFormMailerStyles();
   document.documentElement.dataset.formMailer = "ready";
 
   window.sendContactFormEmail = function (payload) {
