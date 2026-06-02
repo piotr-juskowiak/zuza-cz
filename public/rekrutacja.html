@@ -7930,6 +7930,13 @@
                 radial-gradient(circle at top right, rgba(197, 160, 101, 0.12), transparent 42%);
         }
 
+        .recruitment-form-layout {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(300px, 360px);
+            gap: clamp(2rem, 4vw, 3rem);
+            align-items: start;
+        }
+
         .recruitment-form-intro {
             max-width: 760px;
             margin: 0 0 2.2rem;
@@ -8029,9 +8036,107 @@
             line-height: 1.55;
         }
 
+        .recruitment-faq {
+            position: sticky;
+            top: 110px;
+            padding-left: clamp(1.25rem, 2.5vw, 2rem);
+            border-left: 1px solid rgba(197, 160, 101, 0.28);
+        }
+
+        .recruitment-faq__eyebrow {
+            display: inline-block;
+            margin-bottom: 0.65rem;
+            font-family: 'Syne', sans-serif;
+            font-size: 0.62rem;
+            font-weight: 700;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--accent-gold);
+        }
+
+        .recruitment-faq__title {
+            margin: 0 0 1.2rem;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1.7rem, 2.2vw, 2.25rem);
+            font-weight: 500;
+            line-height: 1.08;
+            color: var(--text-primary);
+        }
+
+        .recruitment-faq details {
+            border-top: 1px solid rgba(26, 46, 40, 0.12);
+        }
+
+        .recruitment-faq details:last-child {
+            border-bottom: 1px solid rgba(26, 46, 40, 0.12);
+        }
+
+        .recruitment-faq summary {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            padding: 1rem 0;
+            color: var(--text-primary);
+            cursor: pointer;
+            font-family: 'Syne', sans-serif;
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            line-height: 1.45;
+            text-transform: uppercase;
+        }
+
+        .recruitment-faq summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .recruitment-faq summary::after {
+            content: '+';
+            flex: 0 0 auto;
+            color: var(--accent-gold);
+            font-size: 1rem;
+            line-height: 1;
+            transition: transform 0.25s ease;
+        }
+
+        .recruitment-faq details[open] summary::after {
+            transform: rotate(45deg);
+        }
+
+        .recruitment-faq p {
+            margin: 0;
+            padding: 0 0 1rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.7;
+        }
+
+        .recruitment-faq__note {
+            margin-top: 1.4rem;
+            padding-top: 1.2rem;
+            border-top: 1px solid rgba(197, 160, 101, 0.24);
+            color: var(--text-secondary);
+            font-size: 0.82rem;
+            line-height: 1.65;
+        }
+
         @media (max-width: 900px) {
             .recruitment-cta-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .recruitment-form-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .recruitment-faq {
+                position: static;
+                padding-left: 0;
+                border-left: 0;
+                border-top: 1px solid rgba(197, 160, 101, 0.28);
+                padding-top: 1.75rem;
             }
 
             .recruitment-choice-grid {
@@ -8109,96 +8214,130 @@
                     <small>Zgłoszenie przez stronę</small>
                 </div>
                 <div class="recruitment-form-body">
-                    <p class="recruitment-form-intro">
-                        Wypełnij krótkie zgłoszenie i napisz, w jakim obszarze chcesz działać. Dane są poufne i wykorzystywane wyłącznie do celów rekrutacyjnych BeeHouses Foundation.
-                    </p>
-                    <div class="form-alert" id="recruitmentFormAlert"></div>
-                    <form class="contact-form recruitment-form" id="recruitmentForm">
-                        <div class="form-row">
-                            <div class="field">
-                                <input type="text" class="field-input" id="recruitmentName" placeholder=" " required="">
-                                <label class="field-label" for="recruitmentName">Imię i nazwisko</label>
-                                <div class="field-line"></div>
-                            </div>
-                            <div class="field">
-                                <input type="number" class="field-input" id="recruitmentAge" min="13" max="100" placeholder=" " required="">
-                                <label class="field-label" for="recruitmentAge">Wiek</label>
-                                <div class="field-line"></div>
-                            </div>
-                        </div>
-                        <div class="field field--full">
-                            <input type="text" class="field-input" id="recruitmentAddress" placeholder=" " required="">
-                            <label class="field-label" for="recruitmentAddress">Adres zamieszkania</label>
-                            <div class="field-line"></div>
-                        </div>
-                        <div class="form-row">
-                            <div class="field">
-                                <input type="email" class="field-input" id="recruitmentEmail" placeholder=" " required="">
-                                <label class="field-label" for="recruitmentEmail">Adres e-mail</label>
-                                <div class="field-line"></div>
-                            </div>
-                            <div class="field">
-                                <input type="tel" class="field-input" id="recruitmentPhone" placeholder=" " required="">
-                                <label class="field-label" for="recruitmentPhone">Numer telefonu</label>
-                                <div class="field-line"></div>
-                            </div>
-                        </div>
-                        <div class="field field--full">
-                            <input type="text" class="field-input" id="recruitmentFacebook" placeholder=" " required="">
-                            <label class="field-label" for="recruitmentFacebook">Link do Facebooka</label>
-                            <div class="field-line"></div>
+                    <div class="recruitment-form-layout">
+                        <div class="recruitment-form-main">
+                            <p class="recruitment-form-intro">
+                                Wypełnij krótkie zgłoszenie i napisz, w jakim obszarze chcesz działać. Dane są poufne i wykorzystywane wyłącznie do celów rekrutacyjnych BeeHouses Foundation.
+                            </p>
+                            <div class="form-alert" id="recruitmentFormAlert"></div>
+                            <form class="contact-form recruitment-form" id="recruitmentForm">
+                                <div class="form-row">
+                                    <div class="field">
+                                        <input type="text" class="field-input" id="recruitmentName" placeholder=" " required="">
+                                        <label class="field-label" for="recruitmentName">Imię i nazwisko</label>
+                                        <div class="field-line"></div>
+                                    </div>
+                                    <div class="field">
+                                        <input type="number" class="field-input" id="recruitmentAge" min="13" max="100" placeholder=" " required="">
+                                        <label class="field-label" for="recruitmentAge">Wiek</label>
+                                        <div class="field-line"></div>
+                                    </div>
+                                </div>
+                                <div class="field field--full">
+                                    <input type="text" class="field-input" id="recruitmentAddress" placeholder=" " required="">
+                                    <label class="field-label" for="recruitmentAddress">Adres zamieszkania</label>
+                                    <div class="field-line"></div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="field">
+                                        <input type="email" class="field-input" id="recruitmentEmail" placeholder=" " required="">
+                                        <label class="field-label" for="recruitmentEmail">Adres e-mail</label>
+                                        <div class="field-line"></div>
+                                    </div>
+                                    <div class="field">
+                                        <input type="tel" class="field-input" id="recruitmentPhone" placeholder=" " required="">
+                                        <label class="field-label" for="recruitmentPhone">Numer telefonu</label>
+                                        <div class="field-line"></div>
+                                    </div>
+                                </div>
+                                <div class="field field--full">
+                                    <input type="text" class="field-input" id="recruitmentFacebook" placeholder=" " required="">
+                                    <label class="field-label" for="recruitmentFacebook">Link do Facebooka</label>
+                                    <div class="field-line"></div>
+                                </div>
+
+                                <div class="recruitment-choice-group">
+                                    <span class="recruitment-choice-title">W jakim zespole czuł/a byś się najlepiej?</span>
+                                    <div class="recruitment-choice-grid">
+                                        <label class="recruitment-choice">
+                                            <input type="radio" class="custom-check recruitment-radio" name="recruitmentTeam" value="Organizacyjny" required="">
+                                            <span>Organizacyjny</span>
+                                        </label>
+                                        <label class="recruitment-choice">
+                                            <input type="radio" class="custom-check recruitment-radio" name="recruitmentTeam" value="Promocyjny" required="">
+                                            <span>Promocyjny</span>
+                                        </label>
+                                        <label class="recruitment-choice">
+                                            <input type="radio" class="custom-check recruitment-radio" name="recruitmentTeam" value="Merytoryczny" required="">
+                                            <span>Merytoryczny</span>
+                                        </label>
+                                        <label class="recruitment-choice">
+                                            <input type="radio" class="custom-check recruitment-radio" name="recruitmentTeam" value="Grantowy / prawny" required="">
+                                            <span>Grantowy / prawny</span>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="field field--full">
+                                    <textarea class="field-input" id="recruitmentMotivation" placeholder=" " rows="4" required=""></textarea>
+                                    <label class="field-label" for="recruitmentMotivation">Dlaczego chcesz dołączyć do Fundacji?</label>
+                                    <div class="field-line"></div>
+                                </div>
+                                <div class="field field--full">
+                                    <textarea class="field-input" id="recruitmentExperience" placeholder=" " rows="4" required=""></textarea>
+                                    <label class="field-label" for="recruitmentExperience">Jakie masz doświadczenie w działalności społecznej?</label>
+                                    <div class="field-line"></div>
+                                </div>
+
+                                <div class="recruitment-consent">
+                                    <div class="checkbox-row">
+                                        <input type="checkbox" class="custom-check" id="recruitmentConsent" required="">
+                                        <label class="check-label" for="recruitmentConsent">
+                                            Oświadczam, że wyrażam zgodę na przetwarzanie moich danych osobowych przez Fundację BeeHouses Foundation zgodnie z RODO w celach związanych z rekrutacją i członkostwem w Fundacji. Wyrażam również zgodę na wykorzystanie mojego wizerunku w materiałach promocyjnych.
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="recruitment-submit-row">
+                                    <button type="submit" class="btn-primary">
+                                        <span>Wyślij zgłoszenie</span>
+                                        <i class="fas fa-paper-plane" aria-hidden="true"></i>
+                                    </button>
+                                    <p class="recruitment-privacy-note">Po wysłaniu zgłoszenia odpowiemy na podany adres e-mail lub numer telefonu.</p>
+                                </div>
+                            </form>
                         </div>
 
-                        <div class="recruitment-choice-group">
-                            <span class="recruitment-choice-title">W jakim zespole czuł/a byś się najlepiej?</span>
-                            <div class="recruitment-choice-grid">
-                                <label class="recruitment-choice">
-                                    <input type="radio" class="custom-check recruitment-radio" name="recruitmentTeam" value="Organizacyjny" required="">
-                                    <span>Organizacyjny</span>
-                                </label>
-                                <label class="recruitment-choice">
-                                    <input type="radio" class="custom-check recruitment-radio" name="recruitmentTeam" value="Promocyjny" required="">
-                                    <span>Promocyjny</span>
-                                </label>
-                                <label class="recruitment-choice">
-                                    <input type="radio" class="custom-check recruitment-radio" name="recruitmentTeam" value="Merytoryczny" required="">
-                                    <span>Merytoryczny</span>
-                                </label>
-                                <label class="recruitment-choice">
-                                    <input type="radio" class="custom-check recruitment-radio" name="recruitmentTeam" value="Grantowy / prawny" required="">
-                                    <span>Grantowy / prawny</span>
-                                </label>
+                        <aside class="recruitment-faq" aria-labelledby="recruitmentFaqTitle">
+                            <span class="recruitment-faq__eyebrow">FAQ</span>
+                            <h3 class="recruitment-faq__title" id="recruitmentFaqTitle">Najczęstsze pytania</h3>
+
+                            <details open>
+                                <summary>Czy muszę mieć doświadczenie?</summary>
+                                <p>Nie. Doświadczenie jest mile widziane, ale najważniejsza jest motywacja, odpowiedzialność i chęć uczenia się w konkretnym obszarze działań fundacji.</p>
+                            </details>
+                            <details>
+                                <summary>Ile trwa wypełnienie zgłoszenia?</summary>
+                                <p>Zwykle około 5-10 minut. Warto krótko opisać, co chcesz robić i dlaczego interesuje Cię BeeHouses Foundation.</p>
+                            </details>
+                            <details>
+                                <summary>W jakim zespole mogę działać?</summary>
+                                <p>Możesz wskazać zespół organizacyjny, promocyjny, merytoryczny albo grantowy/prawny. Po zgłoszeniu dobierzemy zadania do Twoich kompetencji i dostępności.</p>
+                            </details>
+                            <details>
+                                <summary>Kiedy dostanę odpowiedź?</summary>
+                                <p>Po sprawdzeniu zgłoszenia odezwiemy się na podany adres e-mail albo numer telefonu. Czas odpowiedzi zależy od liczby zgłoszeń.</p>
+                            </details>
+                            <details>
+                                <summary>Czy moje dane są bezpieczne?</summary>
+                                <p>Tak. Dane z formularza są wykorzystywane wyłącznie w celach rekrutacyjnych BeeHouses Foundation i nie są publikowane na stronie.</p>
+                            </details>
+
+                            <div class="recruitment-faq__note">
+                                Masz inne pytanie? Napisz przez formularz kontaktowy, a wrócimy z odpowiedzią.
                             </div>
-                        </div>
-
-                        <div class="field field--full">
-                            <textarea class="field-input" id="recruitmentMotivation" placeholder=" " rows="4" required=""></textarea>
-                            <label class="field-label" for="recruitmentMotivation">Dlaczego chcesz dołączyć do Fundacji?</label>
-                            <div class="field-line"></div>
-                        </div>
-                        <div class="field field--full">
-                            <textarea class="field-input" id="recruitmentExperience" placeholder=" " rows="4" required=""></textarea>
-                            <label class="field-label" for="recruitmentExperience">Jakie masz doświadczenie w działalności społecznej?</label>
-                            <div class="field-line"></div>
-                        </div>
-
-                        <div class="recruitment-consent">
-                            <div class="checkbox-row">
-                                <input type="checkbox" class="custom-check" id="recruitmentConsent" required="">
-                                <label class="check-label" for="recruitmentConsent">
-                                    Oświadczam, że wyrażam zgodę na przetwarzanie moich danych osobowych przez Fundację BeeHouses Foundation zgodnie z RODO w celach związanych z rekrutacją i członkostwem w Fundacji. Wyrażam również zgodę na wykorzystanie mojego wizerunku w materiałach promocyjnych.
-                                </label>
-                            </div>
-                        </div>
-
-                        <div class="recruitment-submit-row">
-                            <button type="submit" class="btn-primary">
-                                <span>Wyślij zgłoszenie</span>
-                                <i class="fas fa-paper-plane" aria-hidden="true"></i>
-                            </button>
-                            <p class="recruitment-privacy-note">Po wysłaniu zgłoszenia odpowiemy na podany adres e-mail lub numer telefonu.</p>
-                        </div>
-                    </form>
+                        </aside>
+                    </div>
                 </div>
             </div>
         </div>
