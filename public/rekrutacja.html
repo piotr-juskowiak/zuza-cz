@@ -8115,10 +8115,15 @@
 
         .recruitment-faq details {
             border-top: 1px solid rgba(26, 46, 40, 0.12);
+            overflow: hidden;
         }
 
         .recruitment-faq details:last-child {
             border-bottom: 1px solid rgba(26, 46, 40, 0.12);
+        }
+
+        .recruitment-faq details.is-faq-animating {
+            will-change: height;
         }
 
         .recruitment-faq summary {
@@ -8136,6 +8141,7 @@
             letter-spacing: 0.06em;
             line-height: 1.45;
             text-transform: uppercase;
+            transition: color 0.25s ease;
         }
 
         .recruitment-faq summary::-webkit-details-marker {
@@ -8155,16 +8161,35 @@
             transform: rotate(45deg);
         }
 
-        .recruitment-faq details[open] summary {
-            padding-bottom: 0.75rem;
-        }
-
         .recruitment-faq p {
             margin: 0;
             padding: 0 0 1.45rem;
             color: var(--text-secondary);
             font-size: 0.9rem;
             line-height: 1.85;
+            opacity: 0;
+            transform: translateY(-6px);
+            transition: opacity 0.24s ease, transform 0.24s ease;
+        }
+
+        .recruitment-faq details[open] p {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .recruitment-faq details.is-faq-closing p {
+            opacity: 0;
+            transform: translateY(-6px);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .recruitment-faq details,
+            .recruitment-faq p,
+            .recruitment-faq summary,
+            .recruitment-faq summary::after {
+                transition: none;
+                animation: none;
+            }
         }
 
         .recruitment-faq__note {
@@ -8391,16 +8416,93 @@
             const value = document.getElementById('recruitmentProgressValue');
             const track = document.getElementById('recruitmentProgressTrack');
             const faqItems = Array.from(document.querySelectorAll('.recruitment-faq details'));
+            const faqAnimations = new WeakMap();
+            const faqAnimationOptions = {
+                duration: 320,
+                easing: 'cubic-bezier(0.22, 1, 0.36, 1)'
+            };
+            const shouldReduceFaqMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+            const clearFaqAnimation = (item) => {
+                item.style.height = '';
+                item.style.overflow = '';
+                item.classList.remove('is-faq-animating', 'is-faq-opening', 'is-faq-closing');
+                faqAnimations.delete(item);
+            };
+
+            const cancelFaqAnimation = (item) => {
+                const animation = faqAnimations.get(item);
+
+                if (animation) {
+                    animation.oncancel = null;
+                    animation.cancel();
+                    faqAnimations.delete(item);
+                }
+            };
+
+            const setFaqOpen = (item, open) => {
+                const summary = item.querySelector('summary');
+
+                if (!summary || (item.open === open && !faqAnimations.has(item))) return;
+
+                cancelFaqAnimation(item);
+
+                if (shouldReduceFaqMotion.matches || typeof item.animate !== 'function') {
+                    item.open = open;
+                    clearFaqAnimation(item);
+                    return;
+                }
+
+                const startHeight = `${item.offsetHeight}px`;
+
+                if (open) {
+                    item.open = true;
+
+                    const endHeight = `${item.scrollHeight}px`;
+                    item.style.height = startHeight;
+                    item.style.overflow = 'hidden';
+                    item.classList.add('is-faq-animating', 'is-faq-opening');
+                    item.classList.remove('is-faq-closing');
+
+                    const animation = item.animate({ height: [startHeight, endHeight] }, faqAnimationOptions);
+                    faqAnimations.set(item, animation);
+                    animation.onfinish = () => clearFaqAnimation(item);
+                    animation.oncancel = () => clearFaqAnimation(item);
+                    return;
+                }
+
+                const endHeight = `${summary.offsetHeight}px`;
+                item.style.height = startHeight;
+                item.style.overflow = 'hidden';
+                item.classList.add('is-faq-animating', 'is-faq-closing');
+                item.classList.remove('is-faq-opening');
+
+                const animation = item.animate({ height: [startHeight, endHeight] }, faqAnimationOptions);
+                faqAnimations.set(item, animation);
+                animation.onfinish = () => {
+                    item.open = false;
+                    clearFaqAnimation(item);
+                };
+                animation.oncancel = () => clearFaqAnimation(item);
+            };
 
             faqItems.forEach((item) => {
                 const summary = item.querySelector('summary');
-                summary?.addEventListener('click', () => {
-                    if (item.open) return;
+                summary?.addEventListener('click', (event) => {
+                    event.preventDefault();
+
+                    if (item.open) {
+                        setFaqOpen(item, false);
+                        return;
+                    }
+
                     faqItems.forEach((otherItem) => {
                         if (otherItem !== item) {
-                            otherItem.open = false;
+                            setFaqOpen(otherItem, false);
                         }
                     });
+
+                    setFaqOpen(item, true);
                 });
             });
 
