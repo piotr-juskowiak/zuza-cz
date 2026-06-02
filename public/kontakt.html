@@ -6277,18 +6277,18 @@
             <div class="topics-cards-grid">
 
                 <div class="topic-card topic-card--media reveal reveal-up">
-                    <div class="topic-card__media-gallery">
-                        <div class="topic-card__media-image topic-card__media-image--main">
-                            <img src="https://i.imgur.com/xe1frjz.png" alt="Zaproszenie do mediów" width="869" height="1151" decoding="async" loading="lazy">
+                    <div class="topic-card__slider" id="slider-media">
+                        <div class="topic-card__slide active">
+                            <img src="https://i.imgur.com/xe1frjz.png" alt="Zaproszenie do mediów" decoding="async" loading="lazy">
                         </div>
-                        <div class="topic-card__media-stack">
-                            <div class="topic-card__media-image">
-                                <img src="https://i.imgur.com/n6vr1Wt.png" alt="Zaproszenie do mediów - materiał prasowy" width="869" height="1151" decoding="async" loading="lazy">
-                            </div>
-                            <div class="topic-card__media-image">
-                                <img src="https://i.imgur.com/64vs4QN.png" alt="Zaproszenie do mediów - spotkanie" width="837" height="490" decoding="async" loading="lazy">
-                            </div>
+                        <div class="topic-card__slide">
+                            <img src="https://i.imgur.com/n6vr1Wt.png" alt="Zaproszenie do mediów - materiał prasowy" decoding="async" loading="lazy">
                         </div>
+                        <div class="topic-card__slide">
+                            <img src="https://i.imgur.com/64vs4QN.png" alt="Zaproszenie do mediów - spotkanie" decoding="async" loading="lazy">
+                        </div>
+                        <button class="slider-side-arrow slider-side-arrow--prev" aria-label="Poprzednie"><i class="fas fa-chevron-left"></i></button>
+                        <button class="slider-side-arrow slider-side-arrow--next" aria-label="Następne"><i class="fas fa-chevron-right"></i></button>
                     </div>
                     <div class="topic-card__media-content">
                         <div class="topic-card__num">01</div>
@@ -6302,13 +6302,15 @@
                 </div>
 
                 <div class="topic-card topic-card--media topic-card--support reveal reveal-up delay-100">
-                    <div class="topic-card__media-gallery topic-card__media-gallery--duo">
-                        <div class="topic-card__media-image topic-card__media-image--main">
-                            <img src="https://i.imgur.com/ICyowxn.jpeg" alt="Warsztaty edukacyjne Brodnica Beehouses 2025" width="1280" height="960" decoding="async" loading="lazy">
+                    <div class="topic-card__slider" id="slider-support">
+                        <div class="topic-card__slide active">
+                            <img src="https://i.imgur.com/ICyowxn.jpeg" alt="Warsztaty edukacyjne Brodnica Beehouses 2025" decoding="async" loading="lazy">
                         </div>
-                        <div class="topic-card__media-image">
-                            <img src="https://i.imgur.com/e0lLmNt.jpeg" alt="Warsztaty pszczelarskie Beehouses" width="1536" height="2048" decoding="async" loading="lazy">
+                        <div class="topic-card__slide">
+                            <img src="https://i.imgur.com/e0lLmNt.jpeg" alt="Warsztaty pszczelarskie Beehouses" decoding="async" loading="lazy">
                         </div>
+                        <button class="slider-side-arrow slider-side-arrow--prev" aria-label="Poprzednie"><i class="fas fa-chevron-left"></i></button>
+                        <button class="slider-side-arrow slider-side-arrow--next" aria-label="Następne"><i class="fas fa-chevron-right"></i></button>
                     </div>
                     <div class="topic-card__media-content">
                         <div class="topic-card__num">02</div>
@@ -6391,7 +6393,7 @@
             gap: 0.75rem;
             position: relative;
             overflow: hidden;
-            transition: transform 0.4s var(--transition), box-shadow 0.4s var(--transition), border-color 0.4s;
+            transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.5s cubic-bezier(0.25, 1, 0.5, 1), border-color 0.4s;
         }
         .topic-card::after {
             content: '';
@@ -6401,12 +6403,12 @@
             width: 0;
             height: 2px;
             background: var(--accent-gold);
-            transition: width 0.4s var(--transition);
+            transition: width 0.5s cubic-bezier(0.25, 1, 0.5, 1);
         }
         .topic-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px -10px rgba(26,46,40,0.1);
-            border-color: rgba(197,160,101,0.35);
+            transform: translateY(-6px);
+            box-shadow: 0 24px 48px -12px rgba(26,46,40,0.15), inset 0 0 60px rgba(197, 160, 101, 0.06);
+            border-color: rgba(197,160,101,0.45);
         }
         .topic-card:hover::after {
             width: 100%;
@@ -6439,10 +6441,12 @@
             color: var(--accent-gold);
             font-size: 1.05rem;
             margin-bottom: 0.5rem;
-            transition: background 0.3s;
+            transition: background 0.4s, transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.4s;
         }
         .topic-card:hover .topic-card__icon {
             background: rgba(197,160,101,0.18);
+            transform: scale(1.08);
+            box-shadow: 0 4px 12px rgba(197,160,101,0.15);
         }
 
         .topic-card__title {
@@ -6495,44 +6499,77 @@
             z-index: 1;
         }
 
-        .topic-card__media-gallery {
+        .topic-card__slider {
             height: 100%;
             min-height: 0;
-            display: grid;
-            grid-template-columns: minmax(0, 1.15fr) minmax(120px, 0.85fr);
-            gap: 6px;
+            position: relative;
             background: #fff;
             overflow: hidden;
         }
 
-        .topic-card__media-gallery--duo {
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-        }
-
-        .topic-card__media-stack {
-            min-height: 0;
-            display: grid;
-            grid-template-rows: 1fr 1fr;
-            gap: 6px;
-        }
-
-        .topic-card__media-image {
-            min-height: 0;
+        .topic-card__slide {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 1s ease-in-out, visibility 1s ease-in-out, transform 4s linear;
+            transform: scale(1);
             overflow: hidden;
         }
 
-        .topic-card__media-image img {
+        .topic-card__slide.active {
+            opacity: 1;
+            visibility: visible;
+            transform: scale(1.04);
+            z-index: 1;
+        }
+
+        .topic-card__slide img {
             width: 100%;
             height: 100%;
             display: block;
             object-fit: cover;
             object-position: center;
             filter: saturate(0.95) contrast(1.02);
-            transition: transform 0.7s var(--transition);
         }
 
-        .topic-card--media:hover .topic-card__media-image img {
-            transform: scale(1.04);
+        /* Nav controls */
+        .slider-side-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: transparent;
+            border: none;
+            color: #fff;
+            font-size: 1.25rem;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 3;
+            transition: all 0.3s var(--transition);
+            opacity: 0;
+        }
+
+        .topic-card__slider:hover .slider-side-arrow {
+            opacity: 0.8;
+        }
+
+        .slider-side-arrow:hover {
+            background: transparent;
+            color: var(--accent-gold);
+            transform: translateY(-50%) scale(1.1);
+            opacity: 1;
+        }
+
+        .slider-side-arrow--prev {
+            left: 1.25rem;
+        }
+
+        .slider-side-arrow--next {
+            right: 1.25rem;
         }
 
         .topic-card__media-content {
@@ -6563,8 +6600,12 @@
                 height: auto;
             }
 
-            .topic-card__media-gallery {
+            .topic-card__slider {
                 height: 320px;
+            }
+
+            .slider-side-arrow {
+                display: none;
             }
         }
         @media (max-width: 540px) {
@@ -6576,15 +6617,8 @@
                 min-height: 0;
             }
 
-            .topic-card__media-gallery {
+            .topic-card__slider {
                 height: 340px;
-                grid-template-columns: 1fr;
-                grid-template-rows: 1.35fr 0.85fr;
-            }
-
-            .topic-card__media-stack {
-                grid-template-columns: repeat(2, 1fr);
-                grid-template-rows: 1fr;
             }
 
             .topic-card__media-content {
@@ -7916,6 +7950,70 @@
                 }
             }, randomDuration * 1000);
         }
+
+        // --- TOPIC CARD SLIDERS ---
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.topic-card__slider').forEach(slider => {
+                const slides = slider.querySelectorAll('.topic-card__slide');
+                if(slides.length <= 1) return;
+
+                let currentIndex = 0;
+                let interval = null;
+                const speed = 4000;
+
+                function goToSlide(index) {
+                    slides[currentIndex].classList.remove('active');
+                    
+                    currentIndex = index;
+                    
+                    slides[currentIndex].classList.add('active');
+                }
+
+                function nextSlide() {
+                    const nextIndex = (currentIndex + 1) % slides.length;
+                    goToSlide(nextIndex);
+                }
+
+                function startAutoplay() {
+                    if (interval) clearInterval(interval);
+                    interval = setInterval(nextSlide, speed);
+                }
+
+                function stopAutoplay() {
+                    if (interval) clearInterval(interval);
+                }
+
+                // Click arrows
+                const prevBtn = slider.querySelector('.slider-side-arrow--prev');
+                const nextBtn = slider.querySelector('.slider-side-arrow--next');
+
+                if (prevBtn) {
+                    prevBtn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        const prevIndex = (currentIndex - 1 + slides.length) % slides.length;
+                        goToSlide(prevIndex);
+                        startAutoplay();
+                    });
+                }
+
+                if (nextBtn) {
+                    nextBtn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        nextSlide();
+                        startAutoplay();
+                    });
+                }
+
+                // Pause on hover
+                const card = slider.closest('.topic-card');
+                if (card) {
+                    card.addEventListener('mouseenter', stopAutoplay);
+                    card.addEventListener('mouseleave', startAutoplay);
+                }
+
+                startAutoplay();
+            });
+        });
     </script>
 
 
