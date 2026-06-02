@@ -7359,7 +7359,7 @@
 
         .team-call-roles {
             display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
+            grid-template-columns: repeat(3, minmax(0, 1fr));
             gap: clamp(0.75rem, 1.4vw, 1rem);
         }
 
@@ -7372,11 +7372,11 @@
             border: 1px solid rgba(197, 160, 101, 0.24);
             border-radius: 8px;
             box-shadow: 0 16px 36px rgba(26, 46, 40, 0.07), 0 6px 14px rgba(197, 160, 101, 0.05);
-            padding: clamp(1rem, 1.7vw, 1.3rem);
-            min-height: 108px;
+            padding: clamp(0.95rem, 1.4vw, 1.15rem);
+            min-height: 92px;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
+            justify-content: flex-start;
             transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
         }
 
@@ -7425,19 +7425,12 @@
 
         .team-call-role strong {
             display: block;
-            margin: 0.62rem 0 0.25rem;
+            margin: 0.62rem 0 0;
             font-family: 'Cormorant Garamond', serif;
             font-size: clamp(1.18rem, 1.45vw, 1.42rem);
             font-weight: 500;
             line-height: 1.05;
             color: var(--text-primary);
-        }
-
-        .team-call-role p {
-            margin: 0;
-            color: var(--text-secondary);
-            font-size: 0.8rem;
-            line-height: 1.42;
         }
 
         @media (max-width: 1100px) {
@@ -7455,7 +7448,7 @@
             }
 
             .team-call-roles {
-                grid-template-columns: 1fr;
+                grid-template-columns: repeat(3, minmax(0, 1fr));
             }
         }
 
@@ -7537,14 +7530,18 @@
                         <span>01</span>
                         <div>
                             <strong>Zgłoszenie</strong>
-                            <p>Wypełniasz formularz i krótko opisujesz, w czym chcesz pomóc BeeHouses Foundation.</p>
                         </div>
                     </article>
                     <article class="team-call-role">
                         <span>02</span>
                         <div>
-                            <strong>Rozmowa i start</strong>
-                            <p>Umawiamy krótką rozmowę, dobieramy obszar działania i zaczynasz od pierwszego zadania.</p>
+                            <strong>Rozmowa</strong>
+                        </div>
+                    </article>
+                    <article class="team-call-role">
+                        <span>03</span>
+                        <div>
+                            <strong>Start</strong>
                         </div>
                     </article>
                 </div>
