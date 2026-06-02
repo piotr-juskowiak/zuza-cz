@@ -1,6 +1,6 @@
-const CONTACT_TO = process.env.RESEND_TO || "kontakt@zuzannaczuprynska.pl";
+const CONTACT_TO = process.env.RESEND_TO || "kontakt@zuzanna-czuprynska.pl";
 const CONTACT_FROM =
-  process.env.RESEND_FROM || "Formularze WWW <kontakt@zuzannaczuprynska.pl>";
+  process.env.RESEND_FROM || "Formularze WWW <kontakt@zuzanna-czuprynska.pl>";
 
 const MAX_FIELD_LENGTH = 2000;
 
