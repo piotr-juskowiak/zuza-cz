@@ -531,7 +531,7 @@ body.transparent-hero-header:not(.menu-open) nav#navbar:not(.scrolled) .nav-link
 
 body.transparent-hero-header:not(.menu-open) nav#navbar:not(.scrolled) .logo img {
     filter: brightness(0) invert(1) drop-shadow(0 2px 8px rgba(0, 0, 0, 0.25)) !important;
-    opacity: 0.95;
+    opacity: 0.5;
 }
 
 body.transparent-hero-header:not(.menu-open) nav#navbar:not(.scrolled) .lang-btn {
@@ -563,12 +563,12 @@ body.transparent-hero-header:not(.menu-open) nav#navbar:not(.scrolled) .lang-con
 }
 
 body.transparent-hero-header:not(.menu-open) nav#navbar:not(.scrolled) .btn-gold {
-    background: rgba(197, 160, 101, 0.12) !important;
-    border-color: rgba(197, 160, 101, 0.3) !important;
-    color: rgba(197, 160, 101, 0.9) !important;
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15) !important;
+    background: transparent !important;
+    border-color: #b28f5661 !important;
+    color: rgb(197 160 101) !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    box-shadow: none !important;
 }
 
 body.transparent-hero-header:not(.menu-open) nav#navbar:not(.scrolled) .btn-gold:hover {
