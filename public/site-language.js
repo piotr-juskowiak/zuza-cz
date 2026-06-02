@@ -124,7 +124,7 @@
         'Harmonogram Wydarzeń': 'Event schedule',
         'Sejm RP': 'Polish Parliament',
         'Aktywna praca w Sejmie Rzeczypospolitej Polskiej na rzecz ekologii i przyszłości kraju': 'Active work in the Polish Parliament for ecology and the country\'s future',
-        'Aktywny udział w obradach IX kadencji': 'Active participation in the 9th term sessions',
+        'Aktywny udział w obradach VIII i IX kadencji': 'Active participation in the 8th and 9th term sessions',
         'Projekt Beehouses': 'Beehouses Project',
         'Innowacyjna edukacja ekologiczna i ochrona dzikich zapylaczy': 'Innovative ecological education and protection of wild pollinators',
         'Co nowego na socialach': 'What\'s new on social media',
