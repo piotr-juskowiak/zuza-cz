@@ -7505,7 +7505,6 @@
                 <div class="team-call-copy reveal reveal-soft-blur delay-100">
                     <span class="team-call-eyebrow">Fundacja 2026 / rekrutacja trwa!</span>
                     <h2 class="team-call-title" id="teamCallTitle">Dołącz do <em>fundacji</em></h2>
-                    <p class="team-call-lead">BeeHouses Foundation szuka osób do projektów ekologicznych, edukacyjnych i lokalnych. Liczą się regularność, ciekawość i chęć działania.</p>
 
                     <a href="#formularz-rekrutacyjny" class="team-call-link">
                         Przejdź do formularza <i class="fas fa-arrow-down" aria-hidden="true"></i>
@@ -7856,6 +7855,18 @@
             letter-spacing: 0.14em;
             text-transform: uppercase;
             color: rgba(255, 255, 255, 0.72);
+            white-space: nowrap;
+        }
+
+        .recruitment-form-header-copy {
+            max-width: 760px;
+        }
+
+        .recruitment-form-header-copy p {
+            margin: 0.45rem 0 0;
+            color: rgba(255, 255, 255, 0.78);
+            font-size: 0.88rem;
+            line-height: 1.55;
         }
 
         .recruitment-progress {
@@ -8172,7 +8183,10 @@
         <div class="container">
             <div class="recruitment-form-panel reveal reveal-up delay-100" id="formularz-rekrutacyjny">
                 <div class="recruitment-form-header">
-                    <span>Formularz BeeHouses Foundation</span>
+                    <div class="recruitment-form-header-copy">
+                        <span>Formularz BeeHouses Foundation</span>
+                        <p>BeeHouses Foundation szuka osób do projektów ekologicznych, edukacyjnych i lokalnych. Liczą się regularność, ciekawość i chęć działania.</p>
+                    </div>
                     <small>Zgłoszenie przez stronę</small>
                 </div>
                 <div class="recruitment-progress" aria-label="Postęp wypełnienia zgłoszenia">
