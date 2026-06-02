@@ -54,6 +54,7 @@
       }
 
       .contact-form.form-mailer-is-submitting .field-input,
+      .recruitment-form.form-mailer-is-submitting .field-input,
       .premium-subscribe-form.form-mailer-is-submitting input {
         opacity: 0.72;
       }
@@ -102,6 +103,11 @@
   function getChecked(form, selector) {
     const field = form.querySelector(selector);
     return Boolean(field && field.checked);
+  }
+
+  function getSelectedValue(form, selector) {
+    const field = form.querySelector(selector);
+    return field ? field.value.trim() : "";
   }
 
   function getPageContext() {
@@ -295,7 +301,8 @@
   function isManagedForm(form) {
     return form instanceof HTMLFormElement && (
       form.id === "contactForm" ||
-      form.id === "newsletterForm"
+      form.id === "newsletterForm" ||
+      form.id === "recruitmentForm"
     );
   }
 
@@ -306,8 +313,10 @@
 
     if (form.id === "contactForm") {
       handleContactForm(form);
-    } else {
+    } else if (form.id === "newsletterForm") {
       handleNewsletterForm(form);
+    } else {
+      handleRecruitmentForm(form);
     }
   }
 
@@ -389,6 +398,44 @@
     }
   }
 
+  async function handleRecruitmentForm(form) {
+    const restoreButton = setPending(form, "Wysyłanie zgłoszenia...");
+
+    try {
+      const formData = {
+        name: getField(form, "#recruitmentName"),
+        age: getField(form, "#recruitmentAge"),
+        address: getField(form, "#recruitmentAddress"),
+        email: getField(form, "#recruitmentEmail"),
+        phone: getField(form, "#recruitmentPhone"),
+        facebook: getField(form, "#recruitmentFacebook"),
+        team: getSelectedValue(form, 'input[name="recruitmentTeam"]:checked'),
+        motivation: getField(form, "#recruitmentMotivation"),
+        experience: getField(form, "#recruitmentExperience"),
+        consent: getChecked(form, "#recruitmentConsent"),
+        createdAt: new Date().toISOString(),
+      };
+
+      await sendFormEmail("recruitment", formData);
+
+      showAlert(
+        "recruitmentFormAlert",
+        "success",
+        "Dziękujemy! Twoje zgłoszenie zostało wysłane. Odezwiemy się po jego sprawdzeniu."
+      );
+      form.reset();
+    } catch (error) {
+      console.error("Błąd formularza rekrutacyjnego:", error);
+      showAlert(
+        "recruitmentFormAlert",
+        "error",
+        "Wystąpił błąd podczas wysyłania zgłoszenia. Spróbuj ponownie później."
+      );
+    } finally {
+      restoreButton();
+    }
+  }
+
   document.addEventListener(
     "submit",
     function (event) {
@@ -440,5 +487,9 @@
 
   window.sendNewsletterFormEmail = function (payload) {
     return sendFormEmail("newsletter", payload);
+  };
+
+  window.sendRecruitmentFormEmail = function (payload) {
+    return sendFormEmail("recruitment", payload);
   };
 })();

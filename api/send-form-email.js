@@ -163,6 +163,75 @@ function buildNewsletterEmail(payload) {
   };
 }
 
+function buildRecruitmentEmail(payload) {
+  const name = sanitize(payload.name, 160);
+  const age = sanitize(payload.age, 20);
+  const address = sanitize(payload.address, 300);
+  const email = sanitize(payload.email, 250);
+  const phone = sanitize(payload.phone, 80);
+  const facebook = sanitize(payload.facebook, 500);
+  const team = sanitize(payload.team, 160);
+  const motivation = sanitizeMultiline(payload.motivation, 8000);
+  const experience = sanitizeMultiline(payload.experience, 8000);
+  const consent = payload.consent ? "Tak" : "Nie";
+  const pageUrl = sanitize(payload.pageUrl, 500);
+
+  if (!name || !age || !address || !isEmail(email) || !phone || !facebook || !team) {
+    throw new Error("INVALID_RECRUITMENT_FORM");
+  }
+
+  if (!motivation || !experience) {
+    throw new Error("EMPTY_RECRUITMENT_MESSAGE");
+  }
+
+  if (!payload.consent) {
+    throw new Error("RECRUITMENT_CONSENT_REQUIRED");
+  }
+
+  const title = "Nowe zgloszenie do BeeHouses Foundation";
+  const rows =
+    row("Imie i nazwisko", name) +
+    row("Wiek", age) +
+    row("Adres", address) +
+    row("Email", email) +
+    row("Telefon", phone) +
+    row("Facebook", facebook) +
+    row("Zespol", team) +
+    row("Zgoda RODO i wizerunek", consent) +
+    row("Strona", pageUrl);
+
+  const message = [
+    "Dlaczego chce dolaczyc do Fundacji:",
+    motivation,
+    "",
+    "Doswiadczenie w dzialalnosci spolecznej:",
+    experience,
+  ].join("\n");
+
+  const text = [
+    title,
+    "",
+    textLine("Imie i nazwisko", name),
+    textLine("Wiek", age),
+    textLine("Adres", address),
+    textLine("Email", email),
+    textLine("Telefon", phone),
+    textLine("Facebook", facebook),
+    textLine("Zespol", team),
+    textLine("Zgoda RODO i wizerunek", consent),
+    textLine("Strona", pageUrl),
+    "",
+    message,
+  ].join("\n");
+
+  return {
+    subject: "Nowe zgloszenie do BeeHouses Foundation",
+    replyTo: email,
+    html: layout(title, "Formularz rekrutacyjny zostal wypelniony na stronie.", rows, message),
+    text,
+  };
+}
+
 async function sendViaResend(email) {
   if (!process.env.RESEND_API_KEY) {
     throw new Error("RESEND_API_KEY_MISSING");
@@ -207,6 +276,8 @@ module.exports = async function handler(req, res) {
       email = buildContactEmail(payload);
     } else if (type === "newsletter") {
       email = buildNewsletterEmail(payload);
+    } else if (type === "recruitment") {
+      email = buildRecruitmentEmail(payload);
     } else {
       res.status(400).json({ ok: false, error: "INVALID_FORM_TYPE" });
       return;

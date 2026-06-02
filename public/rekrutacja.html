@@ -7914,17 +7914,128 @@
             color: var(--accent-gold);
         }
 
-        .recruitment-form-frame {
+        .recruitment-form-header small {
+            font-family: 'Syne', sans-serif;
+            font-size: 0.6rem;
+            font-weight: 700;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.72);
+        }
+
+        .recruitment-form-body {
+            padding: clamp(1.5rem, 4vw, 3rem);
+            background:
+                linear-gradient(145deg, rgba(255, 255, 255, 0.95), rgba(248, 246, 241, 0.9)),
+                radial-gradient(circle at top right, rgba(197, 160, 101, 0.12), transparent 42%);
+        }
+
+        .recruitment-form-intro {
+            max-width: 760px;
+            margin: 0 0 2.2rem;
+            color: var(--text-secondary);
+            font-size: 0.96rem;
+            line-height: 1.75;
+        }
+
+        .recruitment-form .field--full {
+            grid-column: 1 / -1;
+        }
+
+        .recruitment-form textarea.field-input {
+            min-height: 136px;
+            resize: vertical;
+            line-height: 1.65;
+        }
+
+        .recruitment-choice-group {
+            margin-bottom: 2rem;
+        }
+
+        .recruitment-choice-title {
             display: block;
-            width: 100%;
-            height: 1480px;
-            border: 0;
-            background: #fff;
+            margin-bottom: 0.95rem;
+            font-family: 'Syne', sans-serif;
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--accent-gold);
+        }
+
+        .recruitment-choice-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 0.8rem;
+        }
+
+        .recruitment-choice {
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            min-height: 58px;
+            padding: 0.9rem 0.95rem;
+            border: 1px solid rgba(197, 160, 101, 0.22);
+            background: rgba(255, 255, 255, 0.66);
+            color: var(--text-primary);
+            font-size: 0.88rem;
+            line-height: 1.35;
+            cursor: pointer;
+            transition: border-color 0.25s ease, background 0.25s ease, transform 0.25s ease;
+        }
+
+        .recruitment-choice:hover {
+            transform: translateY(-2px);
+            border-color: rgba(197, 160, 101, 0.5);
+            background: rgba(255, 255, 255, 0.92);
+        }
+
+        .recruitment-radio {
+            border-radius: 999px;
+        }
+
+        .recruitment-radio::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            border-radius: 999px;
+            background: var(--accent-gold);
+        }
+
+        .recruitment-consent {
+            margin-top: 0.25rem;
+            padding: 1rem 1rem 0.1rem;
+            border: 1px solid rgba(197, 160, 101, 0.2);
+            background: rgba(255, 255, 255, 0.62);
+        }
+
+        .recruitment-consent .check-label {
+            font-size: 0.78rem;
+        }
+
+        .recruitment-submit-row {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 1.6rem;
+        }
+
+        .recruitment-privacy-note {
+            max-width: 420px;
+            margin: 0;
+            color: var(--text-secondary);
+            font-size: 0.78rem;
+            line-height: 1.55;
         }
 
         @media (max-width: 900px) {
             .recruitment-cta-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .recruitment-choice-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
             }
         }
 
@@ -7949,8 +8060,12 @@
                 flex-direction: column;
             }
 
-            .recruitment-form-frame {
-                height: 1540px;
+            .recruitment-choice-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .recruitment-form-body {
+                padding: 1.25rem;
             }
         }
     </style>
@@ -7967,9 +8082,9 @@
                             <i class="fas fa-clipboard-list" aria-hidden="true"></i>
                             <span>Formularz BeeHouses</span>
                         </a>
-                        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdxeLCaVtjqICy-q4DIyhfVCrIboHZmhg3qM8ED1P4ZsgMddA/viewform?pli=1" class="btn btn-outline" target="_blank" rel="noopener">
-                            <span>Otwórz w nowej karcie</span>
-                            <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i>
+                        <a href="/kontakt" class="btn btn-outline">
+                            <span>Zadaj pytanie</span>
+                            <i class="fas fa-arrow-right" aria-hidden="true"></i>
                         </a>
                     </div>
                 </div>
@@ -7991,18 +8106,100 @@
             <div class="recruitment-form-panel reveal reveal-up delay-100" id="formularz-rekrutacyjny">
                 <div class="recruitment-form-header">
                     <span>Formularz BeeHouses Foundation</span>
-                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSdxeLCaVtjqICy-q4DIyhfVCrIboHZmhg3qM8ED1P4ZsgMddA/viewform?pli=1" target="_blank" rel="noopener">
-                        Otwórz w Google Forms <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i>
-                    </a>
+                    <small>Zgłoszenie przez stronę</small>
                 </div>
-                <iframe
-                    class="recruitment-form-frame"
-                    title="Formularz rekrutacyjny BeeHouses Foundation"
-                    src="https://docs.google.com/forms/d/e/1FAIpQLSdxeLCaVtjqICy-q4DIyhfVCrIboHZmhg3qM8ED1P4ZsgMddA/viewform?embedded=true"
-                    loading="lazy"
-                    frameborder="0"
-                    marginheight="0"
-                    marginwidth="0">Ładowanie…</iframe>
+                <div class="recruitment-form-body">
+                    <p class="recruitment-form-intro">
+                        Wypełnij krótkie zgłoszenie i napisz, w jakim obszarze chcesz działać. Dane są poufne i wykorzystywane wyłącznie do celów rekrutacyjnych BeeHouses Foundation.
+                    </p>
+                    <div class="form-alert" id="recruitmentFormAlert"></div>
+                    <form class="contact-form recruitment-form" id="recruitmentForm">
+                        <div class="form-row">
+                            <div class="field">
+                                <input type="text" class="field-input" id="recruitmentName" placeholder=" " required="">
+                                <label class="field-label" for="recruitmentName">Imię i nazwisko</label>
+                                <div class="field-line"></div>
+                            </div>
+                            <div class="field">
+                                <input type="number" class="field-input" id="recruitmentAge" min="13" max="100" placeholder=" " required="">
+                                <label class="field-label" for="recruitmentAge">Wiek</label>
+                                <div class="field-line"></div>
+                            </div>
+                        </div>
+                        <div class="field field--full">
+                            <input type="text" class="field-input" id="recruitmentAddress" placeholder=" " required="">
+                            <label class="field-label" for="recruitmentAddress">Adres zamieszkania</label>
+                            <div class="field-line"></div>
+                        </div>
+                        <div class="form-row">
+                            <div class="field">
+                                <input type="email" class="field-input" id="recruitmentEmail" placeholder=" " required="">
+                                <label class="field-label" for="recruitmentEmail">Adres e-mail</label>
+                                <div class="field-line"></div>
+                            </div>
+                            <div class="field">
+                                <input type="tel" class="field-input" id="recruitmentPhone" placeholder=" " required="">
+                                <label class="field-label" for="recruitmentPhone">Numer telefonu</label>
+                                <div class="field-line"></div>
+                            </div>
+                        </div>
+                        <div class="field field--full">
+                            <input type="text" class="field-input" id="recruitmentFacebook" placeholder=" " required="">
+                            <label class="field-label" for="recruitmentFacebook">Link do Facebooka</label>
+                            <div class="field-line"></div>
+                        </div>
+
+                        <div class="recruitment-choice-group">
+                            <span class="recruitment-choice-title">W jakim zespole czuł/a byś się najlepiej?</span>
+                            <div class="recruitment-choice-grid">
+                                <label class="recruitment-choice">
+                                    <input type="radio" class="custom-check recruitment-radio" name="recruitmentTeam" value="Organizacyjny" required="">
+                                    <span>Organizacyjny</span>
+                                </label>
+                                <label class="recruitment-choice">
+                                    <input type="radio" class="custom-check recruitment-radio" name="recruitmentTeam" value="Promocyjny" required="">
+                                    <span>Promocyjny</span>
+                                </label>
+                                <label class="recruitment-choice">
+                                    <input type="radio" class="custom-check recruitment-radio" name="recruitmentTeam" value="Merytoryczny" required="">
+                                    <span>Merytoryczny</span>
+                                </label>
+                                <label class="recruitment-choice">
+                                    <input type="radio" class="custom-check recruitment-radio" name="recruitmentTeam" value="Grantowy / prawny" required="">
+                                    <span>Grantowy / prawny</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="field field--full">
+                            <textarea class="field-input" id="recruitmentMotivation" placeholder=" " rows="4" required=""></textarea>
+                            <label class="field-label" for="recruitmentMotivation">Dlaczego chcesz dołączyć do Fundacji?</label>
+                            <div class="field-line"></div>
+                        </div>
+                        <div class="field field--full">
+                            <textarea class="field-input" id="recruitmentExperience" placeholder=" " rows="4" required=""></textarea>
+                            <label class="field-label" for="recruitmentExperience">Jakie masz doświadczenie w działalności społecznej?</label>
+                            <div class="field-line"></div>
+                        </div>
+
+                        <div class="recruitment-consent">
+                            <div class="checkbox-row">
+                                <input type="checkbox" class="custom-check" id="recruitmentConsent" required="">
+                                <label class="check-label" for="recruitmentConsent">
+                                    Oświadczam, że wyrażam zgodę na przetwarzanie moich danych osobowych przez Fundację BeeHouses Foundation zgodnie z RODO w celach związanych z rekrutacją i członkostwem w Fundacji. Wyrażam również zgodę na wykorzystanie mojego wizerunku w materiałach promocyjnych.
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="recruitment-submit-row">
+                            <button type="submit" class="btn-primary">
+                                <span>Wyślij zgłoszenie</span>
+                                <i class="fas fa-paper-plane" aria-hidden="true"></i>
+                            </button>
+                            <p class="recruitment-privacy-note">Po wysłaniu zgłoszenia odpowiemy na podany adres e-mail lub numer telefonu.</p>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </section>
@@ -8105,7 +8302,7 @@
         </div>
     </div>
     <!-- Firebase SDK -->
-    <script src="form-mailer.js?v=resend-5"></script>
+    <script src="form-mailer.js?v=resend-6"></script>
     <script type="module">
         import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
         import { getFirestore, collection, addDoc, getDocs, query, orderBy, where } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
