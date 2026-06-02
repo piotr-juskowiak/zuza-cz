@@ -843,3 +843,17 @@ body.transparent-hero-header .mobile-menu-overlay.active .mobile-menu-left-botto
         color: var(--accent-gold, var(--gold)) !important;
     }
 }
+
+/* =======================================================================
+   GLOBAL FIX: TEXTAREA DOUBLE LINE ON FOCUS
+   ======================================================================= */
+.contact-form textarea.field-input,
+textarea.field-input {
+    display: block !important;
+}
+
+.contact-form .field-input:focus,
+.contact-form-full .field-input:focus,
+.recruitment-form .field-input:focus {
+    border-bottom-color: rgba(10, 26, 20, 0.12) !important;
+}
