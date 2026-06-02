@@ -1,6 +1,7 @@
 (function () {
   const ENDPOINT = "/api/send-form-email";
   const ALERT_TIMEOUT_MS = 6000;
+  const FIRESTORE_TIMEOUT_MS = 1200;
 
   function injectFormMailerStyles() {
     if (document.getElementById("formMailerStyles")) {
@@ -135,6 +136,21 @@
     return result;
   }
 
+  function withTimeout(promise, timeoutMs, fallbackValue) {
+    return Promise.race([
+      promise,
+      new Promise((resolve) => {
+        window.setTimeout(() => resolve(fallbackValue), timeoutMs);
+      }),
+    ]);
+  }
+
+  function runInBackground(promise, label) {
+    Promise.resolve(promise).catch((error) => {
+      console.warn(label, error);
+    });
+  }
+
   function getFirebaseHelpers() {
     const helpers = window.firebaseFunctions || {};
 
@@ -178,7 +194,11 @@
     try {
       const newsletterRef = helpers.collection(window.firebaseDb, "newsletter");
       const q = helpers.query(newsletterRef, helpers.where("email", "==", email));
-      const snapshot = await helpers.getDocs(q);
+      const snapshot = await withTimeout(
+        helpers.getDocs(q),
+        FIRESTORE_TIMEOUT_MS,
+        { empty: true }
+      );
       return !snapshot.empty;
     } catch (error) {
       console.warn("Nie udało się sprawdzić duplikatu newslettera:", error);
@@ -288,7 +308,10 @@
       };
 
       await sendFormEmail("contact", formData);
-      await maybeSaveContactMessage(formData);
+      runInBackground(
+        maybeSaveContactMessage(formData),
+        "Nie udało się zapisać formularza kontaktowego w tle:"
+      );
 
       showAlert(
         "contactFormAlert",
@@ -326,7 +349,10 @@
       }
 
       await sendFormEmail("newsletter", { email, source });
-      await maybeSaveNewsletter(email, source);
+      runInBackground(
+        maybeSaveNewsletter(email, source),
+        "Nie udało się zapisać newslettera w tle:"
+      );
 
       showAlert("newsletterAlert", "success", "Dziękujemy za zapis do newslettera!");
       form.reset();
