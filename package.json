@@ -1,0 +1,14 @@
+{
+  "name": "zuzanna-czuprynska",
+  "private": true,
+  "scripts": {
+    "vercel:dev": "npx vercel dev",
+    "deploy": "npx vercel --prod"
+  },
+  "dependencies": {
+    "firebase": "^12.7.0"
+  },
+  "devDependencies": {
+    "firebase-tools": "^15.1.0"
+  }
+}

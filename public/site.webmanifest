@@ -1,0 +1,19 @@
+{
+  "name": "Zuzanna Maria Czupryńska",
+  "short_name": "Zuzanna Czupryńska",
+  "description": "Oficjalna strona Zuzanny Marii Czupryńskiej: aktywistki, fundatorki Beehouses Foundation i głosu nowego pokolenia w działaniach dla ekologii, edukacji i społeczności.",
+  "lang": "pl",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#F9F8F6",
+  "theme_color": "#1A2E28",
+  "icons": [
+    {
+      "src": "/favicon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
