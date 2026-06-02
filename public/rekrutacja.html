@@ -7858,6 +7858,50 @@
             color: rgba(255, 255, 255, 0.72);
         }
 
+        .recruitment-progress {
+            padding: 1rem clamp(1.35rem, 3vw, 2.4rem);
+            border-bottom: 1px solid rgba(197, 160, 101, 0.2);
+            background:
+                linear-gradient(135deg, rgba(255, 255, 255, 0.92), rgba(248, 246, 241, 0.78)),
+                radial-gradient(circle at top left, rgba(197, 160, 101, 0.1), transparent 42%);
+        }
+
+        .recruitment-progress__meta {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            margin-bottom: 0.65rem;
+            font-family: 'Syne', sans-serif;
+            font-size: 0.62rem;
+            font-weight: 700;
+            letter-spacing: 0.18em;
+            line-height: 1.45;
+            text-transform: uppercase;
+            color: var(--text-primary);
+        }
+
+        .recruitment-progress__meta strong {
+            color: var(--accent-gold);
+            font-size: 0.7rem;
+            white-space: nowrap;
+        }
+
+        .recruitment-progress__track {
+            height: 5px;
+            overflow: hidden;
+            background: rgba(26, 46, 40, 0.1);
+        }
+
+        .recruitment-progress__bar {
+            display: block;
+            width: 0;
+            height: 100%;
+            background: linear-gradient(90deg, var(--text-primary), var(--accent-gold));
+            box-shadow: 0 0 18px rgba(197, 160, 101, 0.28);
+            transition: width 0.28s ease;
+        }
+
         .recruitment-form-body {
             padding: clamp(1.35rem, 3vw, 2.4rem);
             background:
@@ -8104,6 +8148,16 @@
                 flex-direction: column;
             }
 
+            .recruitment-progress {
+                padding: 0.95rem 1.25rem;
+            }
+
+            .recruitment-progress__meta {
+                align-items: flex-start;
+                flex-direction: column;
+                gap: 0.35rem;
+            }
+
             .recruitment-choice-grid {
                 grid-template-columns: 1fr;
             }
@@ -8120,6 +8174,15 @@
                 <div class="recruitment-form-header">
                     <span>Formularz BeeHouses Foundation</span>
                     <small>Zgłoszenie przez stronę</small>
+                </div>
+                <div class="recruitment-progress" aria-label="Postęp wypełnienia zgłoszenia">
+                    <div class="recruitment-progress__meta">
+                        <span>Postęp zgłoszenia</span>
+                        <strong id="recruitmentProgressValue">0%</strong>
+                    </div>
+                    <div class="recruitment-progress__track" id="recruitmentProgressTrack" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+                        <span class="recruitment-progress__bar" id="recruitmentProgressBar"></span>
+                    </div>
                 </div>
                 <div class="recruitment-form-body">
                     <div class="recruitment-form-layout">
@@ -8251,6 +8314,63 @@
         </div>
     </section>
 
+    <script>
+        (() => {
+            const form = document.getElementById('recruitmentForm');
+            const bar = document.getElementById('recruitmentProgressBar');
+            const value = document.getElementById('recruitmentProgressValue');
+            const track = document.getElementById('recruitmentProgressTrack');
+
+            if (!form || !bar || !value || !track) return;
+
+            const fields = [
+                '#recruitmentName',
+                '#recruitmentAge',
+                '#recruitmentAddress',
+                '#recruitmentEmail',
+                '#recruitmentPhone',
+                '#recruitmentFacebook',
+                'input[name="recruitmentTeam"]',
+                '#recruitmentMotivation',
+                '#recruitmentExperience',
+                '#recruitmentConsent'
+            ];
+
+            const isComplete = (selector) => {
+                if (selector === 'input[name="recruitmentTeam"]') {
+                    return Boolean(form.querySelector('input[name="recruitmentTeam"]:checked'));
+                }
+
+                const field = form.querySelector(selector);
+                if (!field) return false;
+
+                if (field.type === 'checkbox') {
+                    return field.checked;
+                }
+
+                if (typeof field.value !== 'string' || !field.value.trim()) {
+                    return false;
+                }
+
+                return field.checkValidity ? field.checkValidity() : true;
+            };
+
+            const updateProgress = () => {
+                const completed = fields.filter(isComplete).length;
+                const percent = Math.round((completed / fields.length) * 100);
+
+                bar.style.width = `${percent}%`;
+                value.textContent = `${percent}%`;
+                track.setAttribute('aria-valuenow', String(percent));
+            };
+
+            form.addEventListener('input', updateProgress);
+            form.addEventListener('change', updateProgress);
+            form.addEventListener('reset', () => window.setTimeout(updateProgress, 0));
+            document.addEventListener('DOMContentLoaded', updateProgress);
+            updateProgress();
+        })();
+    </script>
 
     <!-- MODERN MEGA FOOTER -->
     <footer class="modern-footer">
