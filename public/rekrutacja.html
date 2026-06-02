@@ -7189,48 +7189,12 @@
 
         .team-call-frame {
             display: grid;
-            grid-template-columns: minmax(60px, 0.12fr) minmax(0, 1fr) minmax(260px, 0.54fr);
+            grid-template-columns: minmax(0, 1fr) minmax(260px, 0.54fr);
             align-items: stretch;
             gap: clamp(1.2rem, 2.4vw, 2.6rem);
             border-top: 1px solid rgba(197, 160, 101, 0.38);
             border-bottom: 1px solid rgba(26, 46, 40, 0.1);
             min-height: clamp(300px, 30vw, 380px);
-        }
-
-        .team-call-index {
-            padding: clamp(1rem, 2vw, 1.5rem) 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: space-between;
-            min-width: 0;
-        }
-
-        .team-call-index-word {
-            writing-mode: vertical-rl;
-            transform: rotate(180deg);
-            font-family: 'Syne', sans-serif;
-            font-size: 0.62rem;
-            font-weight: 700;
-            letter-spacing: 0.32em;
-            text-transform: uppercase;
-            color: var(--accent-gold);
-        }
-
-        .team-call-index-line {
-            width: 0;
-            min-height: 0;
-            flex: 1;
-            margin: 1.4rem 0;
-            background: none;
-        }
-
-        .team-call-index-year {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(1.9rem, 3vw, 2.7rem);
-            line-height: 0.85;
-            color: var(--text-primary);
-            writing-mode: vertical-rl;
         }
 
         .team-call-copy {
@@ -7249,7 +7213,8 @@
             font-family: 'Syne', sans-serif;
             font-size: 0.64rem;
             font-weight: 700;
-            letter-spacing: 0.36em;
+            letter-spacing: 0.24em;
+            line-height: 1.6;
             text-transform: uppercase;
             color: var(--accent-gold);
             margin-bottom: 0.85rem;
@@ -7370,7 +7335,7 @@
 
         .team-call-brief {
             display: grid;
-            grid-template-columns: minmax(240px, 0.34fr) minmax(0, 1fr);
+            grid-template-columns: minmax(180px, 0.24fr) minmax(0, 1fr);
             gap: clamp(1rem, 2vw, 2rem);
             align-items: stretch;
             margin-top: clamp(1rem, 2vw, 1.6rem);
@@ -7389,14 +7354,7 @@
             letter-spacing: 0.28em;
             text-transform: uppercase;
             color: var(--accent-gold);
-            margin-bottom: 0.55rem;
-        }
-
-        .team-call-brief-heading p {
-            margin: 0;
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            line-height: 1.55;
+            margin-bottom: 0;
         }
 
         .team-call-roles {
@@ -7484,11 +7442,11 @@
 
         @media (max-width: 1100px) {
             .team-call-frame {
-                grid-template-columns: minmax(60px, 0.14fr) minmax(0, 1fr);
+                grid-template-columns: minmax(0, 1fr) minmax(240px, 0.56fr);
             }
 
             .team-call-visual {
-                grid-column: 2;
+                grid-column: auto;
                 min-height: 280px;
             }
 
@@ -7510,20 +7468,6 @@
                 grid-template-columns: 1fr;
                 min-height: 0;
                 gap: 0;
-            }
-
-            .team-call-index {
-                border-right: 0;
-                border-bottom: 1px solid rgba(26, 46, 40, 0.1);
-                padding: 1rem 0 1.2rem;
-                flex-direction: row;
-                gap: 1rem;
-            }
-
-            .team-call-index-word,
-            .team-call-index-year {
-                writing-mode: horizontal-tb;
-                transform: none;
             }
 
             .team-call-copy {
@@ -7565,14 +7509,8 @@
     <section id="recruitment-intro" class="team-call-section" aria-labelledby="teamCallTitle">
         <div class="container">
             <div class="team-call-frame">
-                <aside class="team-call-index reveal reveal-left" aria-hidden="true">
-                    <span class="team-call-index-word">Fundacja</span>
-                    <span class="team-call-index-line"></span>
-                    <span class="team-call-index-year">2026</span>
-                </aside>
-
                 <div class="team-call-copy reveal reveal-soft-blur delay-100">
-                    <span class="team-call-eyebrow">rekrutacja trwa!</span>
+                    <span class="team-call-eyebrow">Fundacja 2026 / rekrutacja trwa!</span>
                     <h2 class="team-call-title" id="teamCallTitle">Dołącz do <em>fundacji</em></h2>
                     <p class="team-call-lead">BeeHouses Foundation szuka osób do projektów ekologicznych, edukacyjnych i lokalnych. Liczą się regularność, ciekawość i chęć działania.</p>
 
@@ -7592,7 +7530,6 @@
             <div class="team-call-brief">
                 <div class="team-call-brief-heading reveal reveal-up">
                     <span>Kroki rekrutacji</span>
-                    <p>Dwa proste etapy: najpierw poznajemy Twoją motywację, potem ustalamy pierwsze zadania.</p>
                 </div>
 
                 <div class="team-call-roles reveal reveal-up delay-100" aria-label="Kroki rekrutacji">
