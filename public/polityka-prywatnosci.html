@@ -6782,9 +6782,6 @@
             if (!trigger || !trigger.classList.contains('mobile-link')) return;
 
             trigger.addEventListener('click', (event) => {
-                const clickedSubmenuIcon = event.target.closest && event.target.closest('.mobile-submenu-icon');
-                if (!clickedSubmenuIcon) return;
-
                 event.preventDefault();
                 event.stopImmediatePropagation();
                 setMobileSubmenuState(submenu, !submenu.classList.contains('is-open'));
@@ -6801,9 +6798,7 @@
                     ? link.nextElementSibling
                     : null;
 
-                const clickedSubmenuIcon = event.target.closest && event.target.closest('.mobile-submenu-icon');
-
-                if (submenu && clickedSubmenuIcon) {
+                if (submenu) {
                     event.preventDefault();
                     event.stopPropagation();
                     setMobileSubmenuState(submenu, !submenu.classList.contains('is-open'));
