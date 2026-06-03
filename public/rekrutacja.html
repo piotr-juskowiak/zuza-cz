@@ -3428,16 +3428,17 @@
         }
 
         .cookie-title {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.2rem;
-            margin-bottom: 0.5rem;
+            font-family: 'Syne';
+            font-size: 15px;
+            margin: 0;
             color: var(--text-primary);
+            letter-spacing: 0.5px;
         }
 
         .cookie-text {
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             color: var(--text-secondary);
-            line-height: 1.6;
+            line-height: 1.7;
         }
 
         /* --- SCROLL PROGRESS & BACK TO TOP --- */
@@ -5823,6 +5824,15 @@
             }
 
             .cookie-link {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            transition: color 0.3s;
+            position: relative;
+            font-family: 'Syne';
+        }
+
+        .cookie-link {
                 font-size: 0.78rem !important;
                 padding: 0.25rem 0 !important;
             }
@@ -6080,7 +6090,7 @@
         </div>
 
         <div class="page-hero-headline reveal reveal-soft-blur delay-200">
-            <h1 class="page-hero-title">Rekrutacja<br><em>BeeHouses Foundation</em></h1>
+            <h1 class="page-hero-title">Rekrutacja <em>BeeHouses Foundation</em></h1>
         </div>
 
         <p class="page-hero-desc reveal reveal-soft-blur delay-300">
@@ -7341,7 +7351,7 @@
             overflow: hidden;
             z-index: 1;
             margin: clamp(0.95rem, 1.7vw, 1.25rem) 0 0;
-            padding: clamp(0.75rem, 1.35vw, 1rem) clamp(1rem, 2.2vw, 2.5rem);
+            padding: clamp(0.75rem, 1.35vw, 1rem) 0;
             background:
                 linear-gradient(180deg, rgba(255, 255, 255, 0.88), rgba(247, 246, 243, 0.98)),
                 radial-gradient(circle at top right, rgba(197, 160, 101, 0.14), transparent 40%);
@@ -7575,30 +7585,32 @@
         </div>
 
         <div class="team-call-brief">
-            <div class="team-call-roles reveal reveal-up delay-100" aria-label="Kroki rekrutacji">
-                <article class="team-call-role team-call-role--active">
-                    <span>01</span>
-                    <div>
-                        <strong>Zgłoszenie</strong>
-                        <small>2-3 minuty</small>
-                    </div>
-                </article>
-                <span class="team-call-step-arrow" aria-hidden="true"><i class="fas fa-arrow-right"></i></span>
-                <article class="team-call-role">
-                    <span>02</span>
-                    <div>
-                        <strong>Rozmowa</strong>
-                        <small>Krótki kontakt</small>
-                    </div>
-                </article>
-                <span class="team-call-step-arrow" aria-hidden="true"><i class="fas fa-arrow-right"></i></span>
-                <article class="team-call-role">
-                    <span>03</span>
-                    <div>
-                        <strong>Start</strong>
-                        <small>Pierwsze zadanie</small>
-                    </div>
-                </article>
+            <div class="container">
+                <div class="team-call-roles reveal reveal-up delay-100" aria-label="Kroki rekrutacji">
+                    <article class="team-call-role team-call-role--active">
+                        <span>01</span>
+                        <div>
+                            <strong>Zgłoszenie</strong>
+                            <small>2-3 minuty</small>
+                        </div>
+                    </article>
+                    <span class="team-call-step-arrow" aria-hidden="true"><i class="fas fa-arrow-right"></i></span>
+                    <article class="team-call-role">
+                        <span>02</span>
+                        <div>
+                            <strong>Rozmowa</strong>
+                            <small>Krótki kontakt</small>
+                        </div>
+                    </article>
+                    <span class="team-call-step-arrow" aria-hidden="true"><i class="fas fa-arrow-right"></i></span>
+                    <article class="team-call-role">
+                        <span>03</span>
+                        <div>
+                            <strong>Start</strong>
+                            <small>Pierwsze zadanie</small>
+                        </div>
+                    </article>
+                </div>
             </div>
         </div>
     </section>
@@ -8151,7 +8163,7 @@
             margin: 0;
             padding: 0 0 1.45rem;
             color: var(--text-secondary);
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             line-height: 1.85;
             opacity: 0;
             transform: translateY(-6px);

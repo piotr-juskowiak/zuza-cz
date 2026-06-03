@@ -1811,10 +1811,11 @@
         }
 
         .timeline-desc {
-            font-size: 0.95rem;
+            font-size: 14px;
             color: var(--text-secondary);
-            line-height: 1.6;
+            line-height: 1.7;
             margin: 0;
+            font-weight: 300;
         }
 
         /* --- BEEHOUSES FOUNDATION STYLES --- */
@@ -1910,10 +1911,12 @@
         }
 
         .found-desc {
+            font-size: 1rem;
             color: var(--text-secondary);
-            line-height: 1.8;
-            margin-bottom: 2rem; /* Reduced from 3rem */
-            font-size: 1.05rem;
+            line-height: 1.85;
+            margin-bottom: 3rem;
+            max-width: 100%;
+            font-family: 'Cormorant Garamond';
         }
 
         .found-data {
@@ -1934,9 +1937,10 @@
         }
 
         .found-data-item p {
-            font-size: .9rem;
-            color: var(--text-primary);
+            font-size: 12px;
+            color: #545454;
             font-weight: 500;
+            letter-spacing: .01em;
         }
 
         .found-cards {
@@ -1996,9 +2000,11 @@
         }
 
         .found-card p {
-            font-size: .9rem;
+            font-size: 0.92rem;
             color: var(--text-secondary);
-            line-height: 1.65;
+            line-height: 1.75;
+            margin: 0;
+            font-family: 'Cormorant Garamond';
         }
 
         .found-cta {
@@ -3379,16 +3385,17 @@
         }
 
         .cookie-title {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.2rem;
-            margin-bottom: 0.5rem;
+            font-family: 'Syne';
+            font-size: 15px;
+            margin: 0;
             color: var(--text-primary);
+            letter-spacing: 0.5px;
         }
 
         .cookie-text {
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             color: var(--text-secondary);
-            line-height: 1.6;
+            line-height: 1.7;
         }
 
         /* --- SCROLL PROGRESS & BACK TO TOP --- */
@@ -6195,6 +6202,15 @@
             }
 
             .cookie-link {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            transition: color 0.3s;
+            position: relative;
+            font-family: 'Syne';
+        }
+
+        .cookie-link {
                 font-size: 0.78rem !important;
                 padding: 0.25rem 0 !important;
             }
@@ -6457,7 +6473,7 @@
 
         <!-- Tytuł -->
         <div class="page-hero-headline reveal reveal-soft-blur delay-200">
-            <h1 class="page-hero-title">Beehouses<br><em>Foundation</em></h1>
+            <h1 class="page-hero-title">Beehouses <em>Foundation</em></h1>
         </div>
 
         <!-- Opis -->
