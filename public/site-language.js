@@ -65,7 +65,7 @@
         '© 2025 Zuzanna Maria Czupryńska. Wszelkie prawa zastrzeżone.': '© 2025 Zuzanna Maria Czupryńska. All rights reserved.',
         'Głos nowego pokolenia.': 'A voice of the new generation.',
         'Budujemy Polskę, która szanuje naturę i inwestuje w przyszłość.': 'We are building a Poland that respects nature and invests in the future.',
-        'Oficjalna strona internetowa Zuzanny Marii Czupryńskiej — aktywistki, fundatorki Beehouses Foundation i głosu nowego pokolenia w polskiej polityce.': 'Official website of Zuzanna Maria Czupryńska — activist, founder of Beehouses Foundation, and a voice of a new generation in Polish public life.',
+        'Oficjalna strona internetowa Zuzanny Marii Czupryńskiej — działaczki, fundatorki Beehouses Foundation i głosu nowego pokolenia w polskiej polityce.': 'Official website of Zuzanna Maria Czupryńska — campaigner, founder of Beehouses Foundation, and a voice of a new generation in Polish public life.',
 
         // Support and cookies
         'Dołącz do inicjatywy': 'Join the initiative',
@@ -79,7 +79,7 @@
         'Akceptuję Wszystkie': 'Accept all',
 
         // Homepage hero and about
-        'Kobieta · Aktywistka · Liderka': 'Woman · Activist · Leader',
+        'Kobieta · Działaczka · Liderka': 'Woman · Campaigner · Leader',
         'Przyszłość': 'The future',
         'buduje się': 'is built',
         'zaczyna się': 'begins',
@@ -100,7 +100,7 @@
         'zmienia rzeczywistość': 'changes reality',
         'Moja droga nie zaczęła się w gabinetach, ale w działaniu. Od lokalnych inicjatyw w Brodnicy, przez salę plenarną Parlamentu Młodych RP, aż po zarządzanie ogólnopolskimi projektami. Wierzę, że polityka to nie gra interesów, ale narzędzie do budowania zrównoważonej przyszłości.': 'My path did not begin in offices, but in action. From local initiatives in Brodnica, through the plenary hall of the Young Parliament of Poland, to managing nationwide projects. I believe politics is not a game of interests, but a tool for building a sustainable future.',
         'Łączę perspektywę prawniczą z wrażliwością ekologiczną. Jako Założycielka': 'I combine a legal perspective with ecological sensitivity. As the founder of',
-        'udowadniam, że edukacja może być innowacyjna, a jako aktywistka walczę o to, by głos mojego pokolenia był słyszalny przy tworzeniu prawa.': 'I show that education can be innovative, and as an activist I fight for my generation\'s voice to be heard when law is created.',
+        'udowadniam, że edukacja może być innowacyjna, a jako działaczka walczę o to, by głos mojego pokolenia był słyszalny przy tworzeniu prawa.': 'I show that education can be innovative, and as a campaigner I fight for my generation\'s voice to be heard when law is created.',
         'Głos Nowego Pokolenia': 'Voice of a New Generation',
         'Wprowadzam perspektywę młodych do debaty publicznej': 'I bring young people\'s perspective into public debate',
         'Ekologia w Działaniu': 'Ecology in Action',
@@ -136,7 +136,7 @@
         // About page
         'Kim': 'Who',
         'jestem?': 'am I?',
-        'Aktywistka, Posłanka Parlamentu Młodych, Założycielka Beehouses Foundation. Buduję przyszłość, w której ekologia i odpowiedzialność idą w parze.': 'Activist, Young Parliament member, founder of Beehouses Foundation. I am building a future where ecology and responsibility go hand in hand.',
+        'Działaczka, Posłanka Parlamentu Młodych, Założycielka Beehouses Foundation. Buduję przyszłość, w której ekologia i odpowiedzialność idą w parze.': 'Campaigner, Young Parliament member, founder of Beehouses Foundation. I am building a future where ecology and responsibility go hand in hand.',
         'Kadencja': 'Term',
         'Parlamentu': 'of Parliament',
         'Wierzę, że polityka to nie gra gabinetowa, lecz żywy dialog pokoleń i realne działanie. Jako': 'I believe politics is not an office game, but a living dialogue between generations and real action. As a',
@@ -591,7 +591,7 @@
         'Zanim przedstawimy nasze nowe inicjatywy, warto zrozumieć, dlaczego ochrona dzikich zapylaczy jest tak istotna. W Polsce żyje ponad 470 gatunków pszczół, z czego zdecydowana większość to gatunki dzikie, takie jak murarki, lepiarki, porobnice czy trzmiele. W przeciwieństwie do pszczoły miodnej, która jest gatunkiem hodowlanym, dzikie zapylacze są niezależne i odgrywają kluczową rolę w zapylaniu roślin, z których wiele jest lepiej zapylanych przez dzikie gatunki niż przez pszczołę miodną.': 'Before we introduce our new initiatives, it is worth understanding why the protection of wild pollinators is so important. Over 470 species of bees live in Poland, the vast majority of which are wild species, such as mason bees, plasterer bees, digger bees or bumblebees. Unlike the honeybee, which is a bred species, wild pollinators are independent and play a key role in pollinating plants, many of which are better pollinated by wild species than by the honeybee.',
         'Zapamiętują Twoje preferencje, by ułatwić i spersonalizować Twoją kolejną wizytę na stronie.': 'They remember your preferences to facilitate and personalize your next visit to the site.',
         'Zastrzegamy sobie prawo do aktualizacji niniejszej Polityki Prywatności w związku z rozwojem technologicznym, zmianami prawnymi lub nowymi funkcjami naszej strony internetowej. O wszelkich istotnych zmianach będziemy informować na tej podstronie.': 'We reserve the right to update this Privacy Policy due to technological developments, legal changes or new features of our website. We will inform about any significant changes on this subpage.',
-        'Założycielka Beehouses Foundation, Posłanka Parlamentu Młodych RP. Aktywistka ekologiczna i ambasadorka zrównoważonego rozwoju.': 'Founder of Beehouses Foundation, MP of the Youth Parliament of the Republic of Poland. Ecological activist and ambassador of sustainable development.',
+        'Założycielka Beehouses Foundation, Posłanka Parlamentu Młodych RP. Działaczka ekologiczna i ambasadorka zrównoważonego rozwoju.': 'Founder of Beehouses Foundation, MP of the Youth Parliament of the Republic of Poland. Ecological campaigner and ambassador of sustainable development.',
         'Założyć ogród przyjazny zapylaczom': 'Establish a pollinator-friendly garden',
         'Zgłoszenie': 'Application',
         'Zmiany klimatyczne': 'Climate change',
@@ -599,7 +599,7 @@
         'Zuzanna Czupryńska': 'Zuzanna Czupryńska',
         'Zuzanna Maria Czupryńska': 'Zuzanna Maria Czupryńska',
         'Zuzanna Maria Czupryńska oraz zespół Beehouses Foundation przywiązują szczególną wagę do ochrony Twojej prywatności. Niniejsza Polityka Prywatności określa, w jaki sposób gromadzimy, wykorzystujemy i chronimy dane osobowe użytkowników naszej strony internetowej zgodnie z wymogami Rozporządzenia o Ochronie Danych Osobowych (RODO).': 'Zuzanna Maria Czupryńska and the Beehouses Foundation team attach particular importance to protecting your privacy. This Privacy Policy sets out how we collect, use and protect personal data of our website users in accordance with the requirements of the General Data Protection Regulation (GDPR).',
-        'Zuzanna Maria Czupryńska | Aktywistka i Beehouses Foundation': 'Zuzanna Maria Czupryńska | Activist and Beehouses Foundation',
+        'Zuzanna Maria Czupryńska | Posłanka, Liderka i Założycielka Beehouses Foundation': 'Zuzanna Maria Czupryńska | MP, Leader and Founder of Beehouses Foundation',
         'Zwolnieni z Teorii': 'Zwolnieni z Teorii',
         'Zwykle około 5-10 minut. Warto krótko opisać, co chcesz robić i dlaczego interesuje Cię BeeHouses Foundation.': 'Usually around 5-10 minutes. It is worth briefly describing what you want to do and why you are interested in BeeHouses Foundation.',
         'blokować automatyczne obsługiwanie plików cookies,': 'block automatic handling of cookies,',
