@@ -6939,6 +6939,249 @@
                 margin-bottom: 0.8rem !important;
             }
         }
+
+        /* --- PREMIUM RICH CAROUSELS (WYSTĄPIENIA & POSTULATY) --- */
+        .zc-carousel-wrapper {
+            position: relative;
+            width: 100%;
+            margin-top: 4.5rem;
+        }
+        .zc-carousel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 2.25rem;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        .zc-carousel-title-group {
+            max-width: 650px;
+        }
+        .zc-carousel-nav {
+            display: flex;
+            gap: 0.75rem;
+        }
+        .zc-carousel-btn {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            color: inherit;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            font-size: 1.15rem;
+        }
+        .zc-carousel-btn:hover {
+            background: var(--accent-gold, #C5A065);
+            border-color: var(--accent-gold, #C5A065);
+            color: #111;
+            transform: scale(1.08);
+            box-shadow: 0 0 25px rgba(197, 160, 101, 0.45);
+        }
+        .zc-carousel-track {
+            display: flex;
+            gap: 1.75rem;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+            padding: 0.5rem 0.25rem 1.5rem 0.25rem;
+        }
+        .zc-carousel-track::-webkit-scrollbar {
+            display: none;
+        }
+        .zc-slide {
+            flex: 0 0 calc(50% - 0.875rem);
+            scroll-snap-align: start;
+            border-radius: 24px;
+            overflow: hidden;
+            position: relative;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            display: flex;
+        }
+        @media (max-width: 992px) {
+            .zc-slide {
+                flex: 0 0 calc(85% - 0.875rem);
+            }
+        }
+        @media (max-width: 576px) {
+            .zc-slide {
+                flex: 0 0 100%;
+            }
+        }
+
+        /* Wystąpienia Slide Style inside About */
+        .zc-speech-card {
+            background: var(--bg-white, #fff);
+            border: 1px solid rgba(26, 46, 40, 0.08);
+            box-shadow: 0 15px 35px -10px rgba(26, 46, 40, 0.07);
+            border-radius: 24px;
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            overflow: hidden;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+        .zc-speech-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 25px 45px -12px rgba(26, 46, 40, 0.14);
+        }
+        .zc-speech-img-wrap {
+            position: relative;
+            width: 100%;
+            height: 270px;
+            overflow: hidden;
+            background: #111;
+        }
+        .zc-speech-img-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .zc-speech-card:hover .zc-speech-img-wrap img {
+            transform: scale(1.06);
+        }
+        .zc-speech-badge {
+            position: absolute;
+            top: 1.2rem;
+            left: 1.2rem;
+            background: rgba(26, 46, 40, 0.85);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            padding: 0.4rem 0.9rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #fff;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            backdrop-filter: blur(10px);
+            z-index: 2;
+        }
+        .zc-speech-content {
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+        .zc-speech-meta {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-size: 0.85rem;
+            color: var(--accent-gold, #C5A065);
+            font-weight: 600;
+            margin-bottom: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+        .zc-speech-content h4 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--text-primary, #1A2E28);
+            margin-bottom: 0.85rem;
+            line-height: 1.35;
+        }
+        .zc-speech-content p {
+            font-size: 0.98rem;
+            color: var(--text-secondary, #5C6B66);
+            line-height: 1.65;
+            margin-bottom: 1.75rem;
+            flex-grow: 1;
+        }
+
+        /* Postulaty Slide Style inside Manifesto (Dark Section) */
+        .zc-postulat-card {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+            padding: 2.5rem;
+            border-radius: 24px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 100%;
+            min-height: 300px;
+            text-align: left;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .zc-postulat-card:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(197, 160, 101, 0.55);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            transform: translateY(-6px);
+        }
+        .zc-postulat-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.75rem;
+        }
+        .zc-postulat-num {
+            font-size: 2.4rem;
+            font-weight: 800;
+            font-family: 'Syne', sans-serif;
+            background: linear-gradient(135deg, #C5A065 0%, #F1E2C3 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .zc-postulat-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
+            background: rgba(197, 160, 101, 0.15);
+            border: 1px solid rgba(197, 160, 101, 0.3);
+            color: #C5A065;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+        }
+        .zc-postulat-card h4 {
+            font-size: 1.45rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 0.9rem;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        .zc-postulat-card p {
+            font-size: 1.02rem;
+            color: rgba(255, 255, 255, 0.82);
+            line-height: 1.7;
+            margin: 0;
+        }
+
+        /* Dots */
+        .zc-carousel-dots {
+            display: flex;
+            justify-content: center;
+            gap: 0.6rem;
+            margin-top: 1.5rem;
+        }
+        .zc-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(141, 163, 153, 0.35);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .manifesto-section .zc-dot {
+            background: rgba(255, 255, 255, 0.25);
+        }
+        .zc-dot.active {
+            width: 32px;
+            border-radius: 6px;
+            background: var(--accent-gold, #C5A065);
+        }
     </style>
     <script src="site-language.js?v=rekrutacja-form-1" defer></script>
 </head>
@@ -7345,6 +7588,87 @@
                         </div>
                     </div>
                 </div>
+            </div>
+
+            <!-- CAROUSEL: MOJE WYSTĄPIENIA -->
+            <div class="zc-carousel-wrapper reveal reveal-up delay-200" id="wystapienia-carousel">
+                <div class="zc-carousel-header">
+                    <div class="zc-carousel-title-group">
+                        <span class="subtitle subtitle-left">Wystąpienia &amp; Debaty</span>
+                        <h3 style="font-size: clamp(1.8rem, 2.5vw, 2.4rem); font-weight: 700; color: var(--text-primary); font-family: 'Cormorant Garamond', serif; margin-top: 0.25rem;">Głos zabierany w najważniejszych sprawach</h3>
+                    </div>
+                    <div class="zc-carousel-nav">
+                        <button class="zc-carousel-btn zc-prev" aria-label="Poprzedni slajd" onclick="scrollZcCarousel('wystapienia-track', -1)">
+                            <i class="fas fa-arrow-left"></i>
+                        </button>
+                        <button class="zc-carousel-btn zc-next" aria-label="Następny slajd" onclick="scrollZcCarousel('wystapienia-track', 1)">
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="zc-carousel-track" id="wystapienia-track">
+                    <!-- Slide 1 -->
+                    <div class="zc-slide">
+                        <div class="zc-speech-card">
+                            <div class="zc-speech-img-wrap">
+                                <span class="zc-speech-badge">Prelekcja · 2026</span>
+                                <img src="https://i.imgur.com/WX3NxmT.png" alt="Konferencja Energia Przyszłości" loading="lazy">
+                            </div>
+                            <div class="zc-speech-content">
+                                <div class="zc-speech-meta"><i class="fas fa-microphone"></i> Konferencja „Energia Przyszłości”</div>
+                                <h4>Rola odnawialnych źródeł energii na rynku pracy</h4>
+                                <p>Wystąpienie prelegenckie poświęcone zielonej transformacji jako największej szansie rozwojowej i gospodarczej dla młodego pokolenia.</p>
+                                <a href="/konferencja-energia-przyszlosci" class="btn btn-small btn-gold" style="align-self: flex-start; text-decoration: none;">Relacja</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Slide 2 -->
+                    <div class="zc-slide">
+                        <div class="zc-speech-card">
+                            <div class="zc-speech-img-wrap">
+                                <span class="zc-speech-badge">Sesja Plenarna</span>
+                                <img src="https://i.imgur.com/vXClYIT.png" alt="Parlament Młodych RP" loading="lazy">
+                            </div>
+                            <div class="zc-speech-content">
+                                <div class="zc-speech-meta"><i class="fas fa-landmark"></i> Parlament Młodych RP</div>
+                                <h4>Głos młodego pokolenia w procesach legislacyjnych</h4>
+                                <p>Przemówienie z sali plenarnej w obronie zrównoważonego rozwoju, edukacji obywatelskiej oraz włączania rad młodzieżowych do stanowienia prawa.</p>
+                                <a href="/aktualnosci" class="btn btn-small btn-gold" style="align-self: flex-start; text-decoration: none;">Szczegóły</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Slide 3 -->
+                    <div class="zc-slide">
+                        <div class="zc-speech-card">
+                            <div class="zc-speech-img-wrap">
+                                <span class="zc-speech-badge">Zarząd · Sejmik</span>
+                                <img src="https://i.imgur.com/E2bDf1I.jpeg" alt="Sekretarz Sejmiku Kujawsko-Pomorskiego" loading="lazy">
+                            </div>
+                            <div class="zc-speech-content">
+                                <div class="zc-speech-meta"><i class="fas fa-users"></i> Młodzieżowy Sejmik Województwa</div>
+                                <h4>Wzmocnienie samorządności młodzieżowej w regionie</h4>
+                                <p>Objęcie stanowiska Sekretarza i oficjalne wystąpienie dotyczące priorytetów rozwoju województwa kujawsko-pomorskiego oraz wsparcia inicjatyw lokalnych.</p>
+                                <a href="/sekretarz-sejmiku" class="btn btn-small btn-gold" style="align-self: flex-start; text-decoration: none;">Czytaj wpis</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Slide 4 -->
+                    <div class="zc-slide">
+                        <div class="zc-speech-card">
+                            <div class="zc-speech-img-wrap">
+                                <span class="zc-speech-badge">Gala Ogólnopolska</span>
+                                <img src="https://i.imgur.com/jIiHaiZ.jpeg" alt="Gala Zwolnieni z Teorii" loading="lazy">
+                            </div>
+                            <div class="zc-speech-content">
+                                <div class="zc-speech-meta"><i class="fas fa-trophy"></i> Zwolnieni z Teorii</div>
+                                <h4>Brodnica Beehouses z nagrodą Srebrnego Wilka</h4>
+                                <p>Prezentacja ogólnopolskiego sukcesu projektu edukacyjno-ekologicznego na wielkiej gali finałowej olimpiady projektów społecznych.</p>
+                                <a href="/inicjatywa-brodnica-beehouses-z-nagroda-srebrnego-wilka" class="btn btn-small btn-gold" style="align-self: flex-start; text-decoration: none;">Artykuł</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="zc-carousel-dots" id="wystapienia-dots"></div>
             </div>
         </div>
     </section>
@@ -8424,6 +8748,91 @@
                 <div class="manifesto-line"></div>
             </div>
 
+            <!-- CAROUSEL: MOJE POSTULATY -->
+            <div class="zc-carousel-wrapper reveal reveal-up delay-100" id="postulaty-carousel">
+                <div class="zc-carousel-header">
+                    <div class="zc-carousel-title-group" style="text-align: left;">
+                        <span class="manifesto-eyebrow" style="margin-bottom: 0.5rem; display: block; font-size: 0.95rem; letter-spacing: 0.15em;">Program &amp; Priorytety</span>
+                        <h3 style="font-size: clamp(1.8rem, 2.5vw, 2.4rem); font-weight: 700; color: #fff; font-family: 'Cormorant Garamond', serif; margin: 0;">Postulaty mojego pokolenia</h3>
+                    </div>
+                    <div class="zc-carousel-nav">
+                        <button class="zc-carousel-btn zc-prev" aria-label="Poprzedni postulat" onclick="scrollZcCarousel('postulaty-track', -1)">
+                            <i class="fas fa-arrow-left"></i>
+                        </button>
+                        <button class="zc-carousel-btn zc-next" aria-label="Następny postulat" onclick="scrollZcCarousel('postulaty-track', 1)">
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="zc-carousel-track" id="postulaty-track">
+                    <!-- Postulat 1 -->
+                    <div class="zc-slide">
+                        <div class="zc-postulat-card">
+                            <div class="zc-postulat-top">
+                                <span class="zc-postulat-num">#01</span>
+                                <div class="zc-postulat-icon"><i class="fas fa-gavel"></i></div>
+                            </div>
+                            <div>
+                                <h4>Głos Młodych w Legislacji</h4>
+                                <p>Obowiązkowe konsultacje z radami młodzieżowymi przy każdej procedowanej ustawie dotyczącej klimatu, edukacji i rynku pracy. Prawo musi uwzględniać naszą przyszłość.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Postulat 2 -->
+                    <div class="zc-slide">
+                        <div class="zc-postulat-card">
+                            <div class="zc-postulat-top">
+                                <span class="zc-postulat-num">#02</span>
+                                <div class="zc-postulat-icon"><i class="fas fa-solar-panel"></i></div>
+                            </div>
+                            <div>
+                                <h4>Zielona Transformacja &amp; OZE</h4>
+                                <p>Odblokowanie rozwoju energetyki odnawialnej na lądzie, inwestycje w lokalne spółdzielnie energetyczne oraz wsparcie zielonych miejsc pracy dla młodych w regionach.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Postulat 3 -->
+                    <div class="zc-slide">
+                        <div class="zc-postulat-card">
+                            <div class="zc-postulat-top">
+                                <span class="zc-postulat-num">#03</span>
+                                <div class="zc-postulat-icon"><i class="fas fa-graduation-cap"></i></div>
+                            </div>
+                            <div>
+                                <h4>Nowoczesna Edukacja Ekologiczna</h4>
+                                <p>Wprowadzenie praktycznych zajęć terenowych z ochrony bioróżnorodności i adaptacji do zmian klimatu do podstawy programowej polskich szkół.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Postulat 4 -->
+                    <div class="zc-slide">
+                        <div class="zc-postulat-card">
+                            <div class="zc-postulat-top">
+                                <span class="zc-postulat-num">#04</span>
+                                <div class="zc-postulat-icon"><i class="fas fa-bug"></i></div>
+                            </div>
+                            <div>
+                                <h4>Ustawowa Ochrona Zapylaczy</h4>
+                                <p>Tworzenie korytarzy ekologicznych, miejskich łąk kwietnych oraz ścisłe ograniczenia w stosowaniu szkodliwych pestycydów zagrażających pszczołom i owadom.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Postulat 5 -->
+                    <div class="zc-slide">
+                        <div class="zc-postulat-card">
+                            <div class="zc-postulat-top">
+                                <span class="zc-postulat-num">#05</span>
+                                <div class="zc-postulat-icon"><i class="fas fa-city"></i></div>
+                            </div>
+                            <div>
+                                <h4>Silny Samorząd Młodzieżowy</h4>
+                                <p>Zwiększenie partycypacyjnych budżetów dla młodzieżowych sejmików województw i rad gmin, dające młodym realne środki na realizację lokalnych inicjatyw.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="zc-carousel-dots" id="postulaty-dots"></div>
+            </div>
         </div>
     </section>
     <!-- NEWS SECTION -->
@@ -9832,6 +10241,41 @@
 
 
 
+    <!-- PREMIUM RICH CAROUSEL CONTROLLER -->
+    <script>
+        function scrollZcCarousel(trackId, direction) {
+            const track = document.getElementById(trackId);
+            if (!track) return;
+            const slide = track.querySelector('.zc-slide');
+            const scrollAmount = (slide ? slide.offsetWidth : 350) + 28;
+            track.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            ['wystapienia', 'postulaty'].forEach(prefix => {
+                const track = document.getElementById(prefix + '-track');
+                const dotsContainer = document.getElementById(prefix + '-dots');
+                if (!track || !dotsContainer) return;
+                const slides = track.querySelectorAll('.zc-slide');
+                slides.forEach((_, idx) => {
+                    const dot = document.createElement('div');
+                    dot.className = 'zc-dot' + (idx === 0 ? ' active' : '');
+                    dot.addEventListener('click', () => {
+                        slides[idx].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
+                    });
+                    dotsContainer.appendChild(dot);
+                });
+                track.addEventListener('scroll', () => {
+                    const scrollLeft = track.scrollLeft;
+                    const slideWidth = slides[0] ? slides[0].offsetWidth + 28 : 1;
+                    const activeIdx = Math.round(scrollLeft / slideWidth);
+                    dotsContainer.querySelectorAll('.zc-dot').forEach((d, i) => {
+                        d.classList.toggle('active', i === activeIdx);
+                    });
+                }, { passive: true });
+            });
+        });
+    </script>
     <script src="page-transition.js?v=mobile-submenu-1"></script>
 </body>
 
