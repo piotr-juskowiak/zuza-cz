@@ -7164,27 +7164,6 @@
         .zc-video-card:hover .zc-video-info h4 {
             color: var(--accent-gold, #C5A065);
         }
-        .zc-info-action {
-            width: 46px;
-            height: 46px;
-            flex-shrink: 0;
-            border-radius: 0px;
-            border: 1px solid rgba(26, 46, 40, 0.1);
-            background: rgba(26, 46, 40, 0.02);
-            color: #1A2E28;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.9rem;
-            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .zc-video-card:hover .zc-info-action {
-            background: #1A2E28;
-            border-color: #1A2E28;
-            color: var(--accent-gold, #C5A065);
-            transform: rotate(-45deg) scale(1.08);
-            box-shadow: 0 8px 20px rgba(26, 46, 40, 0.2);
-        }
         @media (max-width: 576px) {
             .zc-video-info {
                 padding: 1.4rem 1.4rem;
@@ -7666,18 +7645,21 @@
 
                 <div class="about-content-new">
                     <span class="subtitle reveal reveal-soft-blur subtitle-left">O mnie</span>
-                    <h2 class="section-title reveal reveal-soft-blur delay-100">Pasja, która<br>zmienia rzeczywistość
+                    <h2 class="section-title reveal reveal-soft-blur delay-100">Głos młodego pokolenia<br>w debacie o przyszłości
                     </h2>
 
                     <div class="about-bio-new reveal reveal-soft-blur delay-200">
-                        <p>Moja droga nie zaczęła się w gabinetach, ale w działaniu. Od lokalnych inicjatyw w Brodnicy,
-                            przez salę plenarną Parlamentu Młodych RP, aż po zarządzanie ogólnopolskimi
-                            projektami. Wierzę, że polityka to nie gra interesów, ale narzędzie do budowania
-                            zrównoważonej przyszłości.
+                        <p>Mając 19 lat, udowadniam, że skuteczna działalność publiczna nie wymaga wieloletniego stażu
+                            w gabinetach, lecz determinacji i merytorycznego przygotowania. Moja aktywność rozpoczęła się
+                            od lokalnych inicjatyw w Brodnicy, była kontynuowana na sali plenarnej Parlamentu Młodych RP,
+                            a obecnie obejmuje zarządzanie ogólnopolskimi projektami. Wierzę, że polityka to przede
+                            wszystkim odpowiedzialność za przyszłość i skuteczne narzędzie rozwiązywania realnych problemów.
                         </p>
-                        <p>Łączę perspektywę prawniczą z wrażliwością ekologiczną. Jako Założycielka <em>Beehouses</em>
-                            udowadniam, że edukacja może być innowacyjna, a jako działaczka walczę o to, by głos mojego
-                            pokolenia był słyszalny przy tworzeniu prawa.</p>
+                        <p>Jako Założycielka Fundacji <em>Beehouses</em> łączę zaangażowanie społeczne z twardą polityką
+                            klimatyczną i edukacją ekologiczną. Udowadniam, że aktywizm młodego pokolenia potrafi dostarczać
+                            konkretnych, merytorycznych rozwiązań. Działam po to, aby nasza perspektywa przestała być
+                            jedynie tłem w debacie publicznej, a stała się pełnoprawnym partnerem przy podejmowaniu
+                            kluczowych decyzji państwowych.</p>
                     </div>
 
 
@@ -7726,11 +7708,11 @@
                     <div class="zc-slide">
                         <div class="zc-video-card">
                             <div class="zc-video-wrap">
-                                <video controls preload="none" poster="https://i.imgur.com/vXClYIT.png" class="zc-video-el">
+                                <video preload="none" poster="https://i.imgur.com/vXClYIT.png" class="zc-video-el">
                                     <source src="" type="video/mp4">
                                     Twoja przeglądarka nie obsługuje wideo.
                                 </video>
-                                <div class="zc-video-overlay" onclick="const v = this.previousElementSibling; v.play(); this.style.opacity='0'; this.style.pointerEvents='none';">
+                                <div class="zc-video-overlay" onclick="const v = this.previousElementSibling; v.setAttribute('controls', 'true'); v.play(); this.style.opacity='0'; this.style.pointerEvents='none';">
                                     <div class="zc-play-btn">
                                         <i class="fas fa-play"></i>
                                     </div>
@@ -7745,9 +7727,6 @@
                                     </div>
                                     <h4>Głos młodego pokolenia w debacie o przyszłości Polski</h4>
                                 </div>
-                                <div class="zc-info-action" aria-hidden="true">
-                                    <i class="fas fa-arrow-right"></i>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -7755,11 +7734,11 @@
                     <div class="zc-slide">
                         <div class="zc-video-card">
                             <div class="zc-video-wrap">
-                                <video controls preload="none" poster="https://i.imgur.com/w4EooQE.jpeg" class="zc-video-el">
+                                <video preload="none" poster="https://i.imgur.com/w4EooQE.jpeg" class="zc-video-el">
                                     <source src="" type="video/mp4">
                                     Twoja przeglądarka nie obsługuje wideo.
                                 </video>
-                                <div class="zc-video-overlay" onclick="const v = this.previousElementSibling; v.play(); this.style.opacity='0'; this.style.pointerEvents='none';">
+                                <div class="zc-video-overlay" onclick="const v = this.previousElementSibling; v.setAttribute('controls', 'true'); v.play(); this.style.opacity='0'; this.style.pointerEvents='none';">
                                     <div class="zc-play-btn">
                                         <i class="fas fa-play"></i>
                                     </div>
@@ -7774,9 +7753,6 @@
                                     </div>
                                     <h4>Zrównoważony rozwój i ekologia na Kujawach i Pomorzu</h4>
                                 </div>
-                                <div class="zc-info-action" aria-hidden="true">
-                                    <i class="fas fa-arrow-right"></i>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -7784,11 +7760,11 @@
                     <div class="zc-slide">
                         <div class="zc-video-card">
                             <div class="zc-video-wrap">
-                                <video controls preload="none" poster="https://i.imgur.com/jIiHaiZ.jpeg" class="zc-video-el">
+                                <video preload="none" poster="https://i.imgur.com/jIiHaiZ.jpeg" class="zc-video-el">
                                     <source src="" type="video/mp4">
                                     Twoja przeglądarka nie obsługuje wideo.
                                 </video>
-                                <div class="zc-video-overlay" onclick="const v = this.previousElementSibling; v.play(); this.style.opacity='0'; this.style.pointerEvents='none';">
+                                <div class="zc-video-overlay" onclick="const v = this.previousElementSibling; v.setAttribute('controls', 'true'); v.play(); this.style.opacity='0'; this.style.pointerEvents='none';">
                                     <div class="zc-play-btn">
                                         <i class="fas fa-play"></i>
                                     </div>
@@ -7803,9 +7779,6 @@
                                     </div>
                                     <h4>Edukacja ekologiczna jako fundament zielonej zmiany</h4>
                                 </div>
-                                <div class="zc-info-action" aria-hidden="true">
-                                    <i class="fas fa-arrow-right"></i>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -7813,11 +7786,11 @@
                     <div class="zc-slide">
                         <div class="zc-video-card">
                             <div class="zc-video-wrap">
-                                <video controls preload="none" poster="https://i.imgur.com/WX3NxmT.png" class="zc-video-el">
+                                <video preload="none" poster="https://i.imgur.com/WX3NxmT.png" class="zc-video-el">
                                     <source src="" type="video/mp4">
                                     Twoja przeglądarka nie obsługuje wideo.
                                 </video>
-                                <div class="zc-video-overlay" onclick="const v = this.previousElementSibling; v.play(); this.style.opacity='0'; this.style.pointerEvents='none';">
+                                <div class="zc-video-overlay" onclick="const v = this.previousElementSibling; v.setAttribute('controls', 'true'); v.play(); this.style.opacity='0'; this.style.pointerEvents='none';">
                                     <div class="zc-play-btn">
                                         <i class="fas fa-play"></i>
                                     </div>
@@ -7831,9 +7804,6 @@
                                         ENERGIA PRZYSZŁOŚCI
                                     </div>
                                     <h4>Innowacyjne rozwiązania dla transformacji energetycznej</h4>
-                                </div>
-                                <div class="zc-info-action" aria-hidden="true">
-                                    <i class="fas fa-arrow-right"></i>
                                 </div>
                             </div>
                         </div>
