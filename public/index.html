@@ -6968,33 +6968,33 @@
             width: 52px;
             height: 52px;
             border-radius: 0px;
-            background: #0D1714;
-            border: 1px solid rgba(197, 160, 101, 0.45);
-            color: var(--accent-gold, #C5A065);
+            background: #FFFFFF;
+            border: 1px solid rgba(26, 46, 40, 0.12);
+            color: #1A2E28;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
             transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-            font-size: 1.15rem;
-            box-shadow: 0 12px 30px rgba(13, 23, 20, 0.25);
+            font-size: 1.1rem;
+            box-shadow: 0 12px 30px rgba(26, 46, 40, 0.08);
         }
         .zc-carousel-btn:hover {
             background: var(--accent-gold, #C5A065);
             border-color: var(--accent-gold, #C5A065);
-            color: #0D1714;
+            color: #FFFFFF;
             transform: translateY(-50%) scale(1.08);
-            box-shadow: 0 16px 38px rgba(197, 160, 101, 0.4);
+            box-shadow: 0 16px 38px rgba(197, 160, 101, 0.35);
         }
         .zc-prev {
-            left: -26px;
+            left: -54px;
         }
         .zc-next {
-            right: -26px;
+            right: -54px;
         }
-        @media (max-width: 1200px) {
-            .zc-prev { left: -8px; }
-            .zc-next { right: -8px; }
+        @media (max-width: 1300px) {
+            .zc-prev { left: -15px; }
+            .zc-next { right: -15px; }
         }
         @media (max-width: 768px) {
             .zc-carousel-btn {
@@ -7040,9 +7040,9 @@
 
         /* Wystąpienia Video Slide Style (Harmonious Light Luxury Matching Section) */
         .zc-video-card {
-            background: rgba(255, 255, 255, 0.78);
-            border: none;
-            box-shadow: 0 16px 38px rgba(26, 46, 40, 0.06);
+            background: rgba(255, 255, 255, 0.82);
+            border: 1px solid rgba(26, 46, 40, 0.06);
+            box-shadow: 0 16px 38px rgba(26, 46, 40, 0.05);
             border-radius: 0px;
             display: flex;
             flex-direction: column;
@@ -7053,15 +7053,17 @@
         }
         .zc-video-card:hover {
             transform: translateY(-4px);
-            background: rgba(255, 255, 255, 0.95);
-            box-shadow: 0 22px 48px rgba(26, 46, 40, 0.1);
+            background: #FFFFFF;
+            border-color: rgba(197, 160, 101, 0.35);
+            box-shadow: 0 22px 48px rgba(26, 46, 40, 0.09);
         }
         .zc-video-wrap {
             position: relative;
             width: 100%;
             aspect-ratio: 16 / 9;
-            background: #000;
+            background: #EDEAE3;
             overflow: hidden;
+            border-bottom: 1px solid rgba(26, 46, 40, 0.06);
         }
         .zc-video-el {
             width: 100%;
@@ -7071,11 +7073,19 @@
             border-radius: 0px;
             transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
+        /* Ukrywanie kontrolek wideo dopóki użytkownik nie najechał kursorem */
+        .zc-video-el::-webkit-media-controls {
+            opacity: 0;
+            transition: opacity 0.35s ease;
+        }
+        .zc-video-card:hover .zc-video-el::-webkit-media-controls {
+            opacity: 1;
+        }
         .zc-video-card:hover .zc-video-el {
             transform: scale(1.03);
         }
         .zc-video-info {
-            padding: 1.5rem 1.6rem;
+            padding: 1.6rem 1.7rem;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -7093,7 +7103,7 @@
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            font-size: 0.7rem;
+            font-size: 0.72rem;
             font-weight: 700;
             color: var(--accent-gold, #C5A065);
             text-transform: uppercase;
@@ -7112,7 +7122,7 @@
             transform: rotate(225deg) scale(1.2);
         }
         .zc-video-info h4 {
-            font-size: clamp(1.15rem, 1.4vw, 1.35rem);
+            font-size: clamp(1.2rem, 1.45vw, 1.38rem);
             font-weight: 700;
             color: #1A2E28;
             font-family: 'Cormorant Garamond', serif;
@@ -7124,23 +7134,25 @@
             color: var(--accent-gold, #C5A065);
         }
         .zc-info-action {
-            width: 40px;
-            height: 40px;
+            width: 42px;
+            height: 42px;
             flex-shrink: 0;
             border-radius: 0px;
-            background: rgba(197, 160, 101, 0.12);
-            color: var(--accent-gold, #C5A065);
+            border: 1px solid rgba(26, 46, 40, 0.08);
+            background: rgba(26, 46, 40, 0.03);
+            color: #1A2E28;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 0.8rem;
+            font-size: 0.82rem;
             transition: all 0.35s ease;
         }
         .zc-video-card:hover .zc-info-action {
             background: var(--accent-gold, #C5A065);
+            border-color: var(--accent-gold, #C5A065);
             color: #FFFFFF;
             transform: scale(1.06);
-            box-shadow: 0 4px 15px rgba(197, 160, 101, 0.3);
+            box-shadow: 0 6px 18px rgba(197, 160, 101, 0.32);
         }
         @media (max-width: 576px) {
             .zc-video-info {
@@ -7665,12 +7677,12 @@
                     <i class="fas fa-arrow-right"></i>
                 </button>
                 <div class="zc-carousel-track" id="wystapienia-track">
-                    <!-- Film 1 -->
+                    <!-- Film 1 Placeholder -->
                     <div class="zc-slide">
                         <div class="zc-video-card">
                             <div class="zc-video-wrap">
-                                <video controls preload="metadata" poster="https://i.imgur.com/WX3NxmT.png" class="zc-video-el">
-                                    <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" type="video/mp4">
+                                <video controls preload="none" poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='450' viewBox='0 0 800 450'%3E%3Crect width='800' height='450' fill='%23EDEAE3'/%3E%3Cpath d='M380 205 L430 225 L380 245 Z' fill='%23C5A065'/%3E%3Ctext x='400' y='285' font-family='sans-serif' font-size='20' font-weight='600' fill='%235A6E65' text-anchor='middle'%3EMiniaturka wideo %231%3C/text%3E%3C/svg%3E" class="zc-video-el">
+                                    <source src="" type="video/mp4">
                                     Twoja przeglądarka nie obsługuje wideo.
                                 </video>
                             </div>
@@ -7678,9 +7690,9 @@
                                 <div class="zc-info-main">
                                     <div class="zc-video-eyebrow">
                                         <span class="zc-diamond"></span>
-                                        Konferencja „Energia Przyszłości”
+                                        WYSTĄPIENIE TESTOWE #01
                                     </div>
-                                    <h4>Rola odnawialnych źródeł energii na rynku pracy</h4>
+                                    <h4>Tytuł wystąpienia testowego nr 1</h4>
                                 </div>
                                 <div class="zc-info-action" aria-hidden="true">
                                     <i class="fas fa-play"></i>
@@ -7688,12 +7700,12 @@
                             </div>
                         </div>
                     </div>
-                    <!-- Film 2 -->
+                    <!-- Film 2 Placeholder -->
                     <div class="zc-slide">
                         <div class="zc-video-card">
                             <div class="zc-video-wrap">
-                                <video controls preload="metadata" poster="https://i.imgur.com/vXClYIT.png" class="zc-video-el">
-                                    <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4" type="video/mp4">
+                                <video controls preload="none" poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='450' viewBox='0 0 800 450'%3E%3Crect width='800' height='450' fill='%23EDEAE3'/%3E%3Cpath d='M380 205 L430 225 L380 245 Z' fill='%23C5A065'/%3E%3Ctext x='400' y='285' font-family='sans-serif' font-size='20' font-weight='600' fill='%235A6E65' text-anchor='middle'%3EMiniaturka wideo %232%3C/text%3E%3C/svg%3E" class="zc-video-el">
+                                    <source src="" type="video/mp4">
                                     Twoja przeglądarka nie obsługuje wideo.
                                 </video>
                             </div>
@@ -7701,9 +7713,9 @@
                                 <div class="zc-info-main">
                                     <div class="zc-video-eyebrow">
                                         <span class="zc-diamond"></span>
-                                        Parlament Młodych RP
+                                        WYSTĄPIENIE TESTOWE #02
                                     </div>
-                                    <h4>Głos młodego pokolenia w procesach legislacyjnych</h4>
+                                    <h4>Tytuł wystąpienia testowego nr 2</h4>
                                 </div>
                                 <div class="zc-info-action" aria-hidden="true">
                                     <i class="fas fa-play"></i>
@@ -7711,12 +7723,12 @@
                             </div>
                         </div>
                     </div>
-                    <!-- Film 3 -->
+                    <!-- Film 3 Placeholder -->
                     <div class="zc-slide">
                         <div class="zc-video-card">
                             <div class="zc-video-wrap">
-                                <video controls preload="metadata" poster="https://i.imgur.com/E2bDf1I.jpeg" class="zc-video-el">
-                                    <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackSeeTheWorld.mp4" type="video/mp4">
+                                <video controls preload="none" poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='450' viewBox='0 0 800 450'%3E%3Crect width='800' height='450' fill='%23EDEAE3'/%3E%3Cpath d='M380 205 L430 225 L380 245 Z' fill='%23C5A065'/%3E%3Ctext x='400' y='285' font-family='sans-serif' font-size='20' font-weight='600' fill='%235A6E65' text-anchor='middle'%3EMiniaturka wideo %233%3C/text%3E%3C/svg%3E" class="zc-video-el">
+                                    <source src="" type="video/mp4">
                                     Twoja przeglądarka nie obsługuje wideo.
                                 </video>
                             </div>
@@ -7724,9 +7736,9 @@
                                 <div class="zc-info-main">
                                     <div class="zc-video-eyebrow">
                                         <span class="zc-diamond"></span>
-                                        Młodzieżowy Sejmik
+                                        WYSTĄPIENIE TESTOWE #03
                                     </div>
-                                    <h4>Wzmocnienie samorządności młodzieżowej w regionie</h4>
+                                    <h4>Tytuł wystąpienia testowego nr 3</h4>
                                 </div>
                                 <div class="zc-info-action" aria-hidden="true">
                                     <i class="fas fa-play"></i>
@@ -7734,12 +7746,12 @@
                             </div>
                         </div>
                     </div>
-                    <!-- Film 4 -->
+                    <!-- Film 4 Placeholder -->
                     <div class="zc-slide">
                         <div class="zc-video-card">
                             <div class="zc-video-wrap">
-                                <video controls preload="metadata" poster="https://i.imgur.com/jIiHaiZ.jpeg" class="zc-video-el">
-                                    <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4" type="video/mp4">
+                                <video controls preload="none" poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='450' viewBox='0 0 800 450'%3E%3Crect width='800' height='450' fill='%23EDEAE3'/%3E%3Cpath d='M380 205 L430 225 L380 245 Z' fill='%23C5A065'/%3E%3Ctext x='400' y='285' font-family='sans-serif' font-size='20' font-weight='600' fill='%235A6E65' text-anchor='middle'%3EMiniaturka wideo %234%3C/text%3E%3C/svg%3E" class="zc-video-el">
+                                    <source src="" type="video/mp4">
                                     Twoja przeglądarka nie obsługuje wideo.
                                 </video>
                             </div>
@@ -7747,9 +7759,9 @@
                                 <div class="zc-info-main">
                                     <div class="zc-video-eyebrow">
                                         <span class="zc-diamond"></span>
-                                        Gala Zwolnieni z Teorii
+                                        WYSTĄPIENIE TESTOWE #04
                                     </div>
-                                    <h4>Brodnica Beehouses z nagrodą Srebrnego Wilka</h4>
+                                    <h4>Tytuł wystąpienia testowego nr 4</h4>
                                 </div>
                                 <div class="zc-info-action" aria-hidden="true">
                                     <i class="fas fa-play"></i>
