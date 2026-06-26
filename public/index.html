@@ -7015,22 +7015,22 @@
             }
         }
 
-        /* Wystąpienia Video Slide Style (Clean Editorial Minimalism) */
+        /* Wystąpienia Video Slide Style (Luxury Editorial Frame) */
         .zc-video-card {
             background: #0D1714;
-            border: 1px solid rgba(197, 160, 101, 0.3);
+            border: 1px solid rgba(197, 160, 101, 0.35);
             border-radius: 0px;
             display: flex;
             flex-direction: column;
             width: 100%;
             overflow: hidden;
             position: relative;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: all 0.45s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .zc-video-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-6px);
             border-color: var(--accent-gold, #C5A065);
-            box-shadow: 0 20px 40px -10px rgba(13, 23, 20, 0.8);
+            box-shadow: 0 25px 50px -12px rgba(13, 23, 20, 0.8), 0 0 30px rgba(197, 160, 101, 0.2);
         }
         .zc-video-wrap {
             position: relative;
@@ -7046,49 +7046,58 @@
             object-fit: cover;
             display: block;
             border-radius: 0px;
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .zc-speech-badge {
-            position: absolute;
-            top: 1.1rem;
-            left: 1.1rem;
-            background: rgba(13, 23, 20, 0.92);
-            border: 1px solid rgba(197, 160, 101, 0.45);
-            border-left: 3px solid var(--accent-gold, #C5A065);
-            padding: 0.4rem 0.95rem;
-            border-radius: 0px;
-            font-size: 0.78rem;
-            font-weight: 600;
-            color: #fff;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            backdrop-filter: blur(12px);
-            z-index: 2;
-            pointer-events: none;
+        .zc-video-card:hover .zc-video-el {
+            transform: scale(1.04);
         }
         .zc-video-info {
-            padding: 1.6rem 1.8rem;
+            padding: 2rem 2.2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background: #0D1714;
+            flex-grow: 1;
+        }
+        .zc-video-eyebrow {
             display: flex;
             align-items: center;
-            background: #0D1714;
+            gap: 0.75rem;
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: var(--accent-gold, #C5A065);
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            margin-bottom: 0.75rem;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        .zc-eyebrow-line {
+            width: 12px;
+            height: 2px;
+            background: var(--accent-gold, #C5A065);
+            transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .zc-video-card:hover .zc-eyebrow-line {
+            width: 28px;
         }
         .zc-video-info h4 {
-            font-size: 1.4rem;
+            font-size: 1.65rem;
             font-weight: 700;
             color: #fff;
             font-family: 'Cormorant Garamond', serif;
-            line-height: 1.35;
+            line-height: 1.3;
             margin: 0;
             transition: color 0.3s ease;
         }
         .zc-video-card:hover .zc-video-info h4 {
-            color: var(--accent-gold, #C5A065);
+            color: #E5C385;
         }
         @media (max-width: 576px) {
             .zc-video-info {
-                padding: 1.25rem;
+                padding: 1.5rem;
             }
             .zc-video-info h4 {
-                font-size: 1.2rem;
+                font-size: 1.35rem;
             }
         }
 
@@ -7617,13 +7626,16 @@
                     <div class="zc-slide">
                         <div class="zc-video-card">
                             <div class="zc-video-wrap">
-                                <span class="zc-speech-badge">Konferencja „Energia Przyszłości”</span>
                                 <video controls preload="metadata" poster="https://i.imgur.com/WX3NxmT.png" class="zc-video-el">
                                     <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" type="video/mp4">
                                     Twoja przeglądarka nie obsługuje wideo.
                                 </video>
                             </div>
                             <div class="zc-video-info">
+                                <div class="zc-video-eyebrow">
+                                    <span class="zc-eyebrow-line"></span>
+                                    Konferencja „Energia Przyszłości”
+                                </div>
                                 <h4>Rola odnawialnych źródeł energii na rynku pracy</h4>
                             </div>
                         </div>
@@ -7632,13 +7644,16 @@
                     <div class="zc-slide">
                         <div class="zc-video-card">
                             <div class="zc-video-wrap">
-                                <span class="zc-speech-badge">Parlament Młodych RP</span>
                                 <video controls preload="metadata" poster="https://i.imgur.com/vXClYIT.png" class="zc-video-el">
                                     <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4" type="video/mp4">
                                     Twoja przeglądarka nie obsługuje wideo.
                                 </video>
                             </div>
                             <div class="zc-video-info">
+                                <div class="zc-video-eyebrow">
+                                    <span class="zc-eyebrow-line"></span>
+                                    Parlament Młodych RP
+                                </div>
                                 <h4>Głos młodego pokolenia w procesach legislacyjnych</h4>
                             </div>
                         </div>
@@ -7647,13 +7662,16 @@
                     <div class="zc-slide">
                         <div class="zc-video-card">
                             <div class="zc-video-wrap">
-                                <span class="zc-speech-badge">Młodzieżowy Sejmik</span>
                                 <video controls preload="metadata" poster="https://i.imgur.com/E2bDf1I.jpeg" class="zc-video-el">
                                     <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackSeeTheWorld.mp4" type="video/mp4">
                                     Twoja przeglądarka nie obsługuje wideo.
                                 </video>
                             </div>
                             <div class="zc-video-info">
+                                <div class="zc-video-eyebrow">
+                                    <span class="zc-eyebrow-line"></span>
+                                    Młodzieżowy Sejmik
+                                </div>
                                 <h4>Wzmocnienie samorządności młodzieżowej w regionie</h4>
                             </div>
                         </div>
@@ -7662,13 +7680,16 @@
                     <div class="zc-slide">
                         <div class="zc-video-card">
                             <div class="zc-video-wrap">
-                                <span class="zc-speech-badge">Gala Zwolnieni z Teorii</span>
                                 <video controls preload="metadata" poster="https://i.imgur.com/jIiHaiZ.jpeg" class="zc-video-el">
                                     <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4" type="video/mp4">
                                     Twoja przeglądarka nie obsługuje wideo.
                                 </video>
                             </div>
                             <div class="zc-video-info">
+                                <div class="zc-video-eyebrow">
+                                    <span class="zc-eyebrow-line"></span>
+                                    Gala Zwolnieni z Teorii
+                                </div>
                                 <h4>Brodnica Beehouses z nagrodą Srebrnego Wilka</h4>
                             </div>
                         </div>
