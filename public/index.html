@@ -6957,16 +6957,19 @@
         .zc-carousel-title-group {
             max-width: 650px;
         }
-        .zc-carousel-nav {
-            display: flex;
-            gap: 0.75rem;
+        .zc-carousel-wrapper {
+            position: relative;
         }
         .zc-carousel-btn {
+            position: absolute;
+            top: calc(50% - 15px);
+            transform: translateY(-50%);
+            z-index: 10;
             width: 52px;
             height: 52px;
             border-radius: 0px;
             background: #0D1714;
-            border: 1px solid rgba(197, 160, 101, 0.4);
+            border: 1px solid rgba(197, 160, 101, 0.45);
             color: var(--accent-gold, #C5A065);
             display: flex;
             align-items: center;
@@ -6974,13 +6977,33 @@
             cursor: pointer;
             transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
             font-size: 1.15rem;
+            box-shadow: 0 12px 30px rgba(13, 23, 20, 0.25);
         }
         .zc-carousel-btn:hover {
             background: var(--accent-gold, #C5A065);
             border-color: var(--accent-gold, #C5A065);
             color: #0D1714;
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(197, 160, 101, 0.3);
+            transform: translateY(-50%) scale(1.08);
+            box-shadow: 0 16px 38px rgba(197, 160, 101, 0.4);
+        }
+        .zc-prev {
+            left: -26px;
+        }
+        .zc-next {
+            right: -26px;
+        }
+        @media (max-width: 1200px) {
+            .zc-prev { left: -8px; }
+            .zc-next { right: -8px; }
+        }
+        @media (max-width: 768px) {
+            .zc-carousel-btn {
+                width: 44px;
+                height: 44px;
+                font-size: 1rem;
+            }
+            .zc-prev { left: 4px; }
+            .zc-next { right: 4px; }
         }
         .zc-carousel-track {
             display: flex;
@@ -7634,17 +7657,13 @@
             </div>
 
             <!-- CAROUSEL: MOJE WYSTĄPIENIA -->
-            <div class="zc-carousel-wrapper reveal reveal-up delay-200" id="wystapienia-carousel" style="margin-top: 3.5rem;">
-                <div class="zc-carousel-header" style="justify-content: flex-end; margin-bottom: 1.25rem;">
-                    <div class="zc-carousel-nav">
-                        <button class="zc-carousel-btn zc-prev" aria-label="Poprzedni wideo" onclick="scrollZcCarousel('wystapienia-track', -1)">
-                            <i class="fas fa-arrow-left"></i>
-                        </button>
-                        <button class="zc-carousel-btn zc-next" aria-label="Następny wideo" onclick="scrollZcCarousel('wystapienia-track', 1)">
-                            <i class="fas fa-arrow-right"></i>
-                        </button>
-                    </div>
-                </div>
+            <div class="zc-carousel-wrapper reveal reveal-up delay-200" id="wystapienia-carousel" style="margin-top: 3.5rem; position: relative;">
+                <button class="zc-carousel-btn zc-prev" aria-label="Poprzednie wideo" onclick="scrollZcCarousel('wystapienia-track', -1)">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+                <button class="zc-carousel-btn zc-next" aria-label="Następne wideo" onclick="scrollZcCarousel('wystapienia-track', 1)">
+                    <i class="fas fa-arrow-right"></i>
+                </button>
                 <div class="zc-carousel-track" id="wystapienia-track">
                     <!-- Film 1 -->
                     <div class="zc-slide">
