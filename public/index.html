@@ -7017,146 +7017,127 @@
             }
         }
 
-        /* Wystąpienia Slide Style inside About */
-        .zc-speech-card {
-            background: var(--bg-white, #fff);
-            border: 1px solid rgba(26, 46, 40, 0.08);
-            box-shadow: 0 15px 35px -10px rgba(26, 46, 40, 0.07);
+        /* Wystąpienia Video Slide Style */
+        .zc-video-card {
+            background: #0d1714;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 20px 40px -10px rgba(26, 46, 40, 0.2);
             border-radius: 24px;
             display: flex;
-            flex-direction: column;
             width: 100%;
+            aspect-ratio: 16 / 9;
             overflow: hidden;
+            position: relative;
             transition: transform 0.4s ease, box-shadow 0.4s ease;
         }
-        .zc-speech-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 25px 45px -12px rgba(26, 46, 40, 0.14);
+        .zc-video-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 25px 50px -12px rgba(26, 46, 40, 0.3);
         }
-        .zc-speech-img-wrap {
-            position: relative;
-            width: 100%;
-            height: 270px;
-            overflow: hidden;
-            background: #111;
-        }
-        .zc-speech-img-wrap img {
+        .zc-video-el {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .zc-speech-card:hover .zc-speech-img-wrap img {
-            transform: scale(1.06);
+            display: block;
         }
         .zc-speech-badge {
             position: absolute;
             top: 1.2rem;
             left: 1.2rem;
-            background: rgba(26, 46, 40, 0.85);
-            border: 1px solid rgba(255, 255, 255, 0.25);
-            padding: 0.4rem 0.9rem;
+            background: rgba(13, 23, 20, 0.85);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 0.45rem 1rem;
             border-radius: 50px;
-            font-size: 0.75rem;
+            font-size: 0.8rem;
             font-weight: 600;
             color: #fff;
-            letter-spacing: 0.06em;
+            letter-spacing: 0.05em;
             text-transform: uppercase;
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(12px);
             z-index: 2;
-        }
-        .zc-speech-content {
-            padding: 2rem;
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
-        }
-        .zc-speech-meta {
-            display: flex;
-            align-items: center;
-            gap: 0.6rem;
-            font-size: 0.85rem;
-            color: var(--accent-gold, #C5A065);
-            font-weight: 600;
-            margin-bottom: 0.6rem;
-            text-transform: uppercase;
-            letter-spacing: 0.04em;
-        }
-        .zc-speech-content h4 {
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: var(--text-primary, #1A2E28);
-            margin-bottom: 0.85rem;
-            line-height: 1.35;
-        }
-        .zc-speech-content p {
-            font-size: 0.98rem;
-            color: var(--text-secondary, #5C6B66);
-            line-height: 1.65;
-            margin-bottom: 1.75rem;
-            flex-grow: 1;
+            pointer-events: none;
         }
 
-        /* Postulaty Slide Style inside Manifesto (Dark Section) */
-        .zc-postulat-card {
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            backdrop-filter: blur(28px);
-            -webkit-backdrop-filter: blur(28px);
-            padding: 2.5rem;
-            border-radius: 24px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            width: 100%;
-            min-height: 300px;
+        /* Minimalist Manifesto List */
+        .manifesto-list-wrapper {
+            margin-top: 4.5rem;
+            max-width: 860px;
+            margin-left: auto;
+            margin-right: auto;
             text-align: left;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .zc-postulat-card:hover {
-            background: rgba(255, 255, 255, 0.08);
-            border-color: rgba(197, 160, 101, 0.55);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-            transform: translateY(-6px);
+        .manifesto-list-header {
+            margin-bottom: 3rem;
+            text-align: center;
         }
-        .zc-postulat-top {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.75rem;
-        }
-        .zc-postulat-num {
-            font-size: 2.4rem;
-            font-weight: 800;
-            font-family: 'Syne', sans-serif;
-            background: linear-gradient(135deg, #C5A065 0%, #F1E2C3 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .zc-postulat-icon {
-            width: 48px;
-            height: 48px;
-            border-radius: 14px;
-            background: rgba(197, 160, 101, 0.15);
-            border: 1px solid rgba(197, 160, 101, 0.3);
-            color: #C5A065;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.3rem;
-        }
-        .zc-postulat-card h4 {
-            font-size: 1.45rem;
+        .manifesto-list-header h3 {
+            font-size: clamp(1.8rem, 2.5vw, 2.4rem);
             font-weight: 700;
             color: #fff;
-            margin-bottom: 0.9rem;
-            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-family: 'Cormorant Garamond', serif;
+            margin-top: 0.5rem;
+            margin-bottom: 0;
         }
-        .zc-postulat-card p {
-            font-size: 1.02rem;
-            color: rgba(255, 255, 255, 0.82);
-            line-height: 1.7;
+        .manifesto-list {
+            display: flex;
+            flex-direction: column;
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+        }
+        .manifesto-item {
+            display: flex;
+            align-items: baseline;
+            gap: 2.5rem;
+            padding: 2rem 0.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .manifesto-item:hover {
+            padding-left: 1.5rem;
+            border-bottom-color: var(--accent-gold, #C5A065);
+            background: linear-gradient(90deg, rgba(197, 160, 101, 0.08) 0%, transparent 100%);
+        }
+        .manifesto-item-num {
+            font-size: 1.4rem;
+            font-weight: 700;
+            font-family: 'Syne', sans-serif;
+            color: var(--accent-gold, #C5A065);
+            flex-shrink: 0;
+            width: 38px;
+        }
+        .manifesto-item-body {
+            display: flex;
+            flex-direction: column;
+            gap: 0.45rem;
+        }
+        .manifesto-item-body h4 {
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: #fff;
             margin: 0;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            letter-spacing: -0.01em;
+        }
+        .manifesto-item-body p {
+            font-size: 1.02rem;
+            color: rgba(255, 255, 255, 0.78);
+            line-height: 1.65;
+            margin: 0;
+        }
+        @media (max-width: 576px) {
+            .manifesto-item {
+                gap: 1.25rem;
+                padding: 1.5rem 0.25rem;
+            }
+            .manifesto-item-num {
+                font-size: 1.15rem;
+                width: 28px;
+            }
+            .manifesto-item-body h4 {
+                font-size: 1.15rem;
+            }
+            .manifesto-item-body p {
+                font-size: 0.94rem;
+            }
         }
 
         /* Dots */
@@ -7591,80 +7572,56 @@
             </div>
 
             <!-- CAROUSEL: MOJE WYSTĄPIENIA -->
-            <div class="zc-carousel-wrapper reveal reveal-up delay-200" id="wystapienia-carousel">
-                <div class="zc-carousel-header">
-                    <div class="zc-carousel-title-group">
-                        <span class="subtitle subtitle-left">Wystąpienia &amp; Debaty</span>
-                        <h3 style="font-size: clamp(1.8rem, 2.5vw, 2.4rem); font-weight: 700; color: var(--text-primary); font-family: 'Cormorant Garamond', serif; margin-top: 0.25rem;">Głos zabierany w najważniejszych sprawach</h3>
-                    </div>
+            <div class="zc-carousel-wrapper reveal reveal-up delay-200" id="wystapienia-carousel" style="margin-top: 3.5rem;">
+                <div class="zc-carousel-header" style="justify-content: flex-end; margin-bottom: 1.25rem;">
                     <div class="zc-carousel-nav">
-                        <button class="zc-carousel-btn zc-prev" aria-label="Poprzedni slajd" onclick="scrollZcCarousel('wystapienia-track', -1)">
+                        <button class="zc-carousel-btn zc-prev" aria-label="Poprzedni wideo" onclick="scrollZcCarousel('wystapienia-track', -1)">
                             <i class="fas fa-arrow-left"></i>
                         </button>
-                        <button class="zc-carousel-btn zc-next" aria-label="Następny slajd" onclick="scrollZcCarousel('wystapienia-track', 1)">
+                        <button class="zc-carousel-btn zc-next" aria-label="Następny wideo" onclick="scrollZcCarousel('wystapienia-track', 1)">
                             <i class="fas fa-arrow-right"></i>
                         </button>
                     </div>
                 </div>
                 <div class="zc-carousel-track" id="wystapienia-track">
-                    <!-- Slide 1 -->
+                    <!-- Film 1 -->
                     <div class="zc-slide">
-                        <div class="zc-speech-card">
-                            <div class="zc-speech-img-wrap">
-                                <span class="zc-speech-badge">Prelekcja · 2026</span>
-                                <img src="https://i.imgur.com/WX3NxmT.png" alt="Konferencja Energia Przyszłości" loading="lazy">
-                            </div>
-                            <div class="zc-speech-content">
-                                <div class="zc-speech-meta"><i class="fas fa-microphone"></i> Konferencja „Energia Przyszłości”</div>
-                                <h4>Rola odnawialnych źródeł energii na rynku pracy</h4>
-                                <p>Wystąpienie prelegenckie poświęcone zielonej transformacji jako największej szansie rozwojowej i gospodarczej dla młodego pokolenia.</p>
-                                <a href="/konferencja-energia-przyszlosci" class="btn btn-small btn-gold" style="align-self: flex-start; text-decoration: none;">Relacja</a>
-                            </div>
+                        <div class="zc-video-card">
+                            <video controls preload="metadata" poster="https://i.imgur.com/WX3NxmT.png" class="zc-video-el">
+                                <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" type="video/mp4">
+                                Twoja przeglądarka nie obsługuje wideo.
+                            </video>
+                            <span class="zc-speech-badge">Konferencja „Energia Przyszłości”</span>
                         </div>
                     </div>
-                    <!-- Slide 2 -->
+                    <!-- Film 2 -->
                     <div class="zc-slide">
-                        <div class="zc-speech-card">
-                            <div class="zc-speech-img-wrap">
-                                <span class="zc-speech-badge">Sesja Plenarna</span>
-                                <img src="https://i.imgur.com/vXClYIT.png" alt="Parlament Młodych RP" loading="lazy">
-                            </div>
-                            <div class="zc-speech-content">
-                                <div class="zc-speech-meta"><i class="fas fa-landmark"></i> Parlament Młodych RP</div>
-                                <h4>Głos młodego pokolenia w procesach legislacyjnych</h4>
-                                <p>Przemówienie z sali plenarnej w obronie zrównoważonego rozwoju, edukacji obywatelskiej oraz włączania rad młodzieżowych do stanowienia prawa.</p>
-                                <a href="/aktualnosci" class="btn btn-small btn-gold" style="align-self: flex-start; text-decoration: none;">Szczegóły</a>
-                            </div>
+                        <div class="zc-video-card">
+                            <video controls preload="metadata" poster="https://i.imgur.com/vXClYIT.png" class="zc-video-el">
+                                <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4" type="video/mp4">
+                                Twoja przeglądarka nie obsługuje wideo.
+                            </video>
+                            <span class="zc-speech-badge">Parlament Młodych RP</span>
                         </div>
                     </div>
-                    <!-- Slide 3 -->
+                    <!-- Film 3 -->
                     <div class="zc-slide">
-                        <div class="zc-speech-card">
-                            <div class="zc-speech-img-wrap">
-                                <span class="zc-speech-badge">Zarząd · Sejmik</span>
-                                <img src="https://i.imgur.com/E2bDf1I.jpeg" alt="Sekretarz Sejmiku Kujawsko-Pomorskiego" loading="lazy">
-                            </div>
-                            <div class="zc-speech-content">
-                                <div class="zc-speech-meta"><i class="fas fa-users"></i> Młodzieżowy Sejmik Województwa</div>
-                                <h4>Wzmocnienie samorządności młodzieżowej w regionie</h4>
-                                <p>Objęcie stanowiska Sekretarza i oficjalne wystąpienie dotyczące priorytetów rozwoju województwa kujawsko-pomorskiego oraz wsparcia inicjatyw lokalnych.</p>
-                                <a href="/sekretarz-sejmiku" class="btn btn-small btn-gold" style="align-self: flex-start; text-decoration: none;">Czytaj wpis</a>
-                            </div>
+                        <div class="zc-video-card">
+                            <video controls preload="metadata" poster="https://i.imgur.com/E2bDf1I.jpeg" class="zc-video-el">
+                                <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackSeeTheWorld.mp4" type="video/mp4">
+                                Twoja przeglądarka nie obsługuje wideo.
+                            </video>
+                            <span class="zc-speech-badge">Młodzieżowy Sejmik</span>
                         </div>
                     </div>
-                    <!-- Slide 4 -->
+                    <!-- Film 4 -->
                     <div class="zc-slide">
-                        <div class="zc-speech-card">
-                            <div class="zc-speech-img-wrap">
-                                <span class="zc-speech-badge">Gala Ogólnopolska</span>
-                                <img src="https://i.imgur.com/jIiHaiZ.jpeg" alt="Gala Zwolnieni z Teorii" loading="lazy">
-                            </div>
-                            <div class="zc-speech-content">
-                                <div class="zc-speech-meta"><i class="fas fa-trophy"></i> Zwolnieni z Teorii</div>
-                                <h4>Brodnica Beehouses z nagrodą Srebrnego Wilka</h4>
-                                <p>Prezentacja ogólnopolskiego sukcesu projektu edukacyjno-ekologicznego na wielkiej gali finałowej olimpiady projektów społecznych.</p>
-                                <a href="/inicjatywa-brodnica-beehouses-z-nagroda-srebrnego-wilka" class="btn btn-small btn-gold" style="align-self: flex-start; text-decoration: none;">Artykuł</a>
-                            </div>
+                        <div class="zc-video-card">
+                            <video controls preload="metadata" poster="https://i.imgur.com/jIiHaiZ.jpeg" class="zc-video-el">
+                                <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4" type="video/mp4">
+                                Twoja przeglądarka nie obsługuje wideo.
+                            </video>
+                            <span class="zc-speech-badge">Gala Zwolnieni z Teorii</span>
                         </div>
                     </div>
                 </div>
@@ -8748,90 +8705,49 @@
                 <div class="manifesto-line"></div>
             </div>
 
-            <!-- CAROUSEL: MOJE POSTULATY -->
-            <div class="zc-carousel-wrapper reveal reveal-up delay-100" id="postulaty-carousel">
-                <div class="zc-carousel-header">
-                    <div class="zc-carousel-title-group" style="text-align: left;">
-                        <span class="manifesto-eyebrow" style="margin-bottom: 0.5rem; display: block; font-size: 0.95rem; letter-spacing: 0.15em;">Program &amp; Priorytety</span>
-                        <h3 style="font-size: clamp(1.8rem, 2.5vw, 2.4rem); font-weight: 700; color: #fff; font-family: 'Cormorant Garamond', serif; margin: 0;">Postulaty mojego pokolenia</h3>
-                    </div>
-                    <div class="zc-carousel-nav">
-                        <button class="zc-carousel-btn zc-prev" aria-label="Poprzedni postulat" onclick="scrollZcCarousel('postulaty-track', -1)">
-                            <i class="fas fa-arrow-left"></i>
-                        </button>
-                        <button class="zc-carousel-btn zc-next" aria-label="Następny postulat" onclick="scrollZcCarousel('postulaty-track', 1)">
-                            <i class="fas fa-arrow-right"></i>
-                        </button>
-                    </div>
+            <!-- PROGRAM & PRIORYTETY: MINIMALISTYCZNA LISTA -->
+            <div class="manifesto-list-wrapper reveal reveal-up delay-100">
+                <div class="manifesto-list-header">
+                    <span class="manifesto-eyebrow" style="margin-bottom: 0.5rem; display: block; font-size: 0.95rem; letter-spacing: 0.15em;">Program &amp; Priorytety</span>
+                    <h3>Postulaty mojego pokolenia</h3>
                 </div>
-                <div class="zc-carousel-track" id="postulaty-track">
-                    <!-- Postulat 1 -->
-                    <div class="zc-slide">
-                        <div class="zc-postulat-card">
-                            <div class="zc-postulat-top">
-                                <span class="zc-postulat-num">#01</span>
-                                <div class="zc-postulat-icon"><i class="fas fa-gavel"></i></div>
-                            </div>
-                            <div>
-                                <h4>Głos Młodych w Legislacji</h4>
-                                <p>Obowiązkowe konsultacje z radami młodzieżowymi przy każdej procedowanej ustawie dotyczącej klimatu, edukacji i rynku pracy. Prawo musi uwzględniać naszą przyszłość.</p>
-                            </div>
+                <div class="manifesto-list">
+                    <div class="manifesto-item">
+                        <span class="manifesto-item-num">01</span>
+                        <div class="manifesto-item-body">
+                            <h4>Głos Młodych w Legislacji</h4>
+                            <p>Obowiązkowe konsultacje z radami młodzieżowymi przy każdej procedowanej ustawie dotyczącej klimatu, edukacji i rynku pracy. Prawo musi uwzględniać naszą przyszłość.</p>
                         </div>
                     </div>
-                    <!-- Postulat 2 -->
-                    <div class="zc-slide">
-                        <div class="zc-postulat-card">
-                            <div class="zc-postulat-top">
-                                <span class="zc-postulat-num">#02</span>
-                                <div class="zc-postulat-icon"><i class="fas fa-solar-panel"></i></div>
-                            </div>
-                            <div>
-                                <h4>Zielona Transformacja &amp; OZE</h4>
-                                <p>Odblokowanie rozwoju energetyki odnawialnej na lądzie, inwestycje w lokalne spółdzielnie energetyczne oraz wsparcie zielonych miejsc pracy dla młodych w regionach.</p>
-                            </div>
+                    <div class="manifesto-item">
+                        <span class="manifesto-item-num">02</span>
+                        <div class="manifesto-item-body">
+                            <h4>Zielona Transformacja &amp; OZE</h4>
+                            <p>Odblokowanie rozwoju energetyki odnawialnej na lądzie, inwestycje w lokalne spółdzielnie energetyczne oraz wsparcie zielonych miejsc pracy dla młodych w regionach.</p>
                         </div>
                     </div>
-                    <!-- Postulat 3 -->
-                    <div class="zc-slide">
-                        <div class="zc-postulat-card">
-                            <div class="zc-postulat-top">
-                                <span class="zc-postulat-num">#03</span>
-                                <div class="zc-postulat-icon"><i class="fas fa-graduation-cap"></i></div>
-                            </div>
-                            <div>
-                                <h4>Nowoczesna Edukacja Ekologiczna</h4>
-                                <p>Wprowadzenie praktycznych zajęć terenowych z ochrony bioróżnorodności i adaptacji do zmian klimatu do podstawy programowej polskich szkół.</p>
-                            </div>
+                    <div class="manifesto-item">
+                        <span class="manifesto-item-num">03</span>
+                        <div class="manifesto-item-body">
+                            <h4>Nowoczesna Edukacja Ekologiczna</h4>
+                            <p>Wprowadzenie praktycznych zajęć terenowych z ochrony bioróżnorodności i adaptacji do zmian klimatu do podstawy programowej polskich szkół.</p>
                         </div>
                     </div>
-                    <!-- Postulat 4 -->
-                    <div class="zc-slide">
-                        <div class="zc-postulat-card">
-                            <div class="zc-postulat-top">
-                                <span class="zc-postulat-num">#04</span>
-                                <div class="zc-postulat-icon"><i class="fas fa-bug"></i></div>
-                            </div>
-                            <div>
-                                <h4>Ustawowa Ochrona Zapylaczy</h4>
-                                <p>Tworzenie korytarzy ekologicznych, miejskich łąk kwietnych oraz ścisłe ograniczenia w stosowaniu szkodliwych pestycydów zagrażających pszczołom i owadom.</p>
-                            </div>
+                    <div class="manifesto-item">
+                        <span class="manifesto-item-num">04</span>
+                        <div class="manifesto-item-body">
+                            <h4>Ustawowa Ochrona Zapylaczy</h4>
+                            <p>Tworzenie korytarzy ekologicznych, miejskich łąk kwietnych oraz ścisłe ograniczenia w stosowaniu szkodliwych pestycydów zagrażających pszczołom i owadom.</p>
                         </div>
                     </div>
-                    <!-- Postulat 5 -->
-                    <div class="zc-slide">
-                        <div class="zc-postulat-card">
-                            <div class="zc-postulat-top">
-                                <span class="zc-postulat-num">#05</span>
-                                <div class="zc-postulat-icon"><i class="fas fa-city"></i></div>
-                            </div>
-                            <div>
-                                <h4>Silny Samorząd Młodzieżowy</h4>
-                                <p>Zwiększenie partycypacyjnych budżetów dla młodzieżowych sejmików województw i rad gmin, dające młodym realne środki na realizację lokalnych inicjatyw.</p>
-                            </div>
+                    <div class="manifesto-item">
+                        <span class="manifesto-item-num">05</span>
+                        <div class="manifesto-item-body">
+                            <h4>Silny Samorząd Młodzieżowy</h4>
+                            <p>Zwiększenie partycypacyjnych budżetów dla młodzieżowych sejmików województw i rad gmin, dające młodym realne środki na realizację lokalnych inicjatyw.</p>
                         </div>
                     </div>
                 </div>
-                <div class="zc-carousel-dots" id="postulaty-dots"></div>
             </div>
         </div>
     </section>
