@@ -1,723 +1,417 @@
-# Kompleksowy Audyt SEO — zuzanna-czuprynska.pl
+# Audyt SEO – Zuzanna Czupryńska | zuzanna-czuprynska.pl
 
-**Data audytu:** 2026-07-01  
-**Audytor:** Analiza statyczna kodu (bez uruchamiania Lighthouse/PageSpeed Insights)  
-**Platforma:** HTML + CSS + JavaScript, hosting Vercel (wcześniej Firebase Hosting)
-
----
-
-## A. PODSUMOWANIE
-
-### Ogólna ocena SEO: **51/100**
-
-Strona posiada solidne fundamenty techniczne (HTTPS przez Vercel, clean URLs, robots.txt, sitemap.xml, Google Analytics + GTM) i przyzwoity zestaw meta tagów. Jednak szereg poważnych problemów technicznych i contentowych obniża jej rzeczywisty potencjał pozycjonowania.
-
-### Największe problemy
-
-1. **Ogromny rozmiar pliku `index.html`** — 362 KB / ~10 381 linii w jednym pliku HTML
-2. **Wszystkie obrazy hostowane zewnętrznie na imgur.com** — brak kontroli, ryzyko zerwania linków, brak WebP
-3. **Brak elementu `<main>` na stronie głównej** — poważny błąd semantyczny
-4. **Błędne og:url i twitter:url na `sekretarz-sejmiku.html`** — wskazują na inną stronę
-5. **Linki do `/fundacja` i `/rekrutacja` z rozszerzeniem `.html`** w nawigacji — niepotrzebne przekierowania 301
-6. **Plik `Flyingbee.glb` (8,5 MB)** + biblioteki Three.js bez `defer`
-7. **`sekretarz-sejmiku.html` nie jest w sitemap.xml**
-8. **Przełącznik języka EN bez tagów `hreflang`** — ryzyko duplikacji
-
-### Największe szanse wzrostu
-
-- Dodanie `BreadcrumbList` w Schema.org dla artykułów (łatwa implementacja rich results)
-- Optymalizacja LCP: przeniesienie obrazu hero na własny serwer + preload
-- Uzupełnienie sitemap.xml o brakujące strony artykułowe
-- Poprawa meta description strony głównej — sucha, bez CTA
-- Dodanie `FAQPage` Schema na stronach fundacja i rekrutacja
-
-### Ogólna ocena wpływu
-
-- Indeksowanie nowych artykułów: **opóźnione** (brak w sitemap)
-- LCP na stronie głównej: **prawdopodobnie > 4s** (8,5 MB GLB + imgur images)
-- CTR: **średni** (tytuły kompetentne, meta descriptions do poprawy)
-- Potencjał na rich results: **niezrealizowany** (brak BreadcrumbList, FAQPage)
+**Data audytu:** 2026-07-02  
+**Wersja analizy:** kompletna, na podstawie kodu źródłowego
 
 ---
 
-## B. LISTA PROBLEMÓW
+## 1. Rozpoznanie projektu
 
-### PROBLEM 1 — Brak `<main>` na stronie głównej
+| Cecha | Wartość |
+|---|---|
+| Typ strony | Strona osoby publicznej / portfolio polityczne |
+| Technologia | Czysty HTML + wbudowany CSS + vanilla JavaScript |
+| Rendering | Statyczny SSG-like, bez frameworka (pliki `.html` serwowane przez Vercel) |
+| Hosting | Vercel (wercel.json z `cleanUrls: true`, `trailingSlash: false`) |
+| CMS | Brak. Dane dynamiczne (posty, wydarzenia) są ładowane z Firestore przez JavaScript. |
+| Baza danych | Firebase Firestore (dynamiczne posty i события na stronie głównej) |
+| Języki | PL (domyślny) + EN (tłumaczenia przez `site-language.js`) |
+| SEO zasięg | Ogólnopolski, z akcentem lokalnym (Brodnica, Kujawsko-Pomorskie) |
+| Główna konwersja | Wypełnienie formularza kontaktowego / zapis na newsletter / rekrutacja do fundacji |
+| Intencja główna | Budowanie wizerunku osoby publicznej, liderki, posłanki, fundatorki |
 
-- **Priorytet:** KRYTYCZNY
-- **Kategoria:** Semantyka HTML
-- **Plik:** `public/index.html`
-- **Opis:** Strona główna nie zawiera elementu `<main>`. Googlebot i czytniki ekranowe nie mogą zidentyfikować głównej treści. Pozostałe strony (o-mnie, fundacja itd.) posiadają `<main class="article-content">`, lecz index.html — nie.
-- **Wpływ na SEO:** Degradacja sygnałów semantycznych, problem z dostępnością
-- **Rekomendacja:** Owinąć wszystkie sekcje treści w `<main id="main-content">` po nawigacji, zamknąć przed `<footer>`
-- **Automatyczna poprawka:** Tak
+### Mapa wszystkich podstron
+
+| Plik HTML | Adres URL (Vercel cleanUrls) | Typ |
+|---|---|---|
+| `index.html` | `/` | Strona główna |
+| `o-mnie.html` | `/o-mnie` | O osobie |
+| `fundacja-beehouses.html` | `/fundacja-beehouses` | Organizacja NGO |
+| `rekrutacja-do-fundacji-beehouses.html` | `/rekrutacja-do-fundacji-beehouses` | Rekrutacja |
+| `aktualnosci.html` | `/aktualnosci` | Hub bloga |
+| `kontakt.html` | `/kontakt` | Kontakt |
+| `inicjatywa-brodnica-beehouses-z-nagroda-srebrnego-wilka.html` | `/inicjatywa-brodnica-beehouses-z-nagroda-srebrnego-wilka` | Artykuł |
+| `konferencja-energia-przyszlosci.html` | `/konferencja-energia-przyszlosci` | Artykuł |
+| `nowe-inicjatywy-na-rzecz-ochrony-zapylaczy.html` | `/nowe-inicjatywy-na-rzecz-ochrony-zapylaczy` | Artykuł |
+| `projekt-brodnica-beehouses-2025-edukacja-o-zapylaczach.html` | `/projekt-brodnica-beehouses-2025-edukacja-o-zapylaczach` | Artykuł |
+| `sekretarz-sejmiku.html` | `/sekretarz-sejmiku` | Artykuł |
+| `udzial-w-pracach-nad-narodowym-programem-lesnym.html` | `/udzial-w-pracach-nad-narodowym-programem-lesnym` | Artykuł |
+| `warsztaty-pszczelarskie-w-ramach-projektu-beehouses-v2.html` | `/warsztaty-pszczelarskie-w-ramach-projektu-beehouses-v2` | Artykuł |
+| `polityka-prywatnosci.html` | `/polityka-prywatnosci` | Prawna |
+| `cookies.html` | `/cookies` | Prawna |
+| `404.html` | `/404` | Błąd |
+| `stopka-mailowa.html` | `/stopka-mailowa` | ⚠️ Techniczna (brak noindex!) |
 
 ---
 
-### PROBLEM 2 — Błędny og:url i twitter:url na sekretarz-sejmiku.html
+## A. Executive Summary
 
-- **Priorytet:** KRYTYCZNY
-- **Kategoria:** Open Graph / Canonicale
-- **Plik:** `public/sekretarz-sejmiku.html`, linie 39–50
-- **Opis:** Canonical wskazuje prawidłowo na `/sekretarz-sejmiku`, ale `og:url` i `twitter:url` wskazują na `/konferencja-energia-przyszlosci`. Błąd kopiowania szablonu.
-- **Wpływ na SEO:** Błędne sygnały tożsamości przy udostępnianiu w social media
-- **Rekomendacja:**
-```html
-<meta property="og:url" content="https://zuzanna-czuprynska.pl/sekretarz-sejmiku">
-<meta name="twitter:url" content="https://zuzanna-czuprynska.pl/sekretarz-sejmiku">
+Strona Zuzanny Czupryńskiej jest solidnie zbudowaną wizytówką osoby publicznej z dobrą strukturą treści i poprawnymi podstawami meta danych. Projekt wyróżnia się: formatem WebP dla wszystkich obrazów, prawidłowymi atrybutami `width/height` na obrazach (ważne dla CLS), systemem preloadingu LCP, wdrożoną analityką GTM+GA4 oraz bogatymi, naturalnie napisanymi treściami.
+
+**Największe problemy:**
+1. **Inline CSS blokujący renderowanie** – każdy plik HTML zawiera od 6000 do 6500+ linii CSS w bloku `<style>`. To podstawowa przyczyna wolnych metryk LCP/FCP.
+2. **Błędne canonical i og:url** dla `/fundacja-beehouses` (wskazuje na nieistniejące `/fundacja`) i `/rekrutacja-do-fundacji-beehouses` (wskazuje na nieistniejące `/rekrutacja`).
+3. **Wszystkie tagi og:image i twitter:image używają ścieżek względnych** zamiast absolutnych URL – miniatury nie ładują się podczas udostępniania linków w social mediach.
+4. **Linki nawigacyjne i stopka używają .html w href** – niespójne z cleanUrls Vercela, ryzyko pętli przekierowań lub nieočekiwanych zachowań.
+5. **Three.js i Flyingbee.glb (7,5 MB!)** ładowane synchronicznie na stronie głównej – drastycznie zwiększa czas ładowania dla użytkowników mobilnych.
+
+**Największe możliwości:**
+- Przeniesienie CSS do zewnętrznych plików poprawi LCP/FCP nawet o kilka sekund.
+- Naprawienie canonical uchroni przed duplikowaniem treści.
+- Poprawienie og:image zwiększy CTR z postów social media.
+- Tagowanie artykułów z `BlogPosting` schema umożliwi wyświetlanie w Google Discover.
+- Wdrożenie opisowych nazw obrazów poprawi widoczność w Google Grafika.
+
+---
+
+## B. Ocena punktowa (ekspercka, na podstawie kodu)
+
+| Obszar | Ocena | Uzasadnienie |
+|---|---|---|
+| SEO techniczne | **58/100** | Błędne canonical (2 strony), relative og:image, .html w linkach nawigacyjnych, SearchAction bez wyszukiwarki |
+| Indeksowanie | **82/100** | Dobry robots.txt, czytelny sitemap, cleanUrls działają poprawnie, stopka-mailowa bez noindex |
+| On-page SEO | **74/100** | Tytuły i meta description są, ale miejscami zbyt ogólne; keywords meta (nieużywany przez Google) wszędzie identyczny |
+| Treści | **88/100** | Treści naturalne, merytoryczne, dobrze opisujące osobę publiczną |
+| Linkowanie wewnętrzne | **66/100** | Niejednolite – mix `/ścieżka` vs `plik.html`; tagi artykułów z `href="#"` nie linkują nigdzie |
+| Wydajność | **42/100** | Inline CSS ≈300KB na plik HTML, Three.js + model 3D 7.5MB na stronie głównej, podwójne tagi analityki |
+| Core Web Vitals | **50/100** | Wysokie ryzyko słabego LCP i TBT z powodu inline CSS i Three.js; dobre CLS (width/height na obrazach) |
+| Mobile SEO | **88/100** | Responsywny układ, skip-link, aria-labels w menu mobilnym |
+| Dane strukturalne | **72/100** | Person + Organization + WebSite na stronach głównych; NewsArticle na artykułach; brak BreadcrumbList; relative URL w image |
+| Obrazy | **62/100** | Dobry format WebP, ale losowe nazwy plików, brak preload hero na podstronach, jeden hero image bez alt |
+| Dostępność (SEO-relevant) | **76/100** | Skip-link, aria-labels, lang="pl", ale ukryty tekst w H1 (clip CSS), `<h4>` w hero decoration |
+| Bezpieczeństwo | **88/100** | HTTPS przez Vercel, nagłówki bezpieczeństwa w vercel.json, brak CSP |
+| E-E-A-T / Wiarygodność | **87/100** | Silne sygnały: doświadczenie, role, nagrody, dane kontaktowe, polityka prywatności |
+
+---
+
+## C. Lista wszystkich problemów
+
+| ID | Priorytet | Obszar | Problem | Lokalizacja | Wpływ SEO | Rekomendacja |
+|---|---|---|---|---|---|---|
+| P01 | **CRITICAL** | Wydajność/LCP | Cały CSS (ok. 6000–6500 linii) wstrzyknięty inline w każdym pliku HTML. Plik `index.html` waży 360 KB, z czego ~280 KB to CSS. | Wszystkie pliki HTML (`index.html` L188–L6495, pozostałe analogicznie) | Blokowanie renderowania, wolny FCP i LCP, niski wynik PageSpeed | Ekstrakcja CSS do pliku `/style.css` i podpięcie przez `<link rel="stylesheet" href="/style.css">` |
+| P02 | **CRITICAL** | Canonical | `fundacja-beehouses.html`: canonical i og:url wskazują na `/fundacja` (strona nie istnieje = 404) | `fundacja-beehouses.html` L39, L43 | Google ignoruje canonical, ryzyko duplikatów treści pod złym URL | Zmiana na `https://zuzanna-czuprynska.pl/fundacja-beehouses` |
+| P03 | **CRITICAL** | Canonical | `rekrutacja-do-fundacji-beehouses.html`: canonical i og:url wskazują na `/rekrutacja` (404) | `rekrutacja-do-fundacji-beehouses.html` L43, L47 | Jak wyżej | Zmiana na `https://zuzanna-czuprynska.pl/rekrutacja-do-fundacji-beehouses` |
+| P04 | **HIGH** | Open Graph | Wszystkie tagi `og:image` i `twitter:image` zawierają ścieżki względne (np. `/images/pzhgBM6.webp`) zamiast absolutnych URL | Wszystkie pliki HTML (np. `index.html` L52, L65; `o-mnie.html` L50, L62) | Serwisy social media (FB, LinkedIn, X) nie renderują miniatur linków | Zamiana na `https://zuzanna-czuprynska.pl/images/pzhgBM6.webp` we wszystkich plikach |
+| P05 | **HIGH** | Linki wewnętrzne | Linki nawigacyjne i stopkowe do Fundacji i Rekrutacji używają rozszerzenia `.html` (np. `fundacja-beehouses.html`), podczas gdy Vercel obsługuje `cleanUrls`. Może powodować niespójność i niepotrzebne przekierowania | Wszystkie HTML w nav/footer, np. `index.html` L7307, L9223 | Nieoptymalne przekazywanie link equity, ryzyko przekierowań | Zmiana na `/fundacja-beehouses` i `/rekrutacja-do-fundacji-beehouses` we wszystkich plikach |
+| P06 | **HIGH** | Wydajność | Three.js (ok. 600 KB) + GLTFLoader + DRACOLoader ładowane synchronicznie (bez `defer`/`async`) przed renderowaniem strony | `index.html` L9897–L9899 | Blokowanie głównego wątku, wysokie TBT, zły INP | Dodanie atrybutu `defer` lub przeniesienie Three.js do modułu ładowanego warunkowo (np. gdy sekcja fundacji jest widoczna) |
+| P07 | **HIGH** | Wydajność | Model 3D `Flyingbee.glb` waży **7,5 MB** i jest ładowany na stronie głównej | `public/Flyingbee.glb` – ładowany przez Three.js na stronie głównej | Dramatycznie spowalnia LCP i TTI dla użytkowników mobilnych | Kompresja modelu do formatu Draco (możliwa redukcja do ~500 KB), warunek: ładuj tylko na desktop lub po kliknięciu |
+| P08 | **HIGH** | Analityka | Na każdej stronie wdrożono JEDNOCZEŚNIE Google Tag Manager (GTM-WJKVQZNP) i bezpośredni tag GA4 (G-9BK92HFXPZ) przez gtag.js. To powoduje podwójne śledzenie i dodatkowe żądanie sieciowe. | Wszystkie HTML L11–L28 | Zaśmiecenie danych analitycznych (zdwojone sesje/zdarzenia), spowolnienie ładowania | Usunięcie bezpośredniego kodu gtag.js; zarządzanie GA4 wyłącznie przez GTM |
+| P09 | **MEDIUM** | Indeksowanie | `stopka-mailowa.html` jest dostępna dla robotów bez tagu `noindex`, mimo że jest plikiem technicznym (stopka mailowa do skopiowania) | `stopka-mailowa.html` L1–L20 (brak `<meta name="robots" content="noindex">`) | Crawl budget waste, thin content | Dodanie `<meta name="robots" content="noindex, nofollow">` |
+| P10 | **MEDIUM** | Schema | W JSON-LD wszystkich plików pola `"image"` (w Person i Organization) oraz `"logo"` zawierają ścieżki względne zamiast URL absolutnych | Np. `index.html` L130 (`/images/pzhgBM6.webp`), L157 (`/images/ZqtTYMW.webp`) | Błąd walidacji w Google Rich Results Test | Zmiana na `https://zuzanna-czuprynska.pl/images/...` |
+| P11 | **MEDIUM** | Schema | Schema `WebSite` zawiera `SearchAction` z URL `?s={search_term_string}`, co sugeruje istnienie wyszukiwarki. Strona jej nie posiada. | `aktualnosci.html` L121–L132, `kontakt.html` L121–L132, `o-mnie.html` L125–L138 | Wprowadzenie Google w błąd, potencjalny błąd walidacji | Usunięcie bloku `potentialAction` ze schema `WebSite` |
+| P12 | **MEDIUM** | Linkowanie | Tagi artykułów (Ekologia, Brodnica, Srebrny Wilk, itp.) mają `href="#"` i nie prowadzą do żadnych stron kategorii | Wszystkie artykuły, np. `nowe-inicjatywy-na-rzecz-ochrony-zapylaczy.html` L6716–L6721 | Stracona okazja na linkowanie do stron z filtrowaną treścią; tagi jako `<a>` bez celu to anti-pattern SEO | Zmiana na `<span class="tag-item">` (jeśli nie planujemy stron tagów) lub stworzenie stron tagów z listą artykułów |
+| P13 | **MEDIUM** | Obrazy | Wszystkie pliki graficzne w `/public/images/` mają losowe, nieczytelne nazwy (np. `pzhgBM6.webp`, `L5rbn0e.webp`). Google Grafika indeksuje obrazy po nazwie pliku i alt. | Katalog `/public/images/` (44 pliki) | Brak widoczności w Google Grafika dla powiązanych fraz | Systematyczna zmiana nazw na opisowe (np. `zuzanna-czuprynska-portret.webp`) i aktualizacja referencji |
+| P14 | **MEDIUM** | Obrazy | Plik `e66eab26-08a9-48cd-925f.jpeg` to jedyny plik JPEG w projekcie. Reszta to WebP. | `/public/images/e66eab26-08a9-48cd-925f.jpeg` i reference w schema `inicjatywa-brodnica` L79 | Brak optymalizacji formatu; stare JPEG są cięższe | Konwersja do WebP; aktualizacja referencji w schema JSON-LD |
+| P15 | **MEDIUM** | Semantyka | Elementy `<h4>` są używane wewnątrz bloku hero w sekcji Beehouses decoration, bez H2/H3 poprzedzającego | `index.html` L7502 (`<h4>Beehouses Foundation</h4>`) | Złamana hierarchia nagłówków – przeskok H1→H4 | Zamiana na `<p class="decoration-title">` lub odpowiedni `<h3>` po dodaniu H2 sekcji |
+| P16 | **MEDIUM** | Meta | Meta tag `keywords` jest identyczny na wszystkich podstronach – zawiera ten sam zestaw 12 ogólnych fraz | Wszystkie HTML, L33–L34 (lub analogicznie) | Google nie używa `keywords` do rankingu, ale identyczne tagi na wszystkich stronach świadczą o copy-paste, co może utrudnić audyt GSC | Albo usunąć tag keywords ze wszystkich stron, albo dostosować do specyfiki każdej podstrony |
+| P17 | **LOW** | H1 | Nagłówki H1 na stronach głównych/hubowych zawierają ukryty tekst przez CSS clip (`position: absolute; clip: rect(0,0,0,0)`). Choć dostępny dla czytników ekranu, może być flagowany jako hidden text | `index.html` L7476, `o-mnie.html` L6116, `aktualnosci.html` L6229, `fundacja-beehouses.html` L6492 itd. | Ryzyko działania jak cloaking, sprzeczne z wytycznymi Google | Usunięcie ukrytego spanu; użycie naturalnego zdania jako H1 z umieszczonym imieniem/brandingiem w inny sposób |
+| P18 | **LOW** | Dostępność | Logo nawigacyjne (`logotyp.webp`) ma alt `"Zuzanna Maria Czuprynska"` (bez polskich znaków) w wielu plikach | Np. `kontakt.html` L5937, wszystkie artykuły L (nawigacja) | Niespójna transkrypcja znaku ń | Korekta na `"Zuzanna Maria Czupryńska"` (z polskim ń) |
+| P19 | **LOW** | Linki | Marquee (ticker ról) zawiera linki do osób (`Arkadiusz Myrcha`, `Iwona Karolewska`) z `href="#"` zamiast realnych URL (np. do strony wiki lub oficjalnej strony) | `index.html` L7519, L7523 | Stracona okazja na zewnętrzne linkowanie, które sygnalizuje E-E-A-T | Dodanie href do profili publicznych tych osób lub usunięcie `<a>` i zastąpienie `<span>` |
+| P20 | **LOW** | Canonical | `404.html` ma canonical wskazujący na `https://zuzanna-czuprynska.pl/404`. Strony błędów nie powinny mieć canonical (lub canonical powinien wskazywać na `/`). | `404.html` L11 | Niestandardowe, może wprowadzać w błąd | Usunięcie canonical z 404.html |
+| P21 | **LOW** | Bezpieczeństwo | Firebase API key widoczny w HTML (`index.html` L9293). Choć klucze Firebase są z natury "publiczne" (działają po stronie klienta), warto zabezpieczyć dostęp przez Firebase Security Rules | `index.html` L9292–L9299 | Ryzyko nadużycia zasobów Firebase bez właściwych reguł | Weryfikacja, czy Firestore Security Rules są poprawnie skonfigurowane (sprawdzić w Firebase Console) |
+| P22 | **INFO** | Indeksowanie | Wszystkie `lastmod` w sitemap.xml mają datę `2026-07-01` (prawdopodobnie aktualizowane ręcznie lub ustawione na jeden dzień) | `sitemap.xml` L5, L11, L17, itd. | Google może ignorować lastmod jeśli wszystkie strony mają tę samą datę | Ustawienie lastmod na faktyczną datę ostatniej modyfikacji treści |
+| P23 | **INFO** | Hreflang | Strona posiada przełącznik językowy (PL/EN) w JS, ale brak tagów `hreflang` w HTML. Google nie wie, że istnieje wersja angielska. | Brak tagów `<link rel="alternate" hreflang="pl">` w `<head>` | Jeśli tłumaczenia angielskie są dostępne pod oddzielnym URL, Google nie może ich powiązać | Jeśli EN to tylko tłumaczenie UI bez zmiany URL – dodać `hreflang="x-default"` i nie dodawać EN hreflang. Jeśli EN ma inny URL – wdrożyć pełny hreflang. |
+| P24 | **INFO** | Treści | Artykuł `udzial-w-pracach-nad-narodowym-programem-lesnym.html` używa zewnętrznego obrazu hero z innej domeny (`tapetuj.pl`) | `udzial-w-pracach-nad-narodowym-programem-lesnym.html` L6550 | Zależność zewnętrzna, ryzyko 404 obrazu, wolniejsze ładowanie | Pobranie obrazu i dodanie do katalogu `/public/images/` |
+
+---
+
+## D. Quick wins
+
+| # | Zmiana | Wpływ | Trudność |
+|---|---|---|---|
+| 1 | Naprawa canonical w `fundacja-beehouses.html` i `rekrutacja-do-fundacji-beehouses.html` | Krytyczny (indeksowanie) | 5 min |
+| 2 | Zmiana wszystkich `og:image` i `twitter:image` na adresy absolutne | Wysoki (social media CTR) | 15 min (find & replace) |
+| 3 | Ekstrakcja inline CSS do pliku `/style.css` | Krytyczny (PageSpeed, LCP) | 30–60 min |
+| 4 | Usunięcie bezpośredniego kodu gtag.js (zostawienie tylko GTM) | Wysoki (wydajność, rzetelność danych) | 10 min |
+| 5 | Dodanie `noindex` do `stopka-mailowa.html` | Średni (crawl budget) | 2 min |
+| 6 | Dodanie `defer` do tagów Three.js | Wysoki (TBT, INP) | 5 min |
+| 7 | Naprawa altów logo nawigacyjnego (`Czuprynska` → `Czupryńska`) | Niski (dostępność) | 5 min (find & replace) |
+| 8 | Zmiana linków w nawigacji z `.html` na czyste ścieżki (`/fundacja-beehouses`) | Wysoki (spójność linków) | 20 min |
+| 9 | Zmiana ścieżek w JSON-LD image/logo na absolutne | Średni (Rich Results) | 10 min |
+| 10 | Usunięcie `SearchAction` z schema WebSite (strona nie ma wyszukiwarki) | Średni (błąd walidacji) | 5 min |
+
+---
+
+## E. Problemy krytyczne
+
+1. **[P01] Inline CSS** – 300 KB CSS w każdym HTML-u blokuje renderowanie i zabija metryki Core Web Vitals.
+2. **[P02, P03] Błędne canonical** – prowadzą do stron 404, Google ignoruje wskazanie canonical.
+3. **[P04] Relative og:image** – brak miniatur przy udostępnianiu linków w social mediach.
+4. **[P06, P07] Three.js + model 3D 7.5 MB** – dramatyczne spowolnienie strony głównej, szczególnie na mobile.
+
+---
+
+## F. Mapa podstron
+
+| URL | Typ | Intencja | Główna fraza | Title (obecny) | H1 (obecny) | Canonical (obecny) | Poprawność | Uwagi |
+|---|---|---|---|---|---|---|---|---|
+| `/` | Główna | Brandowa/nawigacyjna | Zuzanna Czupryńska | Zuzanna Czupryńska – Głos nowego pokolenia w polityce | "Przyszłość buduje się od natury" (z ukrytym "Zuzanna Czupryńska -") | `/` ✅ | ✅ Poprawny | Inline CSS, Three.js |
+| `/o-mnie` | Profil | Informacyjna | kim jest Zuzanna Czupryńska | O mnie \| Zuzanna Czupryńska | "Kim jestem?" | `/o-mnie` ✅ | ✅ Poprawny | Ukryty tekst w H1 |
+| `/fundacja-beehouses` | NGO | Informacyjna | Beehouses Foundation | Fundacja Beehouses \| Zuzanna Czupryńska | "Fundacja Beehouses" | ❌ `/fundacja` (404) | **BŁĄD canonical** | |
+| `/rekrutacja-do-fundacji-beehouses` | Rekrutacja | Transakcyjna | Beehouses rekrutacja | Rekrutacja do fundacji \| Zuzanna Czupryńska | "Rekrutacja Beehouses Foundation" | ❌ `/rekrutacja` (404) | **BŁĄD canonical** | |
+| `/aktualnosci` | Hub bloga | Nawigacyjna | aktualności Zuzanny Czupryńskiej | Aktualności \| Zuzanna Czupryńska | "Aktualne inicjatywy" | `/aktualnosci` ✅ | ✅ Poprawny | Posty ładowane z Firestore przez JS |
+| `/kontakt` | Kontakt | Transakcyjna | kontakt Zuzanna Czupryńska | Kontakt \| Zuzanna Czupryńska | "Porozmawiajmy razem" | `/kontakt` ✅ | ✅ Poprawny | |
+| `/inicjatywa-brodnica-beehouses-z-nagroda-srebrnego-wilka` | Artykuł | Informacyjna | Brodnica Beehouses Srebrny Wilk | Beehouses z nagrodą Srebrnego Wilka... | "Inicjatywa Brodnica Beehouses z nagrodą..." | `/inicjatywa-brodnica...` ✅ | ✅ Poprawny | |
+| `/konferencja-energia-przyszlosci` | Artykuł | Informacyjna | konferencja OZE | Konferencja Energia Przyszłości | "Wystąpienie na konferencji Energia Przyszłości" | `/konferencja-energia-przyszlosci` ✅ | ✅ Poprawny | |
+| `/nowe-inicjatywy-na-rzecz-ochrony-zapylaczy` | Artykuł | Informacyjna | ochrona zapylaczy | Ochrona zapylaczy — nowe inicjatywy | "Nowe inicjatywy na rzecz ochrony zapylaczy" | `/nowe-inicjatywy...` ✅ | ✅ Poprawny | |
+| `/projekt-brodnica-beehouses-2025-edukacja-o-zapylaczach` | Artykuł | Informacyjna | projekt Beehouses 2025 | Projekt Brodnica Beehouses 2025 | "Projekt Brodnica Beehouses 2025 – Edukacja o zapylaczach" | `/projekt-brodnica...` ✅ | ✅ Poprawny | |
+| `/sekretarz-sejmiku` | Artykuł | Informacyjna | Sekretarz Sejmiku Kujawsko-Pomorskiego | Sekretarz Sejmiku Kujawsko-Pomorskiego | "Objęcie stanowiska Sekretarza Młodzieżowego Sejmiku..." | `/sekretarz-sejmiku` ✅ | ✅ Poprawny | |
+| `/udzial-w-pracach-nad-narodowym-programem-lesnym` | Artykuł | Informacyjna | Narodowy Program Leśny | Narodowy Program Leśny \| Zuzanna Czupryńska | "Udział w pracach nad Narodowym Programem Leśnym" | `/udzial-w-pracach...` ✅ | ✅ Poprawny | Zewnętrzny obraz hero |
+| `/warsztaty-pszczelarskie-w-ramach-projektu-beehouses-v2` | Artykuł | Informacyjna | warsztaty pszczelarskie Beehouses | Warsztaty pszczelarskie Beehouses v2 | "Warsztaty pszczelarskie w ramach projektu Beehouses v2" | `/warsztaty-pszczelarskie...` ✅ | ✅ Poprawny | |
+| `/polityka-prywatnosci` | Prawna | — | — | Polityka prywatności \| Posłanka... | "Polityka Prywatności" | `/polityka-prywatnosci` ✅ | ✅ Poprawny | |
+| `/cookies` | Prawna | — | — | Polityka cookies \| Posłanka... | "Polityka Cookies" | `/cookies` ✅ | ✅ Poprawny | |
+| `/stopka-mailowa` | ⚠️ Techniczna | — | — | Stopka Mailowa - Posłanka... | Brak | Brak | ⚠️ Brak noindex | Powinno być noindex |
+
+---
+
+## G. Proponowane title i meta description
+
+| URL | Obecny title | Dług. | Proponowany title | Dług. |
+|---|---|---|---|---|
+| `/` | Zuzanna Czupryńska – Głos nowego pokolenia w polityce | 52 | Zuzanna Czupryńska – Polityka, Ekologia, Beehouses Foundation | 59 |
+| `/o-mnie` | O mnie \| Zuzanna Czupryńska | 26 | Kim jest Zuzanna Czupryńska? Sekretarz Sejmiku, Fundatorka Beehouses | 66 |
+| `/fundacja-beehouses` | Fundacja Beehouses \| Zuzanna Czupryńska | 39 | Beehouses Foundation – Fundacja Ekologiczna Zuzanny Czupryńskiej | 64 |
+| `/rekrutacja-do-fundacji-beehouses` | Rekrutacja do fundacji \| Zuzanna Czupryńska | 43 | Rekrutacja do Beehouses Foundation – Dołącz do Naszego Zespołu | 63 |
+| `/aktualnosci` | Aktualności \| Zuzanna Czupryńska | 33 | Aktualności – Projekty, Wystąpienia i Inicjatywy Zuzanny Czupryńskiej | 68 |
+| `/kontakt` | Kontakt \| Zuzanna Czupryńska | 29 | Kontakt – Zuzanna Czupryńska \| Współpraca, Media, Projekty | 58 |
+| `/sekretarz-sejmiku` | Sekretarz Sejmiku Kujawsko-Pomorskiego \| Zuzanna Czupryńska | 55 | Zuzanna Czupryńska – Sekretarz Młodzieżowego Sejmiku Woj. K-P | 63 |
+
+| URL | Obecny description | Proponowany description | Dl. |
+|---|---|---|---|
+| `/` | Zuzanna Czupryńska – Sekretarz Sejmiku K-P, założycielka Beehouses Foundation. Głos młodego pokolenia w polityce i ekologii. | Zuzanna Czupryńska – Sekretarz Młodzieżowego Sejmiku Woj. Kujawsko-Pomorskiego i założycielka Beehouses Foundation. Działam na rzecz ekologii, edukacji i praw młodzieży w Polsce. | 162 |
+| `/fundacja-beehouses` | Beehouses Foundation to fundacja założona przez Zuzannę Czupryńską. Wspieramy edukację ekologiczną, ochronę zapylaczy i bioróżnorodność w Polsce. | Beehouses Foundation – organizacja ekologiczna założona przez Zuzannę Czupryńską. Chronimy zapylacze, prowadzimy warsztaty i projekty edukacyjne dla młodzieży w Polsce. | 168 |
+| `/rekrutacja-do-fundacji-beehouses` | Dołącz do Beehouses Foundation! Współtwórz lokalne i ogólnopolskie projekty ekologiczne razem z Zuzanną Czupryńską i naszym zespołem. | Chcesz działać na rzecz środowiska? Dołącz do Beehouses Foundation – współtwórz projekty ekologiczne, warsztaty i inicjatywy z Zuzanną Czupryńską. Sprawdź warunki rekrutacji. | 178 |
+
+---
+
+## H. Proponowana hierarchia nagłówków
+
+### `/` – Strona główna (obecna: H1→H4, brak H2 sekcji)
 ```
-- **Automatyczna poprawka:** Tak
-
----
-
-### PROBLEM 3 — sekretarz-sejmiku brakuje w sitemap.xml
-
-- **Priorytet:** KRYTYCZNY
-- **Kategoria:** Crawlability
-- **Plik:** `public/sitemap.xml`
-- **Opis:** Strona `sekretarz-sejmiku.html` istnieje i jest linkowana z index.html, ale brakuje jej w sitemap.xml.
-- **Wpływ na SEO:** Opóźnione lub nieskuteczne indeksowanie
-- **Rekomendacja:** Dodać wpis:
-```xml
-<url>
-    <loc>https://zuzanna-czuprynska.pl/sekretarz-sejmiku</loc>
-    <lastmod>2025-06-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-</url>
+H1: Zuzanna Czupryńska – Przyszłość buduje się od natury
+  H2: O mnie – głos młodego pokolenia w debacie o przyszłości
+  H2: Moje role i zaangażowanie  
+  H2: Fundacja Beehouses
+    H3: Czym się zajmujemy
+    H3: Nasze projekty
+  H2: Postulaty i priorytety
+  H2: Harmonogram wydarzeń
+  H2: Aktualności
+  H2: Wystąpienia publiczne
 ```
-- **Automatyczna poprawka:** Tak
 
----
-
-### PROBLEM 4 — Linki do fundacja.html i rekrutacja.html w nawigacji
-
-- **Priorytet:** KRYTYCZNY
-- **Kategoria:** URL / Linkowanie wewnętrzne
-- **Plik:** Wszystkie HTML: `index.html` L7371-7372, `o-mnie.html` L5934-5935, `fundacja.html` L6313-6314, artykuły, polityka-prywatnosci, sekretarz-sejmiku
-- **Opis:** Dropdown nawigacyjny linkuje przez `fundacja.html` i `rekrutacja.html` zamiast `/fundacja` i `/rekrutacja`. Generuje niepotrzebne przekierowania 301 (cleanUrls: true). Footer używa poprawnych URL — niespójność.
-- **Wpływ na SEO:** Straty link equity, niespójne sygnały dla Googlebota
-- **Rekomendacja:** Zamienić wszystkie: `href="fundacja.html"` → `href="/fundacja"`, `href="rekrutacja.html"` → `href="/rekrutacja"`
-- **Automatyczna poprawka:** Tak (find & replace)
-
----
-
-### PROBLEM 5 — Flyingbee.glb (8,5 MB) + Three.js bez defer
-
-- **Priorytet:** KRYTYCZNY
-- **Kategoria:** Wydajność / Core Web Vitals
-- **Plik:** `public/index.html`, linie 9978–9979 i 10170+
-- **Opis:** Dwa pliki Three.js ładowane bez `defer`. Plik `Flyingbee.glb` waży 8,5 MB — przy słabym łączu (mobilnym) może opóźniać ładowanie całej strony.
-- **Wpływ na SEO:** Degradacja LCP, INP, TBT
-- **Rekomendacja:**
-  1. Dodać `defer` do obu tagów `<script src="...three...">` 
-  2. Załadować model GLB przez IntersectionObserver (gdy sekcja wchodzi w viewport)
-  3. Skompresować model GLB narzędziem `gltf-pipeline` lub Draco (cel: < 1 MB)
-- **Automatyczna poprawka:** Częściowo (defer — tak; kompresja GLB — nie)
-
----
-
-### PROBLEM 6 — Wszystkie obrazy hostowane na imgur.com
-
-- **Priorytet:** KRYTYCZNY
-- **Kategoria:** Obrazy / Wydajność
-- **Plik:** `public/index.html` (36 instancji), wszystkie podstrony
-- **Opis:** Kluczowe zdjęcia (portrait hero, logo Beehouses, galeria) hostowane na `i.imgur.com`. Imgur nie gwarantuje SLA, nie obsługuje WebP/AVIF per-request, brak kontroli nagłówków cache. Jeden obraz pochodzi z `tapetuj.pl`, inny z sejmiku kujawsko-pomorskiego.
-- **Wpływ na SEO:** Brak kontroli LCP image, ryzyko broken images
-- **Rekomendacja:** Przenieść do `/public/images/` lub użyć Cloudflare Images / Vercel Image Optimization
-- **Automatyczna poprawka:** Nie
-
----
-
-### PROBLEM 7 — Brak preload dla obrazu LCP (hero)
-
-- **Priorytet:** KRYTYCZNY
-- **Kategoria:** Wydajność / LCP
-- **Plik:** `public/index.html`, linia 7554
-- **Opis:** Obraz hero ma `fetchpriority="high"` i `decoding="async"`, ale brakuje `<link rel="preload">` w `<head>`. Przeglądarka odkrywa ten obraz dopiero po sparsowaniu 362 KB HTML.
-- **Wpływ na SEO:** LCP prawdopodobnie > 2.5s
-- **Rekomendacja:**
-```html
-<link rel="preload" as="image" href="/images/hero-portrait.jpg" fetchpriority="high">
-<link rel="preconnect" href="https://i.imgur.com">
+### `/o-mnie` – O mnie (obecna: H1→brak H2)
 ```
-- **Automatyczna poprawka:** Tak (po przeniesieniu obrazu na własny hosting)
+H1: Kim jest Zuzanna Czupryńska?
+  H2: Moja droga – od Brodnicy do ogólnopolskiej polityki
+  H2: Funkcje i doświadczenie
+  H2: Wartości i priorytety
+```
+
+### `/fundacja-beehouses` (obecna: H1→brak struktury)
+```
+H1: Fundacja Beehouses – ekologia i edukacja w działaniu
+  H2: Czym jest Beehouses Foundation?
+  H2: Nasze projekty i inicjatywy
+  H2: Jak możesz dołączyć?
+```
 
 ---
 
-### PROBLEM 8 — favicon.svg (480 KB) i favicon.png (360 KB)
+## I. Linkowanie wewnętrzne
 
-- **Priorytet:** WYSOKI
-- **Kategoria:** Wydajność
-- **Plik:** `public/favicon.svg`, `public/favicon.png`
-- **Opis:** Faviconа SVG waży 480 KB, PNG 360 KB — typowo powinny to być pliki < 2 KB (SVG) i < 5 KB (PNG).
-- **Wpływ na SEO:** Zbędny transfer danych przy każdej wizycie
-- **Rekomendacja:** Wygenerować prawidłowe favicony przez np. favicon.io lub realfavicongenerator.net
-- **Automatyczna poprawka:** Nie
-
----
-
-### PROBLEM 9 — Niespójność jobTitle w Schema.org
-
-- **Priorytet:** WYSOKI
-- **Kategoria:** Dane strukturalne
-- **Plik:** `public/index.html`, linia 86
-- **Opis:** `Person.jobTitle` = "Posłanka IX Kadencji Parlamentu Młodych RP", natomiast meta description mówi "Sekretarz Młodzieżowego Sejmiku Kujawsko-Pomorskiego". Niespójność może powodować odrzucenie rich results.
-- **Wpływ na SEO:** Ryzyko błędów w Google Search Console
-- **Rekomendacja:** Ujednolicić jobTitle po weryfikacji aktualnego stanowiska — zaktualizować we wszystkich miejscach
-- **Automatyczna poprawka:** Nie (wymaga decyzji merytorycznej)
+| Strona źródłowa | Strona docelowa | Anchor | Miejsce umieszczenia | Uzasadnienie |
+|---|---|---|---|---|
+| Wszystkie artykuły o Beehouses | `/fundacja-beehouses` | `Beehouses Foundation` / `dowiedz się więcej o fundacji` | Pierwszy akapit treści | Buduje autorytet strony fundacji, naturalne linkowanie kontekstowe |
+| `/fundacja-beehouses` | `/rekrutacja-do-fundacji-beehouses` | `Dołącz do naszego zespołu` | CTA pod opisem fundacji | Naturalna ścieżka konwersji |
+| `/aktualnosci` | Każdy artykuł | Tytuł artykułu | Lista artykułów na stronie | Już istnieje, do utrzymania |
+| Artykuły o Beehouses | `/aktualnosci` | `więcej aktualności` | Footer artykułu | Nawigacja powrotna do huba |
+| `/` (strona główna) | `/sekretarz-sejmiku` | `Sekretarz Sejmiku Kujawsko-Pomorskiego` | Sekcja ról / timeline | Artykuł osiągnięcia jest w sitemapie, ale brak linku z głównej |
+| `/o-mnie` | `/kontakt` | `Skontaktuj się ze mną` | Dolna sekcja strony | Ścieżka konwersji: poznaj → skontaktuj się |
+| `/kontakt` | `/polityka-prywatnosci` | `Polityka prywatności` | Przy formularzu | Już istnieje (w stopce), wzmocnić przy formularzu |
 
 ---
 
-### PROBLEM 10 — Fałszywa SearchAction w WebSite schema
+## J. Obrazy
 
-- **Priorytet:** WYSOKI
-- **Kategoria:** Dane strukturalne
-- **Plik:** `public/index.html`, linia 133–137
-- **Opis:** Schema WebSite zawiera `potentialAction: SearchAction` z targetem `/?s={search_term_string}`. Strona nie posiada funkcji wyszukiwania. To fałszywe dane strukturalne niezgodne z wytycznymi Google.
-- **Wpływ na SEO:** Ryzyko penalizacji za nieprawdziwe dane strukturalne
-- **Rekomendacja:** Usunąć cały blok `"potentialAction": {...}` z WebSite schema
-- **Automatyczna poprawka:** Tak
+| Plik | Problem | Format | Rozmiar | Alt (obecny) | Proponowany alt | Priorytet |
+|---|---|---|---|---|---|---|
+| `images/pzhgBM6.webp` | Losowa nazwa | WebP ✅ | 79 KB | "Zuzanna Czupryńska Portret" | `Zuzanna Czupryńska – portret oficjalny` | HIGH |
+| `images/L5rbn0e.webp` | Losowa nazwa, duży rozmiar | WebP ✅ | **715 KB** | "Nowe inicjatywy na rzecz ochrony zapylaczy" | `Zuzanna Czupryńska podczas inicjatywy ochrony zapylaczy` | HIGH |
+| `images/LWGQw9V.webp` | Losowa nazwa, bardzo duży rozmiar | WebP ✅ | **1.4 MB** | nieznany | Wymaga zbadania kontekstu użycia | CRITICAL |
+| `images/e0lLmNt.webp` | Losowa nazwa | WebP ✅ | 380 KB | "Warsztaty pszczelarskie Beehouses" | `Uczestnicy warsztatów pszczelarskich Beehouses` | MEDIUM |
+| `images/rmV5MvN.webp` | Losowa nazwa | WebP ✅ | 266 KB | "Statuetka Srebrnego Wilka" | `Statuetka nagrody Srebrnego Wilka – projekt Brodnica Beehouses` | MEDIUM |
+| `images/e66eab26...jpeg` | Format JPEG (stary) | JPEG ❌ | 6.6 KB | nieznany | Konwertuj do WebP | MEDIUM |
+| `images/ICyowxn.webp` | Losowa nazwa, duży rozmiar | WebP ✅ | 256 KB | "Warsztaty edukacyjne Brodnica Beehouses 2025" | `Warsztaty edukacyjne Brodnica Beehouses 2025` ✅ (dobry) | LOW |
+| `logotyp.webp` | Alt bez polskich znaków (`Czuprynska`) | WebP ✅ | 200 KB | "Zuzanna Maria Czuprynska" ❌ | `Zuzanna Maria Czupryńska – logotyp` | LOW |
+| `Flyingbee.glb` | Model 3D w GLB, 7.5 MB, ładowany na każdym pageview | GLB | **7.5 MB** | Nie dotyczy | Optymalizacja/kompresja Draco wymagana | CRITICAL |
 
 ---
 
-### PROBLEM 11 — Brak BreadcrumbList na stronach artykułowych
+## K. Dane strukturalne
 
-- **Priorytet:** WYSOKI
-- **Kategoria:** Dane strukturalne / Rich Results
-- **Plik:** 6 artykułów HTML (inicjatywa-brodnica..., konferencja-energia..., nowe-inicjatywy..., projekt-brodnica..., udzial-w-pracach..., warsztaty-pszczelarskie...)
-- **Opis:** Breadcrumb wizualny w HTML istnieje, ale brak odpowiadającego `BreadcrumbList` w JSON-LD. Blokuje to wyświetlanie breadcrumbs w SERP.
-- **Wpływ na SEO:** Niezrealizowany potencjał na rich results i wyższy CTR
-- **Rekomendacja:**
-```html
-<script type="application/ld+json">
+### Obecna architektura JSON-LD
+
+| Strona | Typy Schema | Status |
+|---|---|---|
+| `/` | `Person`, `WebSite`, `Organization` | ⚠️ Relative URLs w image/logo |
+| `/o-mnie` | `Person`, `WebSite`, `Organization` | ⚠️ Jak wyżej |
+| `/aktualnosci` | `Person`, `WebSite` (z błędnym `SearchAction`), `Organization` | ⚠️ SearchAction nieuzasadniony |
+| `/kontakt` | `Person`, `WebSite` (z SearchAction), `Organization` | ⚠️ SearchAction nieuzasadniony |
+| `/fundacja-beehouses` | `Person`, `WebSite`, `Organization` | ✅ Logicznie odpowiedni |
+| `/rekrutacja-do-fundacji-beehouses` | `Person`, `WebSite`, `Organization` | ✅ |
+| Artykuły | `NewsArticle` | ⚠️ Relative URL w image; brak `description` i `publisher` |
+
+### Brakujące typy
+
+- **`BreadcrumbList`** – brak na artykułach (mimo sekcji breadcrumb widocznej na stronie)
+- **`ContactPage`** – strona kontaktowa powinna mieć schema `ContactPage`
+- **`AboutPage`** – strona `/o-mnie` powinna mieć schema `AboutPage`
+
+### Rekomendowana struktura dla artykułów (przykład)
+
+```json
+{
+  "@context": "https://schema.org",
+  "@type": "NewsArticle",
+  "headline": "Inicjatywa Brodnica Beehouses z nagrodą Srebrnego Wilka",
+  "image": ["https://zuzanna-czuprynska.pl/images/rmV5MvN.webp"],
+  "datePublished": "2025-05-25T08:00:00+02:00",
+  "dateModified": "2025-05-25T08:00:00+02:00",
+  "description": "Projekt Brodnica Beehouses zdobył nagrodę Srebrnego Wilka w olimpiadzie Zwolnieni z Teorii.",
+  "author": [{
+    "@type": "Person",
+    "name": "Zuzanna Maria Czupryńska",
+    "url": "https://zuzanna-czuprynska.pl"
+  }],
+  "publisher": {
+    "@type": "Organization",
+    "name": "Zuzanna Maria Czupryńska",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://zuzanna-czuprynska.pl/logotyp.webp"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://zuzanna-czuprynska.pl/inicjatywa-brodnica-beehouses-z-nagroda-srebrnego-wilka"
+  }
+}
+```
+
+### Rekomendowana struktura BreadcrumbList (artykuły)
+
+```json
 {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   "itemListElement": [
     {"@type": "ListItem", "position": 1, "name": "Strona główna", "item": "https://zuzanna-czuprynska.pl/"},
     {"@type": "ListItem", "position": 2, "name": "Aktualności", "item": "https://zuzanna-czuprynska.pl/aktualnosci"},
-    {"@type": "ListItem", "position": 3, "name": "[Tytuł artykułu]"}
+    {"@type": "ListItem", "position": 3, "name": "Inicjatywa Brodnica Beehouses z nagrodą Srebrnego Wilka", "item": "https://zuzanna-czuprynska.pl/inicjatywa-brodnica-beehouses-z-nagroda-srebrnego-wilka"}
   ]
 }
-</script>
 ```
-- **Automatyczna poprawka:** Tak (skrypt generujący per-plik)
 
 ---
 
-### PROBLEM 12 — form-mailer.js i Three.js bez defer
+## L. Core Web Vitals
 
-- **Priorytet:** WYSOKI
-- **Kategoria:** Wydajność / JavaScript SEO
-- **Plik:** `public/index.html`, linia 9367 (`form-mailer.js`), linie 9978–9979 (Three.js)
-- **Opis:** `form-mailer.js` (24 KB) i skrypty Three.js (~600 KB z CDN) ładowane bez `defer`/`async`, blokując parser HTML. Jedynie `site-language.js` ma `defer`.
-- **Wpływ na SEO:** Zwiększony TBT, degradacja INP
-- **Rekomendacja:** Dodać `defer` do obu skryptów:
-```html
-<script src="form-mailer.js?v=resend-8" defer></script>
-<script src="https://cdn.jsdelivr.net/.../three.min.js" defer></script>
-```
-- **Automatyczna poprawka:** Tak
+### LCP (Largest Contentful Paint)
 
----
+**Element LCP:** Prawdopodobnie `<img src="/images/pzhgBM6.webp">` (hero portrait) na stronie głównej.
 
-### PROBLEM 13 — Brak og:image:alt na artykułach
+- ✅ Preload jest wdrożony: `<link rel="preload" as="image" href="/images/pzhgBM6.webp">`
+- ✅ `fetchpriority="high"` na img
+- ❌ Ale: przeglądarka musi najpierw pobrać cały HTML (~360 KB z CSS), żeby znaleźć `<link rel="preload">` w `<head>`. Ekstrakcja CSS skróci czas parsowania HTML do ~20–40 KB, co przyspieszy dotarcie do preload i samego LCP o 1–3 sekundy.
+- ❌ Na stronach artykułów brak preload dla hero image artykułu.
 
-- **Priorytet:** WYSOKI
-- **Kategoria:** Open Graph
-- **Plik:** `sekretarz-sejmiku.html`, `inicjatywa-brodnica-beehouses-z-nagroda-srebrnego-wilka.html` i inne
-- **Opis:** Większość stron artykułowych nie posiada `og:image:alt`. Wymagane przez WCAG 2.1, zalecane przez Facebook/LinkedIn.
-- **Wpływ na SEO:** Dostępność, jakość social sharing
-- **Rekomendacja:** Dodać `<meta property="og:image:alt" content="Opis zdjęcia">` dla każdej strony
-- **Automatyczna poprawka:** Tak
+**Naprawa:** Ekstrakcja CSS (P01) + dodanie `<link rel="preload" as="image" href="[hero_article_image]">` na każdej stronie artykułu.
 
----
+### CLS (Cumulative Layout Shift)
 
-### PROBLEM 14 — Przełącznik języka EN bez hreflang; site-language.js 132 KB
+- ✅ Większość obrazów ma `width` i `height` – dobra praktyka zapobiegająca CLS.
+- ⚠️ `kontakt.html` L6323–L6329: obrazy w galerii bez `width`/`height` – ryzyko CLS.
+- ⚠️ Cookie banner pojawia się z opóźnieniem (setTimeout 500ms) – potencjalny CLS jeśli pojawi się nad treścią.
 
-- **Priorytet:** WYSOKI
-- **Kategoria:** Internacjonalizacja / JavaScript SEO
-- **Plik:** `public/site-language.js`, wszystkie HTML
-- **Opis:** Tłumaczenie EN/PL realizowane przez JavaScript (132 KB słownik ładowany dla WSZYSTKICH). Googlebot widzi tylko wersję PL. Brak `hreflang`. Jeśli Google zindeksuje wersję EN, może traktować ją jako duplikat.
-- **Wpływ na SEO:** Potencjalne duplikaty, blokowanie 132 KB JS
-- **Rekomendacja:** Decyzja architektoniczna: (a) oddzielne pliki HTML per język z hreflang, lub (b) oznaczenie EN jako dekoracyjnego bez indeksowania. Niezależnie — plik site-language.js powinien być dzielony per-strona.
-- **Automatyczna poprawka:** Nie
+### INP (Interaction to Next Paint)
+
+- ❌ `page-transition.js` dodaje 650ms opóźnienia nawigacji (line 86: `setTimeout(() => window.location.href = targetUrl, 650)`). Każde kliknięcie linku wewnętrznego czeka 650ms. To **bardzo wysoki TBT** dla użytkowników mobilnych.
+- ❌ Three.js + GLTFLoader ładowane synchronicznie na stronie głównej blokują główny wątek.
+- ⚠️ Firebase SDK ładowany przez `<script type="module">` – asynchroniczny, mniejszy problem.
+
+**Naprawa:** `defer` na Three.js; rozważenie skrócenia `setTimeout` w `page-transition.js` lub zastąpienia `View Transitions API`.
 
 ---
 
-### PROBLEM 15 — insta-grid.png (1,8 MB) w katalogu public
+## M. Plan wdrożenia
 
-- **Priorytet:** WYSOKI
-- **Kategoria:** Obrazy / Wydajność
-- **Plik:** `public/insta-grid.png`
-- **Opis:** PNG 1,8 MB — potencjalnie nieużywany (Instagram grid ładowany przez JS z imgur). Weryfikacja wymagana.
-- **Wpływ na SEO:** Niepotrzebny zasób w deploymencie
-- **Rekomendacja:** Zweryfikować użycie i usunąć jeśli nieużywany; jeśli używany — przekonwertować do WebP
-- **Automatyczna poprawka:** Nie
+### Etap 1 – Problemy krytyczne (czas: 1–2 dni)
+1. [P01] Ekstrakcja inline CSS do `/style.css` (wszystkie strony)
+2. [P02, P03] Naprawa canonical i og:url w `fundacja-beehouses.html` i `rekrutacja-do-fundacji-beehouses.html`
+3. [P04] Naprawa relative og:image na absolute URL we wszystkich plikach
+4. [P05] Naprawa linków nawigacyjnych z `.html` na czyste ścieżki
 
----
+### Etap 2 – Najważniejsze poprawki SEO (czas: 2–3 dni)
+5. [P08] Usunięcie duplikatu gtag.js (tylko GTM)
+6. [P06] Dodanie `defer` do skryptów Three.js
+7. [P09] Dodanie `noindex` do `stopka-mailowa.html`
+8. [P10] Naprawa ścieżek w JSON-LD (relative → absolute)
+9. [P11] Usunięcie błędnego `SearchAction` ze schema WebSite
+10. [P17] Usunięcie ukrytego tekstu z H1 na stronach głównych
 
-### PROBLEM 16 — Meta description strony głównej — niska jakość marketingowa
+### Etap 3 – Wydajność (czas: 3–5 dni)
+11. [P07] Optymalizacja modelu 3D Flyingbee.glb (Draco compression, lazy load)
+12. [P13] Zmiana nazw obrazów WebP na opisowe + aktualizacja referencji
+13. [P14] Konwersja JPEG do WebP
+14. Dodanie preload hero na podstronach artykułów
+15. Optymalizacja Cookie Banner (unikanie CLS)
 
-- **Priorytet:** ŚREDNI
-- **Kategoria:** Meta tagi / CTR
-- **Plik:** `public/index.html`, linia 29–30
-- **Opis:** „Oficjalna strona internetowa..." — opis suchy, biurokratyczny, bez CTA, niespójny z tytułem „Głos nowego pokolenia w polityce".
-- **Wpływ na SEO:** Niski CTR
-- **Rekomendacja:** Przepisać na: „Zuzanna Czupryńska — Sekretarz Sejmiku Kujawsko-Pomorskiego, założycielka Beehouses Foundation i głos młodego pokolenia w polskiej polityce. Poznaj jej działania na rzecz ekologii."
-- **Automatyczna poprawka:** Nie
+### Etap 4 – Rozwój treści i schema (czas: 1–2 tygodnie)
+16. Dodanie `BreadcrumbList` do artykułów
+17. Uzupełnienie schema `NewsArticle` (publisher, description, absolutne URL)
+18. Dodanie `ContactPage` schema do `/kontakt`
+19. Dodanie `AboutPage` schema do `/o-mnie`
+20. Uzupełnienie linkowania wewnętrznego kontekstowego
+21. Rozważenie stron z tagami (zamiast `href="#"`)
 
----
-
-### PROBLEM 17 — Tytuły podstron za długie (105–106 znaków)
-
-- **Priorytet:** ŚREDNI
-- **Kategoria:** Meta tagi
-- **Plik:** `sekretarz-sejmiku.html` (106 znaków), `inicjatywa-brodnica-beehouses-z-nagroda-srebrnego-wilka.html` (105 znaków), inne przekraczające 80 znaków
-- **Opis:** Sufiks „| Posłanka, Liderka i Założycielka Beehouses Foundation" (40+ znaków) pochłania cały limit tytułu. Tytuły > 60 znaków będą obcinane w SERP.
-- **Wpływ na SEO:** Obcięty snippet w wynikach wyszukiwania
-- **Rekomendacja:** Skrócić sufiks do `| Zuzanna Czupryńska`. Cel: < 60 znaków łącznie.
-- **Automatyczna poprawka:** Nie
-
----
-
-### PROBLEM 18 — Meta description sekretarz-sejmiku.html (299 znaków)
-
-- **Priorytet:** ŚREDNI
-- **Kategoria:** Meta tagi
-- **Plik:** `public/sekretarz-sejmiku.html`, linia 24
-- **Opis:** 299 znaków — ponad dwukrotnie więcej niż zalecane 155–160 znaków. Pisana w pierwszej osobie — nienaturalne jako snippet SERP.
-- **Wpływ na SEO:** Obcięty snippet, zły CTR
-- **Rekomendacja:** Skrócić do 150 znaków, pisać w trzeciej osobie
-- **Automatyczna poprawka:** Nie
+### Etap 5 – Monitoring (ciągły)
+22. Podpięcie Google Search Console i oczekiwanie na ponowną indeksację po naprawie canonical
+23. Konfiguracja alertów w GSC (błędy indeksowania)
+24. Testy PageSpeed Insights po ekstrakcji CSS
+25. Testy Facebook Sharing Debugger po naprawie og:image
 
 ---
 
-### PROBLEM 19 — Brak preconnect dla imgur i cdnjs
+## N. Elementy wymagające danych zewnętrznych
 
-- **Priorytet:** ŚREDNI
-- **Kategoria:** Wydajność / Resource Hints
-- **Plik:** `public/index.html`, sekcja head
-- **Opis:** Brakuje `preconnect` lub `dns-prefetch` dla `i.imgur.com`, `cdnjs.cloudflare.com`, `cdn.jsdelivr.net` — domen, z których pobierane są kluczowe zasoby.
-- **Wpływ na SEO:** Wolniejszy TTFB dla zewnętrznych zasobów
-- **Rekomendacja:**
-```html
-<link rel="preconnect" href="https://i.imgur.com">
-<link rel="preconnect" href="https://cdnjs.cloudflare.com">
-<link rel="preconnect" href="https://cdn.jsdelivr.net">
-```
-- **Automatyczna poprawka:** Tak
-
----
-
-### PROBLEM 20 — Hierarchia nagłówków H1→H3→H4 bez H2
-
-- **Priorytet:** ŚREDNI
-- **Kategoria:** Semantyka
-- **Plik:** `public/index.html`, linie 7580–7628 (sekcja hero)
-- **Opis:** W sekcji hero używane są `<h3>` (Asystentka wiceministra, Parlamentarzystka, Fundatorka & prezes) bez nadrzędnego `<h2>`. `<h4>` pojawia się w sekcji Beehouses (L7565) bezpośrednio po H1 — pomijanie H2 i H3.
-- **Wpływ na SEO:** Zamieszanie w hierarchii semantycznej
-- **Rekomendacja:** Elementy `<h3>` w hero-ticker zamienić na `<span>` z klasą CSS.
-- **Automatyczna poprawka:** Częściowo
+| Element | Narzędzie | Co sprawdzić |
+|---|---|---|
+| Rzeczywista indeksacja stron | Google Search Console | Które strony są zaindeksowane, błędy crawlowania, canonical issues |
+| CTR i pozycje organiczne | Google Search Console → Performance | Na jakie frazy pojawia się strona, jaki jest CTR |
+| Core Web Vitals z danych terenowych (CrUX) | PageSpeed Insights, GSC CWV report | Realne dane mobilnych użytkowników |
+| Backlinks / profil linków | Ahrefs / Semrush | Ile domen zewnętrznych linkuje do strony |
+| Profil Google Business Profile | Google Maps | Czy Beehouses Foundation ma zweryfikowaną wizytówkę |
+| Wolumen fraz kluczowych | Senuto / Surfer / Semrush | Potencjał fraz jak "ochrona zapylaczy", "młodożeżowy sejmik Kujawsko-Pomorski" |
+| Analiza konkurencji | Semrush / Ahrefs | Inne strony rankingujące na te same frazy |
+| Firebase Security Rules | Firebase Console | Czy dane w Firestore są odpowiednio zabezpieczone |
+| Aktualny stan indeksowania po naprawach | Google Search Console | Weryfikacja efektów naprawy canonical (kilka tygodni po wdrożeniu) |
 
 ---
 
-### PROBLEM 21 — Font Awesome render-blocking z CDN
-
-- **Priorytet:** ŚREDNI
-- **Kategoria:** Wydajność / Fonty
-- **Plik:** `public/index.html`, linia 176
-- **Opis:** Font Awesome 6.4.0 ładowany synchronicznie z CDN (render-blocking CSS). Zawiera setki ikon, strona używa kilkunastu. Brak kontroli nad `font-display`.
-- **Wpływ na SEO:** FOIT, blokowanie renderowania
-- **Rekomendacja:** Użyć Font Awesome Kit z subsettingiem, lub zainstalować lokalnie, lub przejść na SVG sprites
-- **Automatyczna poprawka:** Nie
-
----
-
-### PROBLEM 22 — msapplication-config odwołuje się do nieistniejącego browserconfig.xml
-
-- **Priorytet:** ŚREDNI
-- **Kategoria:** Techniczne
-- **Plik:** Wszystkie HTML: `index.html` L73, `inicjatywa-brodnica-beehouses-z-nagroda-srebrnego-wilka.html` L63, i inne
-- **Opis:** `<meta name="msapplication-config" content="/browserconfig.xml">` wskazuje na nieistniejący plik — generuje błąd 404.
-- **Wpływ na SEO:** 404 w logach serwera i ewentualnie Search Console
-- **Rekomendacja:** Usunąć meta tag lub stworzyć minimalny `browserconfig.xml`
-- **Automatyczna poprawka:** Tak (usunięcie tagu)
-
----
-
-### PROBLEM 23 — Brak skip-link (przejdź do treści)
-
-- **Priorytet:** ŚREDNI
-- **Kategoria:** Dostępność
-- **Plik:** Wszystkie pliki HTML
-- **Opis:** Żadna strona nie posiada linku „Przejdź do treści" dla użytkowników klawiaturowych.
-- **Wpływ na SEO:** Dostępność wpływa na E-E-A-T
-- **Rekomendacja:**
-```html
-<a href="#main-content" class="skip-link">Przejdź do treści</a>
-```
-(widoczny tylko przy focusie — dodać CSS)
-- **Automatyczna poprawka:** Tak
-
----
-
-### PROBLEM 24 — Słabe i powtarzające się alt teksty
-
-- **Priorytet:** ŚREDNI
-- **Kategoria:** Obrazy / Dostępność
-- **Plik:** `public/index.html`, linia 7919 i inne
-- **Opis:** Alt "Zuzanna" dla zdjęcia timeline (L7919), "Akcja charytatywna", "Wystąpienie" — zbyt ogólnikowe. 10 zdjęć Instagram grid ma identyczny alt „Post z Instagrama Zuzanny Czupryńskiej" — duplicate content w alt.
-- **Wpływ na SEO:** Image SEO, dostępność
-- **Rekomendacja:** Unikalny, opisowy alt dla każdego obrazu (max 125 znaków)
-- **Automatyczna poprawka:** Nie
-
----
-
-### PROBLEM 25 — Logotyp w nawigacji — brak ogonka w alt
-
-- **Priorytet:** NISKI
-- **Kategoria:** Dostępność
-- **Plik:** `public/index.html`, linia 7361
-- **Opis:** Alt logotypu: "Zuzanna Maria Czuprynska" zamiast "Zuzanna Maria Czupryńska" (brak ogonka)
-- **Wpływ na SEO:** Niski
-- **Rekomendacja:** Ujednolicić do `alt="Logo — Zuzanna Maria Czupryńska"`
-- **Automatyczna poprawka:** Tak
-
----
-
-### PROBLEM 26 — Sekcja #harmonogram ukryta display:none — dead code
-
-- **Priorytet:** NISKI
-- **Kategoria:** Kod
-- **Plik:** `public/index.html`, linia 7951
-- **Opis:** Sekcja „Harmonogram Wydarzeń" z `display:none` — parsowana przez przeglądarkę, niewidoczna dla użytkownika.
-- **Wpływ na SEO:** Niski (zbędny kod w DOM)
-- **Rekomendacja:** Usunąć sekcję lub zachować jako HTML comment do czasu uruchomienia
-- **Automatyczna poprawka:** Nie
-
----
-
-### PROBLEM 27 — Skrypty .py w katalogu public/ — dostępne publicznie
-
-- **Priorytet:** NISKI
-- **Kategoria:** Bezpieczeństwo
-- **Plik:** `public/fix_articles.py`, `public/fix_divs.py`, `public/inject_js.py`
-- **Opis:** Przy konfiguracji Vercel `outputDirectory: "public"`, skrypty Python są serwowane publicznie pod adresami URL: `https://zuzanna-czuprynska.pl/fix_articles.py`
-- **Wpływ na SEO:** Problem bezpieczeństwa, niepotrzebne zasoby w deploymencie
-- **Rekomendacja:** Przenieść do katalogu poza `public/` (np. `/scripts/`)
-- **Automatyczna poprawka:** Częściowo
-
----
-
-### PROBLEM 28 — Brak FAQPage schema na fundacja i rekrutacja
-
-- **Priorytet:** NISKI
-- **Kategoria:** Dane strukturalne
-- **Plik:** `public/rekrutacja.html`, `public/fundacja.html`
-- **Opis:** Jeśli strony zawierają sekcje Q&A — brak FAQPage Schema.org blokuje rich results
-- **Wpływ na SEO:** Niezrealizowany potencjał rich results
-- **Rekomendacja:** Zweryfikować treść i dodać FAQPage Schema jeśli sekcja FAQ istnieje
-- **Automatyczna poprawka:** Nie
-
----
-
-### PROBLEM 29 — Brak ContactPage schema na kontakt.html
-
-- **Priorytet:** NISKI
-- **Kategoria:** Dane strukturalne
-- **Plik:** `public/kontakt.html`
-- **Opis:** Strona kontaktowa nie ma dedykowanego JSON-LD ContactPage
-- **Rekomendacja:**
-```html
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"ContactPage","name":"Kontakt — Zuzanna Czupryńska","url":"https://zuzanna-czuprynska.pl/kontakt"}
-</script>
-```
-- **Automatyczna poprawka:** Tak
-
----
-
-### PROBLEM 30 — logotyp.webp 399 KB na logo 42px wysokości
-
-- **Priorytet:** NISKI
-- **Kategoria:** Obrazy / Wydajność
-- **Plik:** `public/logotyp.webp`
-- **Opis:** Logo 900×195px, 399 KB wyświetlane jako `max-height: 42px`. Logo powinno ważyć < 20 KB.
-- **Rekomendacja:** Zoptymalizować logotyp.webp (zmniejszyć rozmiar do 200×43px, docelowa waga < 20 KB)
-- **Automatyczna poprawka:** Nie
-
----
-
-## C. TABELA PRIORYTETÓW
-
-| Priorytet | Problem | Pliki | Wpływ | Trudność | Rekomendacja |
-|-----------|---------|-------|-------|----------|--------------|
-| KRYTYCZNY | Brak `<main>` na stronie głównej | `index.html` | Semantyka, indeksowanie | Łatwa | Dodaj `<main id="main-content">` |
-| KRYTYCZNY | Błędny og:url / twitter:url na sekretarz-sejmiku | `sekretarz-sejmiku.html` L39–50 | Social crawl | Łatwa | Popraw URL |
-| KRYTYCZNY | sekretarz-sejmiku brakuje w sitemap.xml | `sitemap.xml` | Indeksowanie | Łatwa | Dodaj wpis |
-| KRYTYCZNY | Linki .html w nawigacji (fundacja, rekrutacja) | Wszystkie HTML | Link equity | Łatwa | Zmień na /fundacja, /rekrutacja |
-| KRYTYCZNY | Flyingbee.glb 8,5 MB + Three.js bez defer | `index.html` L9978 | LCP, CWV | Średnia | defer + kompresja GLB |
-| KRYTYCZNY | Wszystkie obrazy na imgur.com | Wszystkie HTML | LCP, ryzyko | Trudna | Przenieść na własny hosting |
-| KRYTYCZNY | Brak preload dla obrazu LCP | `index.html` L7554 | LCP | Łatwa | Dodaj link preload |
-| WYSOKI | favicon.svg/png 360–480 KB | `public/` | Wydajność | Łatwa | Rekompresja |
-| WYSOKI | Niespójność jobTitle w Schema.org | `index.html` L86 | Rich results | Wymaga decyzji | Ujednolicić stanowisko |
-| WYSOKI | Fałszywa SearchAction w WebSite schema | `index.html` L133 | Wiarygodność | Łatwa | Usunąć SearchAction |
-| WYSOKI | Brak BreadcrumbList na artykułach | 6 artykułów | Rich results, CTR | Łatwa | Dodać JSON-LD |
-| WYSOKI | form-mailer.js bez defer | `index.html` L9367 | TBT, INP | Łatwa | Dodaj defer |
-| WYSOKI | Brak og:image:alt na artykułach | 4+ HTML | Dostępność, social | Łatwa | Dodać meta tag |
-| WYSOKI | EN switch bez hreflang; site-language.js 132 KB | Wszystkie HTML | Duplikaty | Trudna | Decyzja architektoniczna |
-| WYSOKI | insta-grid.png 1,8 MB | `public/` | Wydajność | Łatwa | Sprawdzić i usunąć/optymalizować |
-| ŚREDNI | Meta description strony głównej — sucha | `index.html` L29 | CTR | Łatwa | Przepisać |
-| ŚREDNI | Tytuły > 60 znaków | sekretarz, inicjatywa, inne | SERP snippet | Łatwa | Skrócić |
-| ŚREDNI | Sekretarz-sejmiku: desc 299 znaków | `sekretarz-sejmiku.html` L24 | CTR | Łatwa | Skrócić |
-| ŚREDNI | Brak preconnect dla imgur i cdnjs | `index.html` head | TTFB | Łatwa | Dodać preconnect |
-| ŚREDNI | Hierarchia H1→H3 bez H2 w hero | `index.html` L7580–7628 | Semantyka | Łatwa | Zamienić h3 na span |
-| ŚREDNI | Font Awesome render-blocking z CDN | Wszystkie HTML | TTFB | Średnia | Local/kit/subsetting |
-| ŚREDNI | msapplication-config → brak browserconfig.xml | Wszystkie HTML L73 | 404 | Łatwa | Usunąć tag |
-| ŚREDNI | Brak skip-link | Wszystkie HTML | Dostępność | Łatwa | Dodać skip link |
-| ŚREDNI | Słabe/powtarzające się alt | `index.html` | Image SEO | Średnia | Przepisać |
-| NISKI | Logo alt bez ogonka | `index.html` L7361 | Spójność | Łatwa | Poprawić |
-| NISKI | Sekcja harmonogram display:none | `index.html` L7951 | Dead code | Łatwa | Usunąć |
-| NISKI | Skrypty .py w public/ | `public/*.py` | Bezpieczeństwo | Łatwa | Przenieść poza public |
-| NISKI | Brak FAQPage schema | fundacja, rekrutacja | Rich results | Średnia | Dodać jeśli FAQ obecne |
-| NISKI | Brak ContactPage schema | `kontakt.html` | Schema | Łatwa | Dodać schema |
-| NISKI | logotyp.webp 399 KB | `logotyp.webp` | Wydajność | Łatwa | Rekompresja |
-
----
-
-## D. AUDYT KAŻDEJ PODSTRONY
-
-### 1. index.html — Strona główna (https://zuzanna-czuprynska.pl/)
-
-| Element | Wartość | Ocena |
-|---------|---------|-------|
-| Proponowany cel | Wizytówka osoby publicznej, budowanie marki | — |
-| Główna fraza | „Zuzanna Czupryńska", „Beehouses Foundation", „młody polityk" | — |
-| Title | „Zuzanna Czupryńska – Głos nowego pokolenia w polityce" (58 znaków) | ✅ |
-| Meta description | „Oficjalna strona..." — sucha, bez CTA | ⚠️ |
-| H1 | Istnieje (linia 7538), zawartość przez reveal animation | ✅/⚠️ |
-| Brak `<main>` | Krytyczny błąd semantyczny | ❌ |
-
-**Problemy z nagłówkami:** H1→H3→H4 bez H2; h3 jako dekoracyjne etykiety w hero ticker  
-**Problemy z treścią:** Bogata treść; animacje scroll-reveal mogą opóźniać widoczność dla botów; ukryta sekcja harmonogram  
-**Problemy techniczne:** Brak `<main>`, 8,5 MB GLB, imgur, brak preload, skrypty bez defer  
-**Rekomendowane linkowanie:** Linki kontekstowe w sekcji "about" do /o-mnie; w sekcji fundacja do /fundacja; wszystkie artykuły do /aktualnosci  
-**Proponowane dane strukturalne:** Usunąć fałszywą SearchAction; dodać WebPage schema
-
----
-
-### 2. o-mnie.html (https://zuzanna-czuprynska.pl/o-mnie)
-
-| Element | Wartość |
-|---------|---------|
-| Proponowany cel | E-E-A-T, pozycjonowanie na frazy brandowe |
-| Główna fraza | „Zuzanna Czupryńska kim jest", „polityk Brodnica" |
-| Title | „O mnie | Posłanka, Liderka i Założycielka Beehouses Foundation" (66 znaków) ✅ |
-| Meta description | ~193 znaki — nieznacznie za długa; treść dobra |
-| H1 | „Kim jestem?" — oryginalny, słabo kluczowy |
-
-**Problemy:** Linki .html w nawigacji; meta desc za długa  
-**Rekomendowane linkowanie:** Do /fundacja, /aktualnosci, /kontakt  
-**Schema:** Person + WebPage
-
----
-
-### 3. fundacja.html (https://zuzanna-czuprynska.pl/fundacja)
-
-| Element | Wartość |
-|---------|---------|
-| Proponowany cel | Prezentacja fundacji; frazy ekologiczne |
-| Główna fraza | „Beehouses Foundation", „fundacja ekologiczna Brodnica", „ochrona zapylaczy" |
-| Title | „Beehouses Foundation | Posłanka, Liderka i Założycielka" (59 znaków) ✅ |
-| Meta description | 189 znaków — nieznacznie za długa |
-| H1 | „Beehouses Foundation" ✅ |
-
-**Problemy:** Linki .html w nawigacji; sprawdzić thin content  
-**Schema:** Organization (z KRS/NIP); FAQPage jeśli sekcja Q&A istnieje
-
----
-
-### 4. rekrutacja.html (https://zuzanna-czuprynska.pl/rekrutacja)
-
-| Element | Wartość |
-|---------|---------|
-| Proponowany cel | Pozyskiwanie wolontariuszy/członków |
-| Główna fraza | „wolontariat ekologia", „dołącz do fundacji", „rekrutacja Beehouses" |
-| Title | „Dołącz do nas | Posłanka, Liderka i Założycielka Beehouses Foundation" (75 znaków) — za długi |
-| Meta description | 181 znaków — za długa |
-| H1 | „Rekrutacja BeeHouses Foundation" — niespójność: BeeHouses vs Beehouses |
-
-**Problemy:** Niespójność brandingu (BeeHouses vs Beehouses); linki .html w nav  
-**Rekomendowane linkowanie:** Do /fundacja, /kontakt
-
----
-
-### 5. aktualnosci.html (https://zuzanna-czuprynska.pl/aktualnosci)
-
-| Element | Wartość |
-|---------|---------|
-| Proponowany cel | Hub newsowy; pozycjonowanie na frazy informacyjne |
-| Główna fraza | „aktualności Zuzanna Czupryńska", „inicjatywy Brodnica" |
-| Title | „Aktualności i inicjatywy | Posłanka..." (85 znaków) — za długi |
-| Meta description | 163 znaki — akceptowalne |
-| H1 | „Aktualne inicjatywy" ✅ |
-
-**Krytyczny problem:** Artykuły ładowane dynamicznie z Firestore przez JS — ryzyko nieindeksowania przez Googlebota  
-**Schema:** ItemList dla listy artykułów
-
----
-
-### 6. kontakt.html (https://zuzanna-czuprynska.pl/kontakt)
-
-| Element | Wartość |
-|---------|---------|
-| Proponowany cel | Konwersja — inicjowanie kontaktu |
-| Główna fraza | „kontakt Zuzanna Czupryńska" |
-| Title | „Kontakt z biurem | Posłanka..." (76 znaków) — nieco za długi |
-| Meta description | 178 znaków — nieznacznie za długa |
-| H1 | „Porozmawiajmy razem" — kreacyjny, słabo kluczowy |
-
-**Dobre elementy:** Formularz z labelami ✅, mailto link ✅  
-**Brakujące:** ContactPage schema, telefon kontaktowy (jeśli dostępny)
-
----
-
-### 7-12. Artykuły (6 stron)
-
-**Wspólne obserwacje:**
-- Canonical URLs prawidłowe ✅
-- Schema NewsArticle obecna ✅ (wymaga publisher, właściwych wymiarów obrazu)
-- Breadcrumb wizualny w HTML ✅, brak BreadcrumbList JSON-LD ❌
-- Tytuły za długie (105 znaków) ❌
-- Obrazy na imgur ❌
-- Meta descriptions (130–155 znaków) ✅
-
-**Proponowane frazy kluczowe:**
-
-| Strona | Frazy |
-|--------|-------|
-| inicjatywa-brodnica-beehouses-z-nagroda-srebrnego-wilka | „Srebrny Wilk Brodnica", „Beehouses nagroda" |
-| konferencja-energia-przyszlosci | „konferencja OZE 2025", „energia przyszłości" |
-| nowe-inicjatywy-na-rzecz-ochrony-zapylaczy | „ochrona zapylaczy Polska", „pszczoły edukacja" |
-| projekt-brodnica-beehouses-2025-edukacja-o-zapylaczach | „edukacja o zapylaczach Brodnica 2025" |
-| udzial-w-pracach-nad-narodowym-programem-lesnym | „Narodowy Program Leśny", „leśnictwo polityka" |
-| warsztaty-pszczelarskie-w-ramach-projektu-beehouses-v2 | „warsztaty pszczelarskie Brodnica", „BeeHouses v2" |
-
----
-
-### 13. sekretarz-sejmiku.html (https://zuzanna-czuprynska.pl/sekretarz-sejmiku)
-
-**Krytyczne problemy:**
-- og:url i twitter:url wskazują na `/konferencja-energia-przyszlosci` ❌
-- Brakuje w sitemap.xml ❌
-- Title: 106 znaków ❌ → skrócić do: „Sekretarz Sejmiku Kujawsko-Pomorskiego | Zuzanna Czupryńska"
-- Meta description: 299 znaków, pisana w 1. osobie ❌
-
-**Proponowane frazy:** „Sekretarz Młodzieżowego Sejmiku Kujawsko-Pomorskiego", „Zuzanna Czupryńska sejmik"
-
----
-
-### 14. polityka-prywatnosci.html i cookies.html
-
-- Meta tagi prawidłowe ✅
-- `cookies.html` w sitemap.xml z priority 0.3 ✅
-- Rozważyć `noindex` dla `cookies.html` (opcjonalne)
-
----
-
-## E. PLAN WDROŻENIA
-
-### Etap 1: Poprawki krytyczne (dzień 1–2)
-
-1. **[index.html]** Dodać `<main id="main-content">` owijający sekcje treści
-2. **[sekretarz-sejmiku.html L39–50]** Poprawić og:url i twitter:url na `/sekretarz-sejmiku`
-3. **[sitemap.xml]** Dodać wpis sekretarz-sejmiku; zweryfikować lastmod
-4. **[Wszystkie HTML]** Zamienić `href="fundacja.html"` → `href="/fundacja"` i `href="rekrutacja.html"` → `href="/rekrutacja"` (find & replace)
-5. **[index.html L9367, L9978–9979]** Dodać `defer` do form-mailer.js i Three.js
-6. **[index.html L133–137]** Usunąć `potentialAction: SearchAction` z WebSite schema
-7. **[public/]** Przenieść `fix_articles.py`, `fix_divs.py`, `inject_js.py` poza katalog public/
-
-### Etap 2: Poprawki w jeden dzień (dzień 2–3)
-
-8. **[Wszystkie HTML]** Usunąć `<meta name="msapplication-config" content="/browserconfig.xml">`
-9. **[Wszystkie HTML head]** Dodać preconnect dla i.imgur.com, cdnjs.cloudflare.com, cdn.jsdelivr.net
-10. **[Wszystkie HTML]** Dodać skip-link `<a href="#main-content" class="skip-link">Przejdź do treści</a>` + CSS
-11. **[index.html L29–30]** Przepisać meta description strony głównej
-12. **[sekretarz-sejmiku.html L24]** Skrócić meta description do < 160 znaków; poprawić tytuł
-13. **[index.html L7361]** Poprawić alt logotypu (dodać ogonki)
-14. **[6 artykułów HTML]** Dodać og:image:alt
-15. **[index.html L7580–7628]** Zamienić `<h3>` w hero ticker na `<span>`
-
-### Etap 3: Poprawki w pierwszym tygodniu
-
-16. **[6 artykułów HTML]** Dodać BreadcrumbList JSON-LD do każdego artykułu
-17. **[index.html head]** Dodać `<link rel="preload" as="image">` dla obrazu hero
-18. **[index.html L86]** Ujednolicić jobTitle po konsultacji z właścicielką strony
-19. **[index.html L7919]** Poprawić alt teksty obrazów (timeline, instagram grid)
-20. **[kontakt.html]** Dodać ContactPage schema JSON-LD
-21. **[Wszystkie HTML]** Skrócić tytuły > 60 znaków (zmienić sufiks na `| Zuzanna Czupryńska`)
-
-### Etap 4: Działania contentowe
-
-22. Zweryfikować aktualność stanowisk (Posłanka vs Sekretarz Sejmiku) — ujednolicić we wszystkich miejscach
-23. Rozbudować artykuły o sekcje E-E-A-T (źródła, linki do instytucji)
-24. Ustandaryzować zapis nazwy fundacji: Beehouses Foundation (nie BeeHouses)
-25. Zoptymalizować meta descriptions dla o-mnie (193 zn.), fundacja (189 zn.), rekrutacja (181 zn.)
-26. Zaktualizować lastmod w sitemap.xml przy każdej aktualizacji
-
-### Etap 5: Działania wymagające zewnętrznych narzędzi
-
-27. **PageSpeed Insights / Lighthouse:** Zmierzyć LCP, CLS, INP, TTFB na żywo
-28. **Google Search Console:** Coverage report, Mobile Usability, Rich Results
-29. **Google Rich Results Test:** Walidacja NewsArticle, Person, Organization, BreadcrumbList
-30. **gltf-pipeline / Draco:** Kompresja Flyingbee.glb z 8,5 MB do < 1 MB
-31. **Image migration:** Przenieść imgur → własny hosting, konwersja do WebP/AVIF
-32. **WebPageTest:** Analiza waterfall dla zewnętrznych zasobów
-
-### Etap 6: Działania długoterminowe
-
-33. Rozważyć SSG (Astro, 11ty) zamiast monolitycznych plików HTML 8K–10K linii
-34. Podzielić site-language.js (132 KB) — code splitting per-strona lub osobne wersje językowe z hreflang
-35. Wdrożyć Cloudflare Images lub Vercel Image Optimization dla obrazów
-36. Zoptymalizować Font Awesome — lokalny hosting z subsettingiem lub SVG sprites
-37. Wdrożyć statyczne generowanie listy artykułów zamiast dynamicznego ładowania z Firestore
-38. Monitoring dostępności zewnętrznych obrazów (imgur breakage alerts)
-
----
-
-## Uwagi końcowe
-
-> Wyniki wymagające pomiaru w środowisku produkcyjnym (Chrome DevTools / Lighthouse / PageSpeed Insights / Google Search Console):
-> - Rzeczywiste wartości LCP, CLS, INP, TTFB
-> - Efektywność kompresji Brotli/Gzip (Vercel domyślnie kompresuje — do weryfikacji)
-> - Nagłówki Cache-Control (Vercel cachuje statyczne pliki — do weryfikacji)
-> - Faktyczne renderowanie JS przez Googlebot
-> - Indeksowanie treści tłumaczonej przez site-language.js
-
----
-
-## PODSUMOWANIE KOŃCOWE
-
-| Metryka | Wartość |
-|---------|---------|
-| Przeanalizowanych podstron | **16** (w tym 404, stopka mailowa, polityki) |
-| Kluczowych podstron SEO | **14** |
-| Problemów krytycznych | **7** |
-| Problemów wysokiego priorytetu | **8** |
-| Problemów średniego priorytetu | **9** |
-| Problemów niskiego priorytetu | **6** |
-| **Łącznie problemów** | **30** |
-
-### 3 Najważniejsze poprawki (max wpływ przy min nakładzie):
-
-1. **Dodać `<main>` do strony głównej + poprawić og:url na sekretarz-sejmiku + dodać do sitemap** — 15 minut pracy, duży wpływ na crawlability i semantykę
-
-2. **Zamienić wszystkie linki `fundacja.html`/`rekrutacja.html` na `/fundacja`/`/rekrutacja` + dodać `defer` do form-mailer.js i Three.js + usunąć fałszywą SearchAction** — 30 minut pracy, poprawa link equity i wydajności
-
-3. **Dodać BreadcrumbList JSON-LD do wszystkich 6 artykułów** — ~1h pracy, potencjalny wzrost CTR przez rich results w Google
-
----
-
-**Pełny raport:** [SEO-AUDIT.md](file:///Users/piotrjuskowiak/Desktop/Projekty/zuzanna%20czupry%C5%84ska/SEO-AUDIT.md)
+## Rekomendowany pierwszy pakiet wdrożeniowy
+
+Poniższe 10 zmian jest **bezpiecznych, nie zmienia designu, nie wymaga decyzji biznesowych** i daje natychmiastowy, mierzalny efekt:
+
+| # | Zmiana | Plik(i) | Zakres |
+|---|---|---|---|
+| 1 | Naprawa canonical `fundacja-beehouses` | `fundacja-beehouses.html` L39 | `/fundacja` → `/fundacja-beehouses` |
+| 2 | Naprawa canonical `rekrutacja` | `rekrutacja-do-fundacji-beehouses.html` L43 | `/rekrutacja` → `/rekrutacja-do-fundacji-beehouses` |
+| 3 | Naprawa og:url `fundacja-beehouses` | `fundacja-beehouses.html` L43 | `/fundacja` → `/fundacja-beehouses` |
+| 4 | Naprawa og:url `rekrutacja` | `rekrutacja-do-fundacji-beehouses.html` L47 | `/rekrutacja` → `/rekrutacja-do-fundacji-beehouses` |
+| 5 | Zmiana all `og:image` na absolute URL | Wszystkie HTML | `/images/...` → `https://zuzanna-czuprynska.pl/images/...` |
+| 6 | Zmiana all `twitter:image` na absolute URL | Wszystkie HTML | `/images/...` → `https://zuzanna-czuprynska.pl/images/...` |
+| 7 | Noindex dla stopka-mailowa | `stopka-mailowa.html` | Dodanie `<meta name="robots" content="noindex, nofollow">` |
+| 8 | `defer` dla Three.js | `index.html` L9897–L9899 | `<script src="...three.min.js" defer>` itd. |
+| 9 | Usunięcie gtag.js (zostawienie GTM) | Wszystkie HTML L20–L28 | Usunięcie 3 linii ze wszystkich plików |
+| 10 | Naprawa linków nawigacyjnych z `.html` | Wszystkie HTML (nav + footer) | `fundacja-beehouses.html` → `/fundacja-beehouses` (i analogicznie rekrutacja) |
