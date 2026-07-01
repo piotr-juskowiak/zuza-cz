@@ -681,7 +681,9 @@
             position: absolute;
             top: calc(100% + 0.9rem);
             left: 0;
-            min-width: 190px;
+            min-width: 420px;
+            width: max-content;
+            max-width: 80vw;
             padding: 0.55rem;
             background: rgba(249, 248, 246, 0.97);
             border: 1px solid rgba(197, 160, 101, 0.22);
@@ -721,6 +723,7 @@
             color: var(--text-primary);
             opacity: 0.78;
             padding: 0.78rem 0.85rem;
+            white-space: nowrap;
             transition: color 0.25s var(--transition), background 0.25s var(--transition), opacity 0.25s var(--transition);
         }
 
@@ -6999,6 +7002,7 @@
     <!-- Three.js libraries (must load before 3D bee script) -->
     <script src="https://cdn.jsdelivr.net/npm/three@0.140.0/build/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.140.0/examples/js/loaders/GLTFLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.140.0/examples/js/loaders/DRACOLoader.js"></script>
 
     <script>
         // --- LOGIKA MENU MOBILNEGO ---
@@ -7190,6 +7194,11 @@
 
             // Load model
             const loader = new THREE.GLTFLoader();
+            if (typeof THREE.DRACOLoader !== 'undefined') {
+                const dracoLoader = new THREE.DRACOLoader();
+                dracoLoader.setDecoderPath('https://www.gstatic.com/draco/versioned/decoders/1.5.5/');
+                loader.setDRACOLoader(dracoLoader);
+            }
             let beeModel = null;
             let mixer = null;
             let targetPosition = new THREE.Vector3();

@@ -735,7 +735,9 @@
             position: absolute;
             top: calc(100% + 0.9rem);
             left: 0;
-            min-width: 190px;
+            min-width: 420px;
+            width: max-content;
+            max-width: 80vw;
             padding: 0.55rem;
             background: rgba(249, 248, 246, 0.97);
             border: 1px solid rgba(197, 160, 101, 0.22);
@@ -775,6 +777,7 @@
             color: var(--text-primary);
             opacity: 0.78;
             padding: 0.78rem 0.85rem;
+            white-space: nowrap;
             transition: color 0.25s var(--transition), background 0.25s var(--transition), opacity 0.25s var(--transition);
         }
 
