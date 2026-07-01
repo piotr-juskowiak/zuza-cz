@@ -1,4 +1,26 @@
 // page-transition.js — Light Organic Reveal
+window.addEventListener('pageshow', (event) => {
+    const curtain = document.getElementById('curtain-transition');
+    if (event.persisted || (curtain && curtain.classList.contains('is-closing'))) {
+        if (curtain) {
+            curtain.classList.remove('is-closing');
+            curtain.classList.add('is-loaded');
+        }
+        document.body.classList.remove('page-entering');
+        document.body.classList.add('page-entered');
+    }
+});
+
+window.addEventListener('popstate', () => {
+    const curtain = document.getElementById('curtain-transition');
+    if (curtain) {
+        curtain.classList.remove('is-closing');
+        curtain.classList.add('is-loaded');
+    }
+    document.body.classList.remove('page-entering');
+    document.body.classList.add('page-entered');
+});
+
 document.addEventListener('DOMContentLoaded', () => {
     const curtain = document.getElementById('curtain-transition');
     
@@ -8,6 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Open the curtain after page loads
     setTimeout(() => {
         if (curtain) {
+            curtain.classList.remove('is-closing');
             curtain.classList.add('is-loaded');
         }
         // Trigger content entrance

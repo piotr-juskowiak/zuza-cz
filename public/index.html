@@ -2879,10 +2879,10 @@
         .insta-photo-grid {
             display: grid;
             grid-template-columns: repeat(5, minmax(0, 1fr));
-            gap: 2.6rem 1.6rem;
-            max-width: 1280px;
-            margin: 1.5rem auto 5rem;
-            padding: 1.5rem 0.5rem;
+            gap: 3.2rem 2rem;
+            max-width: 1320px;
+            margin: 2rem auto 6rem;
+            padding: 2rem 1rem;
         }
 
         .insta-photo-item {
@@ -2890,9 +2890,9 @@
             display: flex;
             flex-direction: column;
             background: #fffefb;
-            padding: 11px 11px 36px 11px;
-            border-radius: 4px;
-            box-shadow: 0 12px 28px -6px rgba(0, 0, 0, 0.45), 0 3px 10px -3px rgba(0, 0, 0, 0.3);
+            padding: 0 0 28px 0;
+            border-radius: 3px;
+            box-shadow: 0 18px 40px -8px rgba(0, 0, 0, 0.55), 0 4px 14px -4px rgba(0, 0, 0, 0.28);
             text-decoration: none;
             cursor: pointer;
             transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.5s cubic-bezier(0.25, 1, 0.5, 1);
@@ -2900,40 +2900,18 @@
             z-index: 1;
         }
 
-        /* Washi tape piece pinned at top center */
+        /* No washi tape - clean polaroid look */
         .insta-photo-item::before {
-            content: '';
-            position: absolute;
-            top: -10px;
-            left: 50%;
-            width: 44px;
-            height: 18px;
-            background: rgba(255, 255, 255, 0.65);
-            border-left: 1px dashed rgba(0, 0, 0, 0.12);
-            border-right: 1px dashed rgba(0, 0, 0, 0.12);
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.18);
-            backdrop-filter: blur(3px);
-            -webkit-backdrop-filter: blur(3px);
-            z-index: 5;
-            pointer-events: none;
-            display: block !important;
-        }
-
-        .insta-photo-item:nth-child(odd)::before {
-            transform: translateX(-50%) rotate(-4deg);
-        }
-        .insta-photo-item:nth-child(even)::before {
-            transform: translateX(-50%) rotate(3.5deg);
+            display: none;
         }
 
         .polaroid-img-wrap {
             position: relative;
             width: 100%;
-            aspect-ratio: 1 / 1;
+            aspect-ratio: 4 / 5;
             overflow: hidden;
-            border-radius: 2px;
+            border-radius: 2px 2px 0 0;
             background: #f4f2ee;
-            box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.1);
         }
 
         .polaroid-img-wrap img {
@@ -2946,21 +2924,7 @@
         }
 
         .polaroid-caption {
-            position: absolute;
-            bottom: 6px;
-            left: 10px;
-            right: 10px;
-            text-align: center;
-            font-family: 'Cormorant Garamond', serif;
-            font-style: italic;
-            font-weight: 600;
-            font-size: 1.05rem;
-            color: #2b2826;
-            letter-spacing: 0.02em;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            transition: color 0.3s ease;
+            display: none;
         }
 
         /* Dark overlay inside photo on hover */
@@ -7458,8 +7422,8 @@
                         <a href="#" onclick="event.preventDefault();" class="nav-item nav-dropdown-toggle">Fundacja Beehouses <i
                                 class="fas fa-chevron-down nav-dropdown-icon" aria-hidden="true"></i></a>
                         <div class="nav-dropdown-menu" aria-label="Podmenu Fundacja">
-                            <a href="/fundacja-beehouses" class="nav-subitem">O fundacji Beehouses</a>
-                            <a href="/rekrutacja-do-fundacji-beehouses" class="nav-subitem">Rekrutacja do fundacji Beehouses Foundation</a>
+                            <a href="fundacja-beehouses.html" class="nav-subitem">O fundacji Beehouses</a>
+                            <a href="rekrutacja-do-fundacji-beehouses.html" class="nav-subitem">Rekrutacja do fundacji Beehouses Foundation</a>
                         </div>
                     </div>
                     <a href="/aktualnosci" class="nav-item">Aktualności</a>
@@ -7537,11 +7501,11 @@
                             <span class="mobile-link-num">03</span>
                         </a>
                         <div class="mobile-submenu">
-                            <a href="/fundacja-beehouses" class="mobile-sublink">
+                            <a href="fundacja-beehouses.html" class="mobile-sublink">
                                 <span>O fundacji Beehouses</span>
                                 <span class="mobile-link-num">03.1</span>
                             </a>
-                            <a href="/rekrutacja-do-fundacji-beehouses" class="mobile-sublink">
+                            <a href="rekrutacja-do-fundacji-beehouses.html" class="mobile-sublink">
                                 <span>Rekrutacja do fundacji Beehouses Foundation</span>
                                 <span class="mobile-link-num">03.2</span>
                             </a>
@@ -9404,8 +9368,8 @@
                         <h5>Nawigacja</h5>
                         <ul class="premium-links">
                             <li><a href="/o-mnie">O mnie</a></li>
-                            <li><a href="/rekrutacja-do-fundacji-beehouses">Rekrutacja do fundacji Beehouses Foundation</a></li>
-                            <li><a href="/fundacja-beehouses">Fundacja Beehouses</a></li>
+                            <li><a href="rekrutacja-do-fundacji-beehouses.html">Rekrutacja do fundacji Beehouses Foundation</a></li>
+                            <li><a href="fundacja-beehouses.html">Fundacja Beehouses</a></li>
                             <li><a href="/aktualnosci">Aktualności</a></li>
                             <li><a href="/kontakt">Kontakt</a></li>
                         </ul>
