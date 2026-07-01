@@ -2879,56 +2879,32 @@
         .insta-photo-grid {
             display: grid;
             grid-template-columns: repeat(5, minmax(0, 1fr));
-            gap: 3.2rem 2rem;
-            max-width: 1320px;
-            margin: 2rem auto 6rem;
-            padding: 2rem 1rem;
+            gap: 1.15rem;
+            margin-bottom: 3.5rem;
         }
 
         .insta-photo-item {
             position: relative;
-            display: flex;
-            flex-direction: column;
-            background: #fffefb;
-            padding: 0 0 28px 0;
-            border-radius: 3px;
-            box-shadow: 0 18px 40px -8px rgba(0, 0, 0, 0.55), 0 4px 14px -4px rgba(0, 0, 0, 0.28);
-            text-decoration: none;
-            cursor: pointer;
-            transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.5s cubic-bezier(0.25, 1, 0.5, 1);
-            will-change: transform, box-shadow;
-            z-index: 1;
-        }
-
-        /* No washi tape - clean polaroid look */
-        .insta-photo-item::before {
-            display: none;
-        }
-
-        .polaroid-img-wrap {
-            position: relative;
-            width: 100%;
-            aspect-ratio: 4 / 5;
             overflow: hidden;
-            border-radius: 2px 2px 0 0;
-            background: #f4f2ee;
+            aspect-ratio: 3 / 4;
+            cursor: pointer;
+            display: block;
+            background: rgba(255, 255, 255, 0.04);
+            text-decoration: none;
         }
 
-        .polaroid-img-wrap img {
+        .insta-photo-item img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+                filter 0.5s ease;
+            filter: brightness(0.96) saturate(0.95);
             display: block;
-            filter: brightness(0.97) contrast(1.03);
-            transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1), filter 0.5s ease;
         }
 
-        .polaroid-caption {
-            display: none;
-        }
-
-        /* Dark overlay inside photo on hover */
-        .polaroid-img-wrap::after {
+        /* Dark overlay on hover */
+        .insta-photo-item::after {
             content: '';
             position: absolute;
             inset: 0;
@@ -2938,8 +2914,8 @@
             z-index: 2;
         }
 
-        /* Heart icon inside image wrapper */
-        .polaroid-img-wrap .insta-overlay-icon {
+        /* Heart icon centred, fades in and scales up */
+        .insta-photo-item .insta-overlay-icon {
             position: absolute;
             inset: 0;
             display: flex;
@@ -2951,35 +2927,24 @@
             transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        .polaroid-img-wrap .insta-overlay-icon i {
+        .insta-photo-item .insta-overlay-icon i {
             font-size: 2.2rem;
             color: #fff;
             filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.35));
         }
 
-        /* Hover interaction */
-        .insta-photo-item:hover {
-            transform: translateY(-14px) scale(1.12) rotate(0deg) !important;
-            box-shadow: 0 24px 48px -8px rgba(0, 0, 0, 0.75), 0 10px 20px -4px rgba(0, 0, 0, 0.45);
-            z-index: 20;
-        }
-
-        .insta-photo-item:hover .polaroid-img-wrap img {
-            transform: scale(1.08);
+        .insta-photo-item:hover img {
+            transform: scale(1.05);
             filter: brightness(0.85);
         }
 
-        .insta-photo-item:hover .polaroid-img-wrap::after {
+        .insta-photo-item:hover::after {
             opacity: 1;
         }
 
-        .insta-photo-item:hover .polaroid-img-wrap .insta-overlay-icon {
+        .insta-photo-item:hover .insta-overlay-icon {
             opacity: 1;
             transform: scale(1.15);
-        }
-
-        .insta-photo-item:hover .polaroid-caption {
-            color: var(--accent-gold);
         }
 
         .insta-photo-item:focus-visible {
@@ -3056,7 +3021,6 @@
             .insta-photo-grid {
                 grid-template-columns: repeat(2, 1fr);
                 gap: 0.75rem;
-                max-width: 94%;
             }
         }
 
@@ -6350,88 +6314,6 @@
             }
         }
 
-        .insta-section .insta-photo-grid.reveal {
-            opacity: 1;
-            transform: none;
-            transition: none;
-        }
-
-        .insta-section .insta-photo-grid.reveal:not(.active) .insta-photo-item {
-            opacity: 0;
-            transform: translateY(45px) scale(0.85) rotate(7deg);
-            filter: blur(10px) brightness(0.8);
-            clip-path: inset(8% 4% 8% 4% round 4px);
-        }
-
-        .insta-section .insta-photo-grid.reveal.active .insta-photo-item {
-            opacity: 1;
-            filter: none;
-            clip-path: inset(0% 0% 0% 0% round 0px);
-        }
-
-        .insta-section .insta-photo-item {
-            backface-visibility: hidden;
-            transform-style: preserve-3d;
-            perspective: 800px;
-            will-change: opacity, transform, filter, clip-path;
-            transition:
-                opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
-                transform 0.85s cubic-bezier(0.16, 1, 0.3, 1),
-                filter 0.75s cubic-bezier(0.16, 1, 0.3, 1),
-                clip-path 0.75s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .insta-section .insta-photo-grid.reveal.active .insta-photo-item:nth-child(1) {
-            transform: rotate(-3.5deg) translateY(4px);
-            transition-delay: 0.05s;
-        }
-
-        .insta-section .insta-photo-grid.reveal.active .insta-photo-item:nth-child(2) {
-            transform: rotate(2.2deg) translateY(-6px);
-            transition-delay: 0.14s;
-        }
-
-        .insta-section .insta-photo-grid.reveal.active .insta-photo-item:nth-child(3) {
-            transform: rotate(-1.5deg) translateY(5px);
-            transition-delay: 0.23s;
-        }
-
-        .insta-section .insta-photo-grid.reveal.active .insta-photo-item:nth-child(4) {
-            transform: rotate(3.0deg) translateY(-4px);
-            transition-delay: 0.32s;
-        }
-
-        .insta-section .insta-photo-grid.reveal.active .insta-photo-item:nth-child(5) {
-            transform: rotate(-2.8deg) translateY(8px);
-            transition-delay: 0.41s;
-        }
-
-        .insta-section .insta-photo-grid.reveal.active .insta-photo-item:nth-child(6) {
-            transform: rotate(2.5deg) translateY(-6px);
-            transition-delay: 0.50s;
-        }
-
-        .insta-section .insta-photo-grid.reveal.active .insta-photo-item:nth-child(7) {
-            transform: rotate(-2.0deg) translateY(9px);
-            transition-delay: 0.59s;
-        }
-
-        .insta-section .insta-photo-grid.reveal.active .insta-photo-item:nth-child(8) {
-            transform: rotate(1.8deg) translateY(-7px);
-            transition-delay: 0.68s;
-        }
-
-        .insta-section .insta-photo-grid.reveal.active .insta-photo-item:nth-child(9) {
-            transform: rotate(-3.2deg) translateY(4px);
-            transition-delay: 0.77s;
-        }
-
-        .insta-section .insta-photo-grid.reveal.active .insta-photo-item:nth-child(10) {
-            transform: rotate(2.8deg) translateY(-5px);
-            transition-delay: 0.86s;
-        }
-
-
 
         .contact-section .contact-info.reveal {
             opacity: 0;
@@ -9146,93 +9028,63 @@
                     <div class="insta-photo-grid reveal reveal-up">
                         <a class="insta-photo-item" href="https://www.instagram.com/zuzanna_czuprynska/" target="_blank"
                             rel="noopener" aria-label="Zobacz profil na Instagramie">
-                            <div class="polaroid-img-wrap">
-                                <img src="/images/E2bDf1I.webp" alt="Zuzanna Czupryńska — objęcie stanowiska Sekretarza Sejmiku Kujawsko-Pomorskiego"
-                                    loading="lazy" width="1086" height="1448" decoding="async">
-                                <span class="insta-overlay-icon"><i class="fas fa-heart"></i></span>
-                            </div>
-                            <span class="polaroid-caption">Sejmik Województwa ✨</span>
+                            <img src="/images/E2bDf1I.webp" alt="Zuzanna Czupryńska — objęcie stanowiska Sekretarza Sejmiku Kujawsko-Pomorskiego"
+                                loading="lazy" width="1086" height="1448" decoding="async">
+                            <span class="insta-overlay-icon"><i class="fas fa-heart"></i></span>
                         </a>
                         <a class="insta-photo-item" href="https://www.instagram.com/zuzanna_czuprynska/" target="_blank"
                             rel="noopener" aria-label="Zobacz profil na Instagramie">
-                            <div class="polaroid-img-wrap">
-                                <img src="/images/yIPZL15.webp" alt="Zuzanna Czupryńska — działalność w Parlamencie Młodych RP"
-                                    loading="lazy" width="1086" height="1448" decoding="async">
-                                <span class="insta-overlay-icon"><i class="fas fa-heart"></i></span>
-                            </div>
-                            <span class="polaroid-caption">Parlament Młodych RP</span>
+                            <img src="/images/yIPZL15.webp" alt="Zuzanna Czupryńska — działalność w Parlamencie Młodych RP"
+                                loading="lazy" width="1086" height="1448" decoding="async">
+                            <span class="insta-overlay-icon"><i class="fas fa-heart"></i></span>
                         </a>
                         <a class="insta-photo-item" href="https://www.instagram.com/zuzanna_czuprynska/" target="_blank"
                             rel="noopener" aria-label="Zobacz profil na Instagramie">
-                            <div class="polaroid-img-wrap">
-                                <img src="/images/GA45zCa.webp" alt="Zuzanna Czupryńska — projekt edukacyjny Beehouses Foundation"
-                                    loading="lazy" width="1086" height="1448" decoding="async">
-                                <span class="insta-overlay-icon"><i class="fas fa-heart"></i></span>
-                            </div>
-                            <span class="polaroid-caption">Beehouses Foundation 🐝</span>
+                            <img src="/images/GA45zCa.webp" alt="Zuzanna Czupryńska — projekt edukacyjny Beehouses Foundation"
+                                loading="lazy" width="1086" height="1448" decoding="async">
+                            <span class="insta-overlay-icon"><i class="fas fa-heart"></i></span>
                         </a>
                         <a class="insta-photo-item" href="https://www.instagram.com/zuzanna_czuprynska/" target="_blank"
                             rel="noopener" aria-label="Zobacz profil na Instagramie">
-                            <div class="polaroid-img-wrap">
-                                <img src="/images/pxbEXWG.webp" alt="Zuzanna Czupryńska — inicjatywa ekologiczna Brodnica Beehouses"
-                                    loading="lazy" width="1086" height="1448" decoding="async">
-                                <span class="insta-overlay-icon"><i class="fas fa-heart"></i></span>
-                            </div>
-                            <span class="polaroid-caption">Brodnica Beehouses 🌱</span>
+                            <img src="/images/pxbEXWG.webp" alt="Zuzanna Czupryńska — inicjatywa ekologiczna Brodnica Beehouses"
+                                loading="lazy" width="1086" height="1448" decoding="async">
+                            <span class="insta-overlay-icon"><i class="fas fa-heart"></i></span>
                         </a>
                         <a class="insta-photo-item" href="https://www.instagram.com/zuzanna_czuprynska/" target="_blank"
                             rel="noopener" aria-label="Zobacz profil na Instagramie">
-                            <div class="polaroid-img-wrap">
-                                <img src="/images/f9dzsRx.webp" alt="Zuzanna Czupryńska — warsztaty pszczelarskie Beehouses v2"
-                                    loading="lazy" width="1086" height="1448" decoding="async">
-                                <span class="insta-overlay-icon"><i class="fas fa-heart"></i></span>
-                            </div>
-                            <span class="polaroid-caption">Warsztaty pszczelarskie</span>
+                            <img src="/images/f9dzsRx.webp" alt="Zuzanna Czupryńska — warsztaty pszczelarskie Beehouses v2"
+                                loading="lazy" width="1086" height="1448" decoding="async">
+                            <span class="insta-overlay-icon"><i class="fas fa-heart"></i></span>
                         </a>
                         <a class="insta-photo-item" href="https://www.instagram.com/zuzanna_czuprynska/" target="_blank"
                             rel="noopener" aria-label="Zobacz profil na Instagramie">
-                            <div class="polaroid-img-wrap">
-                                <img src="/images/4jIr4fV.webp" alt="Zuzanna Czupryńska — konferencja Energia Przyszłości"
-                                    loading="lazy" width="1086" height="1448" decoding="async">
-                                <span class="insta-overlay-icon"><i class="fas fa-heart"></i></span>
-                            </div>
-                            <span class="polaroid-caption">Energia Przyszłości ⚡</span>
+                            <img src="/images/4jIr4fV.webp" alt="Zuzanna Czupryńska — konferencja Energia Przyszłości"
+                                loading="lazy" width="1086" height="1448" decoding="async">
+                            <span class="insta-overlay-icon"><i class="fas fa-heart"></i></span>
                         </a>
                         <a class="insta-photo-item" href="https://www.instagram.com/zuzanna_czuprynska/" target="_blank"
                             rel="noopener" aria-label="Zobacz profil na Instagramie">
-                            <div class="polaroid-img-wrap">
-                                <img src="/images/B9D2psx.webp" alt="Zuzanna Czupryńska — praca na rzecz ochrony zapylaczy"
-                                    loading="lazy" width="1086" height="1448" decoding="async">
-                                <span class="insta-overlay-icon"><i class="fas fa-heart"></i></span>
-                            </div>
-                            <span class="polaroid-caption">Ochrona zapylaczy 🌸</span>
+                            <img src="/images/B9D2psx.webp" alt="Zuzanna Czupryńska — praca na rzecz ochrony zapylaczy"
+                                loading="lazy" width="1086" height="1448" decoding="async">
+                            <span class="insta-overlay-icon"><i class="fas fa-heart"></i></span>
                         </a>
                         <a class="insta-photo-item" href="https://www.instagram.com/zuzanna_czuprynska/" target="_blank"
                             rel="noopener" aria-label="Zobacz profil na Instagramie">
-                            <div class="polaroid-img-wrap">
-                                <img src="/images/dd98NCb.webp" alt="Zuzanna Czupryńska — Narodowy Program Leśny"
-                                    loading="lazy" width="1086" height="1448" decoding="async">
-                                <span class="insta-overlay-icon"><i class="fas fa-heart"></i></span>
-                            </div>
-                            <span class="polaroid-caption">Program Leśny 🌲</span>
+                            <img src="/images/dd98NCb.webp" alt="Zuzanna Czupryńska — Narodowy Program Leśny"
+                                loading="lazy" width="1086" height="1448" decoding="async">
+                            <span class="insta-overlay-icon"><i class="fas fa-heart"></i></span>
                         </a>
                         <a class="insta-photo-item" href="https://www.instagram.com/zuzanna_czuprynska/" target="_blank"
                             rel="noopener" aria-label="Zobacz profil na Instagramie">
-                            <div class="polaroid-img-wrap">
-                                <img src="/images/PpEMaBa.webp" alt="Zuzanna Czupryńska — srebrny Wilk dla Brodnica Beehouses"
-                                    loading="lazy" width="1086" height="1448" decoding="async">
-                                <span class="insta-overlay-icon"><i class="fas fa-heart"></i></span>
-                            </div>
-                            <span class="polaroid-caption">Srebrny Wilk 🏆</span>
+                            <img src="/images/PpEMaBa.webp" alt="Zuzanna Czupryńska — srebrny Wilk dla Brodnica Beehouses"
+                                loading="lazy" width="1086" height="1448" decoding="async">
+                            <span class="insta-overlay-icon"><i class="fas fa-heart"></i></span>
                         </a>
                         <a class="insta-photo-item" href="https://www.instagram.com/zuzanna_czuprynska/" target="_blank"
                             rel="noopener" aria-label="Zobacz profil na Instagramie">
-                            <div class="polaroid-img-wrap">
-                                <img src="/images/j4Irbop.webp" alt="Zuzanna Czupryńska — aktywność społeczna i polityczna"
-                                    loading="lazy" width="1086" height="1448" decoding="async">
-                                <span class="insta-overlay-icon"><i class="fas fa-heart"></i></span>
-                            </div>
-                            <span class="polaroid-caption">Działalność społeczna</span>
+                            <img src="/images/j4Irbop.webp" alt="Zuzanna Czupryńska — aktywność społeczna i polityczna"
+                                loading="lazy" width="1086" height="1448" decoding="async">
+                            <span class="insta-overlay-icon"><i class="fas fa-heart"></i></span>
                         </a>
                     </div>
                 </div>
