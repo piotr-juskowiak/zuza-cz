@@ -13,7 +13,9 @@
         // Common navigation and UI
         'O mnie': 'About',
         'Rekrutacja': 'Recruitment',
+        'Rekrutacja do fundacji Beehouses Foundation': 'Recruitment for Beehouses Foundation',
         'Fundacja': 'Foundation',
+        'Fundacja Beehouses': 'Beehouses Foundation',
         'Aktualności': 'News',
         'Kontakt': 'Contact',
         'Wsparcie': 'Support',
@@ -829,11 +831,11 @@
             description: 'Meet Zuzanna Maria Czupryńska: activist, Young Parliament member, and founder of Beehouses Foundation.'
         },
         'rekrutacja.html': {
-            title: 'Recruitment | Zuzanna Maria Czupryńska',
+            title: 'Recruitment for Foundation | Zuzanna Maria Czupryńska',
             description: 'Join the team and co-create social, ecological, and educational initiatives with Zuzanna Maria Czupryńska.'
         },
         'fundacja.html': {
-            title: 'Foundation | Zuzanna Maria Czupryńska',
+            title: 'Beehouses Foundation | Zuzanna Maria Czupryńska',
             description: 'Beehouses Foundation combines ecological education, protection of pollinators, and practical action for biodiversity.'
         },
         'aktualnosci.html': {
