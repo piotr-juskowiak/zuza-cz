@@ -2171,11 +2171,6 @@
         });
     </script>
 
-    <!-- Three.js libraries (must load before 3D bee script) -->
-    <script src="https://cdn.jsdelivr.net/npm/three@0.140.0/build/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.140.0/examples/js/loaders/GLTFLoader.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.140.0/examples/js/loaders/DRACOLoader.js"></script>
-
     <script>
         // --- LOGIKA MENU MOBILNEGO ---
         const toggleBtn = document.getElementById('mobileToggle');
@@ -2300,21 +2295,33 @@
                 return;
             }
 
-            // Check if THREE is available
-            if (typeof THREE === 'undefined') {
-                console.error('THREE.js not loaded!');
-                return;
-            }
-            if (typeof THREE.GLTFLoader === 'undefined') {
-                console.error('GLTFLoader not loaded!');
+            const fundacjaSection = document.getElementById('fundacja');
+            if (!fundacjaSection) {
                 return;
             }
 
-            const fundacjaSection = document.getElementById('fundacja');
-            if (!fundacjaSection) {
-                console.error('Fundacja section not found!');
-                return;
+            function loadThreeAndStart() {
+                if (typeof THREE !== 'undefined' && typeof THREE.GLTFLoader !== 'undefined' && typeof THREE.DRACOLoader !== 'undefined') {
+                    startScene();
+                    return;
+                }
+                const s1 = document.createElement('script');
+                s1.src = 'https://cdn.jsdelivr.net/npm/three@0.140.0/build/three.min.js';
+                s1.onload = () => {
+                    const s2 = document.createElement('script');
+                    s2.src = 'https://cdn.jsdelivr.net/npm/three@0.140.0/examples/js/loaders/GLTFLoader.js';
+                    s2.onload = () => {
+                        const s3 = document.createElement('script');
+                        s3.src = 'https://cdn.jsdelivr.net/npm/three@0.140.0/examples/js/loaders/DRACOLoader.js';
+                        s3.onload = startScene;
+                        document.head.appendChild(s3);
+                    };
+                    document.head.appendChild(s2);
+                };
+                document.head.appendChild(s1);
             }
+
+            function startScene() {
 
             let lastMouseX = 0;
             let lastMouseY = 0;
@@ -2428,17 +2435,7 @@
                 }
             }
 
-            if ('IntersectionObserver' in window) {
-                const beeObserver = new IntersectionObserver(function (entries) {
-                    if (entries.some(entry => entry.isIntersecting)) {
-                        beeObserver.disconnect();
-                        scheduleBeeModelLoad();
-                    }
-                }, { rootMargin: '300px 0px' });
-                beeObserver.observe(fundacjaSection);
-            } else {
-                window.setTimeout(loadBeeModel, 1000);
-            }
+            scheduleBeeModelLoad();
 
             // Mouse events
             fundacjaSection.addEventListener('mouseenter', function () {
@@ -2509,6 +2506,19 @@
                 }
 
                 renderer.render(scene, camera);
+            }
+            } // end startScene
+
+            if ('IntersectionObserver' in window) {
+                const beeObserver = new IntersectionObserver(function (entries) {
+                    if (entries.some(entry => entry.isIntersecting)) {
+                        beeObserver.disconnect();
+                        loadThreeAndStart();
+                    }
+                }, { rootMargin: '400px 0px' });
+                beeObserver.observe(fundacjaSection);
+            } else {
+                window.setTimeout(loadThreeAndStart, 2000);
             }
         })();
 
