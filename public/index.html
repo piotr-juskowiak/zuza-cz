@@ -27,7 +27,7 @@
     <!-- End Google Tag Manager -->
     <!-- SEO Meta Tags -->
     <meta name="description"
-        content="Oficjalna strona internetowa Zuzanny Marii Czupryńskiej - Sekretarz Młodzieżowego Sejmiku Kujawsko-Pomorskiego i Parlamentarzystki Parlamentu Młodych RP.">
+        content="Zuzanna Czupryńska – Sekretarz Sejmiku Kujawsko-Pomorskiego, założycielka Beehouses Foundation. Głos młodego pokolenia w polskiej polityce i ekologii.">
     <meta name="keywords"
         content="Zuzanna Czupryńska, Posłanka, Parlament Młodych, Beehouses, ekologia, edukacja, środowisko, Brodnica, polityka młodzieżowa, zielona transformacja, bioróżnorodność, OZE">
     <meta name="author" content="Zuzanna Maria Czupryńska">
@@ -46,7 +46,7 @@
     <meta property="og:url" content="https://zuzanna-czuprynska.pl/">
     <meta property="og:title" content="Zuzanna Czupryńska – Głos nowego pokolenia w polityce">
     <meta property="og:description"
-        content="Oficjalna strona internetowa Zuzanny Marii Czupryńskiej - Sekretarz Młodzieżowego Sejmiku Kujawsko-Pomorskiego i Parlamentarzystki Parlamentu Młodych RP.">
+        content="Zuzanna Czupryńska – Sekretarz Sejmiku Kujawsko-Pomorskiego, założycielka Beehouses Foundation. Głos młodego pokolenia w polskiej polityce i ekologii.">
     <meta property="og:image" content="https://i.imgur.com/pzhgBM6.jpeg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
@@ -59,7 +59,7 @@
     <meta name="twitter:url" content="https://zuzanna-czuprynska.pl/">
     <meta name="twitter:title" content="Zuzanna Czupryńska – Głos nowego pokolenia w polityce">
     <meta name="twitter:description"
-        content="Oficjalna strona internetowa Zuzanny Marii Czupryńskiej - Sekretarz Młodzieżowego Sejmiku Kujawsko-Pomorskiego i Parlamentarzystki Parlamentu Młodych RP.">
+        content="Zuzanna Czupryńska – Sekretarz Sejmiku Kujawsko-Pomorskiego, założycielka Beehouses Foundation. Głos młodego pokolenia w polskiej polityce i ekologii.">
     <meta name="twitter:image" content="https://i.imgur.com/pzhgBM6.jpeg">
     <meta name="twitter:image:alt" content="Zuzanna Maria Czupryńska">
     <meta name="twitter:creator" content="@zuzanna_czuprynska">
@@ -70,12 +70,21 @@
     <meta name="apple-mobile-web-app-title" content="Zuzanna Czupryńska">
     <meta name="application-name" content="Zuzanna Czupryńska">
     <meta name="msapplication-TileColor" content="#1A2E28">
-    <meta name="msapplication-config" content="/browserconfig.xml">
 
     <!-- Favicon -->
     <link rel="icon" href="favicon.png" type="image/png">
     <link rel="apple-touch-icon" href="favicon.png">
     <link rel="manifest" href="/site.webmanifest">
+    <!-- Resource Hints: preconnect dla zewnętrznych domen -->
+    <link rel="preconnect" href="https://i.imgur.com">
+    <link rel="dns-prefetch" href="https://i.imgur.com">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+    <!-- Preload LCP hero image -->
+    <link rel="preload" as="image" href="https://i.imgur.com/pzhgBM6.jpeg" fetchpriority="high">
+
 
     <!-- Structured Data (JSON-LD) -->
     <script type="application/ld+json">
@@ -89,6 +98,12 @@
         "name": "Parlament Młodych RP"
       },
       "memberOf": [
+        {
+          "@type": "Organization",
+          "name": "Młodzieżowy Sejmik Województwa Kujawsko-Pomorskiego",
+          "jobTitle": "Sekretarz",
+          "url": "https://zuzanna-czuprynska.pl/sekretarz-sejmiku"
+        },
         {
           "@type": "Organization",
           "name": "Beehouses Foundation",
@@ -120,7 +135,7 @@
         "postalCode": "87-300",
         "addressCountry": "PL"
       },
-      "description": "Oficjalna strona internetowa Zuzanny Marii Czupryńskiej - Sekretarz Młodzieżowego Sejmiku Kujawsko-Pomorskiego i Parlamentarzystki Parlamentu Młodych RP."
+      "description": "Zuzanna Czupryńska – Sekretarz Sejmiku Kujawsko-Pomorskiego, założycielka Beehouses Foundation. Głos młodego pokolenia w polskiej polityce i ekologii."
     }
     </script>
 
@@ -129,12 +144,7 @@
       "@context": "https://schema.org",
       "@type": "WebSite",
       "name": "Zuzanna Maria Czupryńska",
-      "url": "https://zuzanna-czuprynska.pl",
-      "potentialAction": {
-        "@type": "SearchAction",
-        "target": "https://zuzanna-czuprynska.pl/?s={search_term_string}",
-        "query-input": "required name=search_term_string"
-      }
+      "url": "https://zuzanna-czuprynska.pl"
     }
     </script>
 
@@ -1388,7 +1398,8 @@
             transform: scale(1.03);
         }
 
-        .roles-marquee-item h3 {
+        .roles-marquee-item h3,
+        .roles-marquee-item .marquee-role-label {
             font-size: 1.4rem;
             font-family: 'Cormorant Garamond', serif;
             font-style: italic;
@@ -1396,6 +1407,7 @@
             font-weight: 300;
             margin: 0 0 0.3rem 0;
             letter-spacing: 0.03em;
+            display: block;
         }
 
         .roles-marquee-item .role-link {
@@ -7285,6 +7297,11 @@
 </head>
 
 <body class="home-page">
+<style>
+.skip-link { position: absolute; top: -100px; left: 1rem; background: #1A2E28; color: #C9A84C; padding: 0.6rem 1.2rem; border-radius: 4px; font-weight: 700; z-index: 99999; text-decoration: none; transition: top 0.2s; }
+.skip-link:focus { top: 1rem; }
+</style>
+<a href="#main-content" class="skip-link">Przejdź do treści</a>
     <div class="curtain-transition" id="curtain-transition">
         <div class="curtain-line"></div>
 
@@ -7358,7 +7375,7 @@
     <nav id="navbar">
         <div class="container nav-inner">
             <a href="/" class="logo">
-                <img src="logotyp.webp" alt="Zuzanna Maria Czuprynska" width="900" height="195" decoding="async">
+                <img src="logotyp.webp" alt="Zuzanna Maria Czupryńska" width="900" height="195" decoding="async">
             </a>
 
             <div class="nav-right">
@@ -7368,8 +7385,8 @@
                         <a href="#" onclick="event.preventDefault();" class="nav-item nav-dropdown-toggle">Fundacja <i
                                 class="fas fa-chevron-down nav-dropdown-icon" aria-hidden="true"></i></a>
                         <div class="nav-dropdown-menu" aria-label="Podmenu Fundacja">
-                            <a href="fundacja.html" class="nav-subitem">O nas</a>
-                            <a href="rekrutacja.html" class="nav-subitem">Rekrutacja</a>
+                            <a href="/fundacja" class="nav-subitem">O nas</a>
+                            <a href="/rekrutacja" class="nav-subitem">Rekrutacja</a>
                         </div>
                     </div>
                     <a href="/aktualnosci" class="nav-item">Aktualności</a>
@@ -7447,11 +7464,11 @@
                             <span class="mobile-link-num">03</span>
                         </a>
                         <div class="mobile-submenu">
-                            <a href="fundacja.html" class="mobile-sublink">
+                            <a href="/fundacja" class="mobile-sublink">
                                 <span>O nas</span>
                                 <span class="mobile-link-num">03.1</span>
                             </a>
-                            <a href="rekrutacja.html" class="mobile-sublink">
+                            <a href="/rekrutacja" class="mobile-sublink">
                                 <span>Rekrutacja</span>
                                 <span class="mobile-link-num">03.2</span>
                             </a>
@@ -7528,6 +7545,7 @@
 
 
     <!-- HERO -->
+    <main id="main-content">
     <section class="hero">
         <div class="container hero-grid">
             <div class="hero-content">
@@ -7578,54 +7596,54 @@
         <div class="roles-marquee-track">
             <!-- GROUP 1 -->
             <div class="roles-marquee-item">
-                <h3>Asystentka wiceministra</h3>
+                <span class="marquee-role-label">Asystentka wiceministra</span>
                 <a href="#" class="role-link">Arkadiusz Myrcha <i class="fas fa-external-link-alt"></i></a>
             </div>
             <div class="roles-marquee-dot"></div>
             <div class="roles-marquee-item">
-                <h3>Asystentka posłanki</h3>
+                <span class="marquee-role-label">Asystentka posłanki</span>
                 <a href="#" class="role-link">Iwona Karolewska <i class="fas fa-external-link-alt"></i></a>
             </div>
             <div class="roles-marquee-dot"></div>
             <div class="roles-marquee-item">
-                <h3>Parlamentarzystka</h3>
+                <span class="marquee-role-label">Parlamentarzystka</span>
                 <a href="#" class="role-link">Parlamentu Młodych RP <i class="fas fa-external-link-alt"></i></a>
             </div>
             <div class="roles-marquee-dot"></div>
             <div class="roles-marquee-item">
-                <h3>Fundatorka &amp; prezes</h3>
-                <a href="#" class="role-link">BeeHouses Foundation <i class="fas fa-external-link-alt"></i></a>
+                <span class="marquee-role-label">Fundatorka &amp; prezes</span>
+                <a href="#" class="role-link">Beehouses Foundation <i class="fas fa-external-link-alt"></i></a>
             </div>
             <div class="roles-marquee-dot"></div>
             <div class="roles-marquee-item">
-                <h3>Koordynatorka</h3>
+                <span class="marquee-role-label">Koordynatorka</span>
                 <a href="#" class="role-link">Union of Sisterhood <i class="fas fa-external-link-alt"></i></a>
             </div>
             <div class="roles-marquee-dot"></div>
 
             <!-- GROUP 2 (DUPLICATE FOR SEAMLESS LOOP) -->
             <div class="roles-marquee-item">
-                <h3>Asystentka wiceministra</h3>
+                <span class="marquee-role-label">Asystentka wiceministra</span>
                 <a href="#" class="role-link">Arkadiusz Myrcha <i class="fas fa-external-link-alt"></i></a>
             </div>
             <div class="roles-marquee-dot"></div>
             <div class="roles-marquee-item">
-                <h3>Asystentka posłanki</h3>
+                <span class="marquee-role-label">Asystentka posłanki</span>
                 <a href="#" class="role-link">Iwona Karolewska <i class="fas fa-external-link-alt"></i></a>
             </div>
             <div class="roles-marquee-dot"></div>
             <div class="roles-marquee-item">
-                <h3>Parlamentarzystka</h3>
+                <span class="marquee-role-label">Parlamentarzystka</span>
                 <a href="#" class="role-link">Parlamentu Młodych RP <i class="fas fa-external-link-alt"></i></a>
             </div>
             <div class="roles-marquee-dot"></div>
             <div class="roles-marquee-item">
-                <h3>Fundatorka &amp; prezes</h3>
-                <a href="#" class="role-link">BeeHouses Foundation <i class="fas fa-external-link-alt"></i></a>
+                <span class="marquee-role-label">Fundatorka &amp; prezes</span>
+                <a href="#" class="role-link">Beehouses Foundation <i class="fas fa-external-link-alt"></i></a>
             </div>
             <div class="roles-marquee-dot"></div>
             <div class="roles-marquee-item">
-                <h3>Koordynatorka</h3>
+                <span class="marquee-role-label">Koordynatorka</span>
                 <a href="#" class="role-link">Union of Sisterhood <i class="fas fa-external-link-alt"></i></a>
             </div>
             <div class="roles-marquee-dot"></div>
@@ -7638,11 +7656,11 @@
             <div class="about-grid-new">
                 <div class="about-visuals-new">
                     <div class="image-wrapper-main">
-                        <img src="https://i.imgur.com/Nrsbt0w.png" alt="Akcja charytatywna" width="1262" height="1246"
+                        <img src="https://i.imgur.com/Nrsbt0w.png" alt="Zuzanna Czupryńska podczas akcji charytatywnej Beehouses Foundation" width="1262" height="1246"
                             decoding="async" loading="lazy">
                     </div>
                     <div class="image-wrapper-sub">
-                        <img src="https://i.imgur.com/vXClYIT.png" alt="Wystąpienie" width="1206" height="1300"
+                        <img src="https://i.imgur.com/vXClYIT.png" alt="Zuzanna Czupryńska podczas publicznego wystąpienia" width="1206" height="1300"
                             decoding="async" loading="lazy">
                     </div>
                 </div>
@@ -7916,7 +7934,7 @@
                         <div class="timeline-dot-core"></div>
                     </div>
                     <div class="timeline-content glass-card">
-                        <img src="beehouses-timeline.webp" class="timeline-stage-image" alt="Zuzanna" width="1800"
+                        <img src="beehouses-timeline.webp" class="timeline-stage-image" alt="Historia Beehouses Foundation — oś czasu założona przez Zuzannę Czupryńską" width="1800"
                             height="1005" decoding="async" loading="lazy">
                         <span class="timeline-year">2025 - Obecnie</span>
                         <h4 class="timeline-role">Założycielka</h4>
@@ -7933,7 +7951,7 @@
                         <div class="timeline-dot-core"></div>
                     </div>
                     <div class="timeline-content glass-card">
-                        <img src="https://i.imgur.com/B28A7iK.png" class="timeline-stage-image" alt="Zuzanna"
+                        <img src="https://i.imgur.com/B28A7iK.png" class="timeline-stage-image" alt="Zuzanna Czupryńska — działalność ekologiczna i społeczna"
                             width="1659" height="948" decoding="async" loading="lazy">
                         <span class="timeline-year">2025 - Obecnie</span>
                         <h4 class="timeline-role">Parlamentarzystka</h4>
@@ -7947,26 +7965,6 @@
         </div>
     </section>
 
-    <!-- SEKCJA HARMONOGRAM -->
-    <section id="harmonogram" class="section-py" style="background-color: var(--bg-paper); display: none;">
-        <div class="container">
-            <div class="text-center reveal reveal-up" style="text-align: center; margin-bottom: 4rem;">
-                <span class="subtitle">Gdzie mnie spotkasz</span>
-                <h2 class="section-title">Harmonogram Wydarzeń</h2>
-            </div>
-
-            <div class="schedule-list reveal reveal-up delay-100" style="max-width: 800px; margin: 0 auto;">
-                <!-- Wydarzenia będą ładowane dynamicznie z Firestore przez funkcję loadEvents() -->
-                <div style="text-align: center; padding: 2rem; color: var(--text-secondary);">
-                    <div
-                        style="display: inline-block; width: 40px; height: 40px; border: 4px solid #f3f3f3; border-top: 4px solid var(--accent-gold); border-radius: 50%; animation: spin 1s linear infinite;">
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-    </section>
     <!-- === FULL WIDTH PHOTO CAROUSEL === -->
     <section class="photo-carousel-section">
         <div class="carousel-container">
@@ -9111,61 +9109,61 @@
                     <div class="insta-photo-grid reveal reveal-up">
                         <a class="insta-photo-item" href="https://www.instagram.com/zuzanna_czuprynska/" target="_blank"
                             rel="noopener" aria-label="Zobacz profil na Instagramie">
-                            <img src="https://i.imgur.com/E2bDf1I.jpeg" alt="Post z Instagrama Zuzanny Czupryńskiej"
+                            <img src="https://i.imgur.com/E2bDf1I.jpeg" alt="Zuzanna Czupryńska — objęcie stanowiska Sekretarza Sejmiku Kujawsko-Pomorskiego"
                                 loading="lazy" width="1086" height="1448" decoding="async">
                             <span class="insta-overlay-icon"><i class="fas fa-heart"></i></span>
                         </a>
                         <a class="insta-photo-item" href="https://www.instagram.com/zuzanna_czuprynska/" target="_blank"
                             rel="noopener" aria-label="Zobacz profil na Instagramie">
-                            <img src="https://i.imgur.com/yIPZL15.png" alt="Post z Instagrama Zuzanny Czupryńskiej"
+                            <img src="https://i.imgur.com/yIPZL15.png" alt="Zuzanna Czupryńska — działalność w Parlamencie Młodych RP"
                                 loading="lazy" width="1086" height="1448" decoding="async">
                             <span class="insta-overlay-icon"><i class="fas fa-heart"></i></span>
                         </a>
                         <a class="insta-photo-item" href="https://www.instagram.com/zuzanna_czuprynska/" target="_blank"
                             rel="noopener" aria-label="Zobacz profil na Instagramie">
-                            <img src="https://i.imgur.com/GA45zCa.png" alt="Post z Instagrama Zuzanny Czupryńskiej"
+                            <img src="https://i.imgur.com/GA45zCa.png" alt="Zuzanna Czupryńska — projekt edukacyjny Beehouses Foundation"
                                 loading="lazy" width="1086" height="1448" decoding="async">
                             <span class="insta-overlay-icon"><i class="fas fa-heart"></i></span>
                         </a>
                         <a class="insta-photo-item" href="https://www.instagram.com/zuzanna_czuprynska/" target="_blank"
                             rel="noopener" aria-label="Zobacz profil na Instagramie">
-                            <img src="https://i.imgur.com/pxbEXWG.png" alt="Post z Instagrama Zuzanny Czupryńskiej"
+                            <img src="https://i.imgur.com/pxbEXWG.png" alt="Zuzanna Czupryńska — inicjatywa ekologiczna Brodnica Beehouses"
                                 loading="lazy" width="1086" height="1448" decoding="async">
                             <span class="insta-overlay-icon"><i class="fas fa-heart"></i></span>
                         </a>
                         <a class="insta-photo-item" href="https://www.instagram.com/zuzanna_czuprynska/" target="_blank"
                             rel="noopener" aria-label="Zobacz profil na Instagramie">
-                            <img src="https://i.imgur.com/f9dzsRx.png" alt="Post z Instagrama Zuzanny Czupryńskiej"
+                            <img src="https://i.imgur.com/f9dzsRx.png" alt="Zuzanna Czupryńska — warsztaty pszczelarskie Beehouses v2"
                                 loading="lazy" width="1086" height="1448" decoding="async">
                             <span class="insta-overlay-icon"><i class="fas fa-heart"></i></span>
                         </a>
                         <a class="insta-photo-item" href="https://www.instagram.com/zuzanna_czuprynska/" target="_blank"
                             rel="noopener" aria-label="Zobacz profil na Instagramie">
-                            <img src="https://i.imgur.com/4jIr4fV.jpeg" alt="Post z Instagrama Zuzanny Czupryńskiej"
+                            <img src="https://i.imgur.com/4jIr4fV.jpeg" alt="Zuzanna Czupryńska — konferencja Energia Przyszłości"
                                 loading="lazy" width="1086" height="1448" decoding="async">
                             <span class="insta-overlay-icon"><i class="fas fa-heart"></i></span>
                         </a>
                         <a class="insta-photo-item" href="https://www.instagram.com/zuzanna_czuprynska/" target="_blank"
                             rel="noopener" aria-label="Zobacz profil na Instagramie">
-                            <img src="https://i.imgur.com/B9D2psx.png" alt="Post z Instagrama Zuzanny Czupryńskiej"
+                            <img src="https://i.imgur.com/B9D2psx.png" alt="Zuzanna Czupryńska — praca na rzecz ochrony zapylaczy"
                                 loading="lazy" width="1086" height="1448" decoding="async">
                             <span class="insta-overlay-icon"><i class="fas fa-heart"></i></span>
                         </a>
                         <a class="insta-photo-item" href="https://www.instagram.com/zuzanna_czuprynska/" target="_blank"
                             rel="noopener" aria-label="Zobacz profil na Instagramie">
-                            <img src="https://i.imgur.com/dd98NCb.png" alt="Post z Instagrama Zuzanny Czupryńskiej"
+                            <img src="https://i.imgur.com/dd98NCb.png" alt="Zuzanna Czupryńska — Narodowy Program Leśny"
                                 loading="lazy" width="1086" height="1448" decoding="async">
                             <span class="insta-overlay-icon"><i class="fas fa-heart"></i></span>
                         </a>
                         <a class="insta-photo-item" href="https://www.instagram.com/zuzanna_czuprynska/" target="_blank"
                             rel="noopener" aria-label="Zobacz profil na Instagramie">
-                            <img src="https://i.imgur.com/PpEMaBa.png" alt="Post z Instagrama Zuzanny Czupryńskiej"
+                            <img src="https://i.imgur.com/PpEMaBa.png" alt="Zuzanna Czupryńska — srebrny Wilk dla Brodnica Beehouses"
                                 loading="lazy" width="1086" height="1448" decoding="async">
                             <span class="insta-overlay-icon"><i class="fas fa-heart"></i></span>
                         </a>
                         <a class="insta-photo-item" href="https://www.instagram.com/zuzanna_czuprynska/" target="_blank"
                             rel="noopener" aria-label="Zobacz profil na Instagramie">
-                            <img src="https://i.imgur.com/j4Irbop.png" alt="Post z Instagrama Zuzanny Czupryńskiej"
+                            <img src="https://i.imgur.com/j4Irbop.png" alt="Zuzanna Czupryńska — aktywność społeczna i polityczna"
                                 loading="lazy" width="1086" height="1448" decoding="async">
                             <span class="insta-overlay-icon"><i class="fas fa-heart"></i></span>
                         </a>
@@ -9259,6 +9257,8 @@
             </div>
         </div>
     </section>
+
+    </main><!-- /#main-content -->
 
     <!-- MODERN MEGA FOOTER -->
     <footer class="modern-footer">
@@ -9364,7 +9364,7 @@
         </div>
     </div>
     <!-- Firebase SDK -->
-    <script src="form-mailer.js?v=resend-8"></script>
+    <script src="form-mailer.js?v=resend-8" defer></script>
     <script type="module">
         import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
         import { getFirestore, collection, addDoc, getDocs, query, orderBy, where } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';

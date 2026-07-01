@@ -63,7 +63,6 @@
     <meta name="apple-mobile-web-app-title" content="Zuzanna Czupryńska">
     <meta name="application-name" content="Zuzanna Czupryńska">
     <meta name="msapplication-TileColor" content="#1A2E28">
-    <meta name="msapplication-config" content="/browserconfig.xml">
 
     <!-- Favicon -->
     <link rel="icon" href="favicon.png" type="image/png">
@@ -5542,9 +5541,21 @@
         }
     </style>
     <script src="site-language.js?v=rekrutacja-form-1" defer></script>
+    <!-- Resource Hints -->
+    <link rel="preconnect" href="https://i.imgur.com">
+    <link rel="dns-prefetch" href="https://i.imgur.com">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
 </head>
 
 <body>
+<style>
+.skip-link { position: absolute; top: -100px; left: 1rem; background: #1A2E28; color: #C9A84C; padding: 0.6rem 1.2rem; border-radius: 4px; font-weight: 700; z-index: 99999; text-decoration: none; transition: top 0.2s; }
+.skip-link:focus { top: 1rem; }
+</style>
+<a href="#main-content" class="skip-link">Przejdź do treści</a>
     <div class="curtain-transition" id="curtain-transition">
         <div class="curtain-line"></div>
         
@@ -5610,8 +5621,8 @@
                     <div class="nav-dropdown">
                         <a href="#" onclick="event.preventDefault();" class="nav-item nav-dropdown-toggle">Fundacja <i class="fas fa-chevron-down nav-dropdown-icon" aria-hidden="true"></i></a>
                         <div class="nav-dropdown-menu" aria-label="Podmenu Fundacja">
-                            <a href="fundacja.html" class="nav-subitem">O nas</a>
-                            <a href="rekrutacja.html" class="nav-subitem">Rekrutacja</a>
+                            <a href="/fundacja" class="nav-subitem">O nas</a>
+                            <a href="/rekrutacja" class="nav-subitem">Rekrutacja</a>
                         </div>
                     </div>
                     <a href="/aktualnosci" class="nav-item">Aktualności</a>
@@ -5655,6 +5666,7 @@
             </div>
         </div>
     </nav>
+    <main id="main-content">
 
     <!-- FULLSCREEN MOBILE MENU -->
     <div class="mobile-menu-overlay" id="mobileMenu" role="dialog" aria-modal="true" aria-label="Menu" aria-hidden="true">
@@ -5662,7 +5674,7 @@
             <div class="mobile-menu-links">
                 <a href="/" class="mobile-link">Strona główna</a>
                 <a href="/o-mnie" class="mobile-link">O mnie</a>
-                <a href="fundacja.html" class="mobile-link"><span>Fundacja <i class="fas fa-chevron-down mobile-submenu-icon" aria-hidden="true"></i></span></a>
+                <a href="/fundacja" class="mobile-link"><span>Fundacja <i class="fas fa-chevron-down mobile-submenu-icon" aria-hidden="true"></i></span></a>
                 <div class="mobile-submenu">
                     <a href="/rekrutacja" class="mobile-sublink"><span>Rekrutacja</span></a>
                 </div>
@@ -6071,6 +6083,7 @@
     <div class="section-gold-divider" style="background: linear-gradient(90deg, transparent 0%, rgba(197,160,101,0.08) 15%, rgba(197,160,101,0.25) 50%, rgba(197,160,101,0.08) 85%, transparent 100%);"></div>
 
     <!-- MODERN MEGA FOOTER -->
+        </main><!-- /#main-content -->
     <footer class="modern-footer">
         <div class="footer-bg-blur"></div>
         <div class="container">
