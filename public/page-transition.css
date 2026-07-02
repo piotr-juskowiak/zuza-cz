@@ -510,7 +510,7 @@ body.transparent-hero-header:not(.menu-open) nav#navbar:not(.scrolled) .containe
 
 body.transparent-hero-header:not(.menu-open) nav#navbar:not(.scrolled) .nav-links a.nav-item,
 body.transparent-hero-header:not(.menu-open) nav#navbar:not(.scrolled) .nav-links a.nav-item .nav-dropdown-icon {
-    color: rgb(88, 93, 88) !important;
+    color: rgb(166 137 87) !important;
     text-shadow: none;
     opacity: 0.85;
 }
@@ -519,13 +519,13 @@ body.transparent-hero-header:not(.menu-open) nav#navbar:not(.scrolled) .nav-link
 body.transparent-hero-header:not(.menu-open) nav#navbar:not(.scrolled) .nav-links a.nav-item.active,
 body.transparent-hero-header:not(.menu-open) nav#navbar:not(.scrolled) .nav-links a.nav-item:hover .nav-dropdown-icon,
 body.transparent-hero-header:not(.menu-open) nav#navbar:not(.scrolled) .nav-links a.nav-item.active .nav-dropdown-icon {
-    color: rgb(88, 93, 88) !important;
+    color: rgb(151 126 80) !important;
     text-shadow: none;
     opacity: 1;
 }
 
 body.transparent-hero-header:not(.menu-open) nav#navbar:not(.scrolled) .nav-links a.nav-item::after {
-    background: rgb(88, 93, 88) !important;
+    background: rgb(197 160 101) !important;
     box-shadow: none !important;
 }
 
