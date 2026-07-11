@@ -6996,13 +6996,13 @@
             transition: color 0.4s ease;
         }
         .manifesto-item-body p {
-            font-size: 0.97rem;
-            color: rgba(255, 255, 255, 0.55);
-            line-height: 1.75;
+            font-size: 0.93rem;
+            color: rgba(197, 185, 165, 0.82);
+            line-height: 1.6;
             margin: 0;
             font-family: 'Plus Jakarta Sans', sans-serif;
-            font-weight: 300;
-            max-width: 680px;
+            font-weight: 400;
+            max-width: 620px;
         }
         @media (max-width: 576px) {
             .manifesto-item {
