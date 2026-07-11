@@ -6916,10 +6916,10 @@
             }
         }
 
-        /* Minimalist Manifesto List (Header & Footer Style) */
+        /* Minimalist Manifesto List */
         .manifesto-list-wrapper {
             margin-top: 4.5rem;
-            max-width: 860px;
+            max-width: 1020px;
             margin-left: auto;
             margin-right: auto;
             text-align: left;
@@ -6927,69 +6927,96 @@
         .manifesto-list {
             display: flex;
             flex-direction: column;
-            border-top: 1px solid rgba(197, 160, 101, 0.3);
+            border-top: 1px solid rgba(197, 160, 101, 0.2);
         }
         .manifesto-item {
-            display: flex;
-            align-items: baseline;
-            gap: 2.5rem;
-            padding: 2.2rem 1.25rem;
-            border-bottom: 1px solid rgba(197, 160, 101, 0.3);
+            display: grid;
+            grid-template-columns: 64px 1fr;
+            align-items: start;
+            gap: 0;
+            padding: 2.4rem 1rem;
+            border-bottom: 1px solid rgba(197, 160, 101, 0.2);
             background: transparent;
-            border-left: 0px solid var(--accent-gold, #C5A065);
-            border-radius: 0px;
-            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+            transition: background 0.4s ease, padding 0.4s ease;
+            cursor: default;
+        }
+        .manifesto-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 2px;
+            height: 100%;
+            background: var(--accent-gold, #C5A065);
+            transform: scaleY(0);
+            transform-origin: bottom;
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .manifesto-item:hover {
+            background: rgba(197, 160, 101, 0.04);
             padding-left: 2rem;
-            background: rgba(13, 23, 20, 0.65);
-            border-left: 4px solid var(--accent-gold, #C5A065);
-            border-bottom-color: var(--accent-gold, #C5A065);
+        }
+        .manifesto-item:hover::before {
+            transform: scaleY(1);
+        }
+        .manifesto-item:hover .manifesto-item-num {
+            color: #fff;
+            opacity: 1;
+        }
+        .manifesto-item:hover .manifesto-item-body h4 {
+            color: var(--accent-gold, #C5A065);
         }
         .manifesto-item-num {
-            font-size: 1.35rem;
-            font-weight: 700;
+            font-size: 0.8rem;
+            font-weight: 400;
             font-family: 'Syne', sans-serif;
             color: var(--accent-gold, #C5A065);
+            opacity: 0.6;
             flex-shrink: 0;
-            width: 38px;
-            letter-spacing: 0.05em;
+            letter-spacing: 0.18em;
+            padding-top: 0.5rem;
+            transition: color 0.4s ease, opacity 0.4s ease;
         }
         .manifesto-item-body {
             display: flex;
             flex-direction: column;
-            gap: 0.5rem;
+            gap: 0.65rem;
+            padding: 0.2rem 0;
         }
         .manifesto-item-body h4 {
-            font-size: 1.6rem;
-            font-weight: 700;
+            font-size: 1.7rem;
+            font-weight: 600;
             color: #fff;
             margin: 0;
             font-family: 'Cormorant Garamond', serif;
-            letter-spacing: 0.01em;
+            letter-spacing: 0.02em;
+            line-height: 1.2;
+            transition: color 0.4s ease;
         }
         .manifesto-item-body p {
-            font-size: 1rem;
-            color: rgba(255, 255, 255, 0.78);
-            line-height: 1.7;
+            font-size: 0.97rem;
+            color: rgba(255, 255, 255, 0.55);
+            line-height: 1.75;
             margin: 0;
             font-family: 'Plus Jakarta Sans', sans-serif;
             font-weight: 300;
+            max-width: 680px;
         }
         @media (max-width: 576px) {
             .manifesto-item {
-                gap: 1.25rem;
-                padding: 1.5rem 0.5rem;
+                grid-template-columns: 48px 1fr;
+                padding: 1.8rem 0.5rem;
             }
             .manifesto-item-num {
-                font-size: 1.15rem;
-                width: 28px;
+                font-size: 0.72rem;
             }
             .manifesto-item-body h4 {
                 font-size: 1.35rem;
             }
             .manifesto-item-body p {
-                font-size: 0.94rem;
+                font-size: 0.9rem;
             }
         }
 
