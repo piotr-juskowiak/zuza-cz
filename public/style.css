@@ -7002,7 +7002,7 @@
             margin: 0;
             font-family: 'Plus Jakarta Sans', sans-serif;
             font-weight: 400;
-            max-width: 520px;
+            max-width: 440px;
         }
         .manifesto-item-icon {
             width: 48px;
@@ -7012,16 +7012,23 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            color: rgba(197, 160, 101, 0.5);
             flex-shrink: 0;
             justify-self: end;
-            transition: border-color 0.4s ease, color 0.4s ease, background 0.4s ease, transform 0.4s ease;
+            transition: border-color 0.4s ease, background 0.4s ease, transform 0.4s ease;
+        }
+        .manifesto-item-icon img {
+            width: 22px;
+            height: 22px;
+            opacity: 0.6;
+            transition: opacity 0.4s ease;
         }
         .manifesto-item:hover .manifesto-item-icon {
             border-color: var(--accent-gold, #C5A065);
-            color: var(--accent-gold, #C5A065);
             background: rgba(197, 160, 101, 0.08);
             transform: scale(1.08);
+        }
+        .manifesto-item:hover .manifesto-item-icon img {
+            opacity: 1;
         }
         @media (max-width: 768px) {
             .manifesto-item {
@@ -7032,7 +7039,7 @@
                 width: 40px;
                 height: 40px;
             }
-            .manifesto-item-icon svg {
+            .manifesto-item-icon img {
                 width: 18px;
                 height: 18px;
             }
