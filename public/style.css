@@ -6741,31 +6741,31 @@
         }
         .zc-carousel-track {
             display: flex;
+            flex-wrap: nowrap;
             gap: 2rem;
-            overflow-x: auto;
-            scroll-snap-type: x mandatory;
-            scroll-behavior: smooth;
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-            padding: 0.5rem 0.5rem 2.5rem 0.5rem;
-            margin: 0 -0.5rem;
+            overflow: hidden;
+            padding: 0.5rem 0 2.5rem 0;
+            will-change: transform;
         }
-        .zc-carousel-track::-webkit-scrollbar {
-            display: none;
+        .zc-video-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        @media (max-width: 640px) {
+            .zc-video-grid {
+                grid-template-columns: 1fr;
+            }
         }
         .zc-slide {
-            flex: 0 0 calc(33.333% - 1.333rem);
-            scroll-snap-align: start;
+            flex: 0 0 calc(50% - 1rem);
+            min-width: 0;
             border-radius: 0px;
             overflow: visible;
             position: relative;
             transition: transform 0.4s ease;
             display: flex;
-        }
-        @media (max-width: 1024px) {
-            .zc-slide {
-                flex: 0 0 calc(50% - 1rem);
-            }
         }
         @media (max-width: 640px) {
             .zc-slide {
@@ -6997,12 +6997,12 @@
         }
         .manifesto-item-body p {
             font-size: 1rem;
-            color: rgba(255, 255, 255, 0.78);
+            color: rgb(180 180 180 / 51%);
             line-height: 1.7;
             margin: 0;
             font-family: 'Plus Jakarta Sans', sans-serif;
             font-weight: 300;
-            padding-right: 0;
+            padding-right: 150px;
         }
         .manifesto-item-icon {
             display: flex;
@@ -7013,8 +7013,8 @@
             transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .manifesto-item-icon img {
-            width: 58px;
-            height: 58px;
+            width: 76px;
+            height: 76px;
             object-fit: contain;
             opacity: 0.88;
             transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
@@ -7030,8 +7030,8 @@
                 padding: 1.6rem 0.5rem;
             }
             .manifesto-item-icon img {
-                width: 44px;
-                height: 44px;
+                width: 52px;
+                height: 52px;
             }
         }
         @media (max-width: 480px) {
